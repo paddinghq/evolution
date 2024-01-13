@@ -4,7 +4,6 @@ import {  IoLocationOutline, IoOptions, IoSearchSharp, IoTicketOutline } from 'r
 import SignIn from '../app/(auth)/signin/index';
 
 const priceOptions = [
-	{ value: "Select price", label: "country" },
 	{ value: "nigeria", label: "Nigeria" },
 	{ value: "togo", label: "Togo" },
 	{ value: "others", label: "others" },
