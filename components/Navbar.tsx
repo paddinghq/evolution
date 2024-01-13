@@ -1,53 +1,97 @@
-import { IoIosOptions } from 'react-icons/io';
 import Logo from '@/components/Assests/Evolution_logo.png';
+import Link from 'next/link';
+import {  IoLocationOutline, IoOptions, IoSearchSharp, IoTicketOutline } from 'react-icons/io5';
+import SignIn from '../app/(auth)/signin/index';
+
+const priceOptions = [
+	{ value: "Select price", label: "country" },
+	{ value: "nigeria", label: "Nigeria" },
+	{ value: "togo", label: "Togo" },
+	{ value: "others", label: "others" },
+];
+
+const links = [
+	{ id: 1, name: 'Events', href: '/events' },
+	{ id: 2, name: 'Stories', href: '/stories' },
+	{ id: 3, name: 'Our mission', href: '/mission' },
+	{ id: 4, name: 'Contact Us', href: '/contactus' },
+];
+  
+
+  
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+
 
 const Navbar = () => {
   return (
-    <div className="bg-black flex justify-between gap-6 py-3 px-5">
-      <div className="flex justify-between items-center gap-4">
-        <img src={Logo.src} alt="Evolution logo" className="w-24" />
+    <div className="bg-black flex justify-between py-3 px-5">
+      	<div className="flex justify-between items-center gap-4">
+			<Link href="/">
+				<img src={Logo.src} alt="Evolution logo" className="w-24" />
+			</Link>
 
-        <div className="relative border-[0.5rem] border-solid border-[#ffffff5e] rounded-2xl">
-						{/* <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute text-2xl xl:top-[1.5rem] xl:left-5 md:top-[1.5rem] md:left-3 sm:hidden md:block" /> */}
-                        <IoIosOptions size={24} className="absolute text-2xl xl:top-[1.5rem] xl:left-5 md:top-[1.5rem] md:left-3 sm:hidden md:block" />
-						<input
-							type="text"
-							name="search"
-							id="search"
-							placeholder="Where would you love to stay?"
-							className="w-full rounded-lg outline-none  sm:pr-0 sm:pl-3 sm:w-full sm:h-[5rem] md:pl-12 md:h-[5rem] xl:pr-[12rem] xl:pl-[4rem] xl:h-[5rem]"
-						/>
+			<div className="flex justify-center items-center gap-3">
+				<div className="relative flex justify-center items-center">
+					<IoSearchSharp size={24} className="absolute  md:left-3 sm:hidden md:block" />
+					<input
+						type="text"
+						name="search"
+						id="search"
+						placeholder="Search all"
+						className=" rounded-full outline-none px-14 py-3"
+					/>
 
-						<div
-							
-							className="absolute rounded-2xl bg-black text-white sm:py-4 sm:px-3 sm:top-[7rem] sm:w-full  md:top-[0.6rem]
-              sm:right-0 md:right-2 md:w-auto xl:top-[1rem] xl:right-4 xl:w-auto xl:py-3 xl:px-5 "
-						>
-                        <IoIosOptions size={24} className="text-2xl xl:top-[1.5rem] xl:left-5 md:top-[1.5rem] md:left-3 sm:hidden md:block" />
-							
+						<div className="absolute rounded-2xl bg-[#B1761F] text-white right-6 px-5 py-1">
+							<IoOptions size={20} className=" md:left-3 sm:hidden md:block" />		
 						</div>
+				</div>
+				<div className="flex flex-col items-center text-white gap-3">
+					<IoLocationOutline size={20}/>
+
+					<select className='bg-transparent text-white border-none'>
+						{priceOptions.map((option) => (
+							<option key={option.value} value={option.value}>
+								{option.label}
+							</option>
+						))}
+					</select>
+				</div>
+			</div>
+			
+		
+      	</div>
+
+		<div className="flex justify-center items-center gap-5">
+			{links.map((link) => (
+			<Link key={link.id} href={link.href} className='text-white hover:text-[#B1761F] active:bg-[#B1761F] '>
+				{link.name}
+			</Link>
+			))}
+			{token ? (
+				<>
+					<Link href="/profile">Profile</Link>
+					<div className="flex">
+						<Link href='/createevent' className='bg-[#B1761f] text-white py-3 px-8 rounded-lg'>
+						<IoTicketOutline />
+						Create an event
+						</Link>
 					</div>
-    
-      </div>
+				</>
+				) : (
+					<div className="flex">
+						<Link href="/signin" className='bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3' >
+						<IoTicketOutline />
+						SignIn
+					</Link>
+					</div>
+				
+				)
+			}
+
+		</div>
     </div>
   );
 };
 
 export default Navbar;
 
-{/* <div className="relative flex justify-between items-center">
-<div className="bg-primary absolute">
-    <IoIosOptions size={24} />
-</div>
-
-<input
-type="text"
-name="search"
-id="search"
-placeholder="search"
-className="px-5 py-3 rounded-full"
-/>
-<div className="bg-primary absolute">
-<IoIosOptions size={24} />
-</div>
-</div> */}
