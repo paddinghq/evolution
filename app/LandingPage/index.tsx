@@ -1,3 +1,4 @@
+import Category from '@/components/Category'
 import Navbar from '@/components/Navbar'
 import Slider from '@/components/Slider'
 
@@ -6,6 +7,7 @@ const LandingPage = () => {
     <div>
       <Navbar />
       <Slider />
+      <Category /> 
     </div>
   )
 }

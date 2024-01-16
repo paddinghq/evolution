@@ -2,14 +2,14 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import {
-  IoIosArrowDropleftCircle,
-  IoIosArrowDroprightCircle,
-} from 'react-icons/io'
+// import {
+//   IoIosArrowDropleftCircle,
+//   IoIosArrowDroprightCircle,
+// } from 'react-icons/io'
 
-import Img1 from '@/components/Assests/Image.png'
-import Img2 from '@/components/Assests/Image.png'
-import Img3 from '@/components/Assests/Image.png'
+import Img1 from '@/public/Images/Image.png'
+import Img2 from '@/public/Images/Image.png'
+import Img3 from '@/public/Images/Image.png'
 import { Button } from './ui/Button/button'
 
 const Slider: React.FC = () => {
@@ -39,12 +39,12 @@ const Slider: React.FC = () => {
         ))}
       </div>
       <div className="absolute top-0 h-full w-full justify-between items-center flex px-10 ">
-        <Button onClick={prevSlide}>
+        {/* <Button onClick={prevSlide}>
           <IoIosArrowDropleftCircle size={24} />
         </Button>
         <Button onClick={nextSlide}>
           <IoIosArrowDroprightCircle size={24} />
-        </Button>
+        </Button> */}
       </div>
 
       <div className="absolute bottom-0 py-4 flex justify-center gap-3 items-center w-full">
