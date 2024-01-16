@@ -1,4 +1,5 @@
-import Logo from '@/components/Assests/Evolution_logo.png'
+import Logo from '@/public/Images/Evolution_logo.png'
+// import { Input } from "@/components/ui/input"
 import Link from 'next/link'
 import {
   IoLocationOutline,
@@ -39,13 +40,14 @@ const Navbar = () => {
               size={24}
               className="absolute  md:left-3 sm:hidden md:block"
             />
-            <input
+            {/* <input
               type="text"
               name="search"
               id="search"
               placeholder="Search all"
               className=" rounded-full outline-none px-14 py-3"
-            />
+            /> */}
+			{/* <Input /> */}
 
             <div className="absolute rounded-2xl bg-[#B1761F] text-white right-6 px-5 py-1">
               <IoOptions size={20} className=" md:left-3 sm:hidden md:block" />
