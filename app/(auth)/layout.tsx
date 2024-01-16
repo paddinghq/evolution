@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 
 export default function Back({ children }: { children: React.ReactNode }) {
@@ -15,7 +14,8 @@ export default function Back({ children }: { children: React.ReactNode }) {
           style={{
             width: "100%",
             height: "100%",
-          }}
+                  }}
+                  priority
           className="block"
           alt="Evolution"
         />
