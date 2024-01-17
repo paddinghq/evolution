@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
+  FormLabel,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -17,6 +18,7 @@ import Link from 'next/link'
 const formSchema = z.object({
   emailAddress: z.string().email(),
   password: z.string().min(3),
+  remember: z.boolean().default(false).optional(),
 })
 
 const SignIn = () => {
@@ -25,9 +27,12 @@ const SignIn = () => {
     defaultValues: {
       emailAddress: '',
       password: '',
+      remember: false,
     },
   })
-  const handleSubmit = () => {}
+  const handleSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values)
+  }
 
   return (
     <div className="shadow-lg p-6 rounded-md ">
@@ -81,16 +86,24 @@ const SignIn = () => {
               )
             }}
           />
-          <div className="flex gap-24">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="remember" />
-              <label
-                htmlFor="remember"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Remember me
-              </label>
-            </div>
+          <div className="flex items-center gap-24">
+            <FormField
+              control={form.control}
+              name="remember"
+              render={({ field }) => (
+                <FormItem className=" flex items-center  gap-2">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-3 pb-2 text-sm font-medium text-slate-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    <FormLabel className="">Remember me</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
             <div>
               <Link href="/">
                 <p className="text-sm font-medium text-[#217873]">
@@ -103,7 +116,7 @@ const SignIn = () => {
             type="submit"
             className="w-full buttoncolor hover:bg-[#217873]"
           >
-            <Link href="/">Sign in</Link>
+            Sign in
           </Button>
         </form>
       </FormProvider>

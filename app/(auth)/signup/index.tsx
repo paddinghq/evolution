@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
+  FormLabel,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -18,6 +19,7 @@ const formSchema = z.object({
   name: z.string().min(3),
   emailAddress: z.string().email(),
   password: z.string().min(3),
+  terms: z.boolean().default(false).optional(),
 })
 
 const SignUp = () => {
@@ -27,9 +29,12 @@ const SignUp = () => {
       name: '',
       emailAddress: '',
       password: '',
+      terms: false,
     },
   })
-  const handleSubmit = () => {}
+  const handleSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values)
+  }
   return (
     <div className="shadow-lg p-6 rounded-md ">
       <div className="flex flex-col gap-8 mb-8">
@@ -98,25 +103,34 @@ const SignUp = () => {
               )
             }}
           />
-          <div className="">
-            <div className="flex items-center space-x-2">
-              <Checkbox id="remember" />
-              <label
-                htmlFor="remember"
-                className="text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                I agree to the{' '}
-                <Link href="" className="underline decoration-solid">
-                  terms and conditions
-                </Link>
-              </label>
-            </div>
-          </div>
+          <FormField
+            control={form.control}
+            name="terms"
+            render={({ field }) => (
+              <FormItem className=" flex items-center  gap-3">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-3 pb-2 text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  <FormLabel>
+                    I agree to the{' '}
+                    <Link href="" className="underline decoration-solid">
+                      terms and conditions
+                    </Link>
+                  </FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
+
           <Button
             type="submit"
             className="w-full buttoncolor hover:bg-[#217873]"
           >
-            <Link href="/">Sign up</Link>
+            Sign up
           </Button>
         </form>
       </FormProvider>
