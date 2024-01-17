@@ -1,12 +1,12 @@
 import Logo from '@/public/Images/Evolution_logo.png'
 import { Input } from "@/components/ui/input"
 import Link from 'next/link'
-// import {
-//   IoLocationOutline,
-//   IoOptions,
-//   IoSearchSharp,
-//   IoTicketOutline,
-// } from 'react-icons/io5'
+import {
+  IoLocationOutline,
+  IoOptions,
+  IoSearchSharp,
+  IoTicketOutline,
+} from 'react-icons/io5'
 import SignIn from '../app/(auth)/signin/index'
 import Image from 'next/image'
 
@@ -36,10 +36,10 @@ const Navbar = () => {
 
         <div className="flex justify-center items-center gap-3">
           <div className="relative flex justify-center items-center">
-            {/* <IoSearchSharp
+            <IoSearchSharp
               size={24}
               className="absolute  md:left-3 sm:hidden md:block"
-            /> */}
+            />
             {/* <input
               type="text"
               name="search"
@@ -50,11 +50,11 @@ const Navbar = () => {
 			      <Input />
 
             <div className="absolute rounded-2xl bg-[#B1761F] text-white right-6 px-5 py-1">
-              {/* <IoOptions size={20} className=" md:left-3 sm:hidden md:block" /> */}
+              <IoOptions size={20} className=" md:left-3 sm:hidden md:block" />
             </div>
           </div>
           <div className="flex flex-col items-center text-white gap-3">
-            {/* <IoLocationOutline size={20} /> */}
+            <IoLocationOutline size={20} />
 
             <select className="bg-transparent text-white border-none">
               {priceOptions.map((option) => (
@@ -85,7 +85,7 @@ const Navbar = () => {
                 href="/createevent"
                 className="bg-[#B1761f] text-white py-3 px-8 rounded-lg"
               >
-                {/* <IoTicketOutline /> */}
+                <IoTicketOutline />
                 Create an event
               </Link>
             </div>
@@ -96,7 +96,7 @@ const Navbar = () => {
               href="/signin"
               className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3"
             >
-              {/* <IoTicketOutline /> */}
+              <IoTicketOutline />
               SignIn
             </Link>
           </div>
