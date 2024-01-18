@@ -4,6 +4,7 @@ import Signup from "."
 
 
 
+
 const page = () => {
   return <Signup/>
 }
