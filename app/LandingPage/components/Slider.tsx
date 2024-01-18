@@ -10,7 +10,7 @@ import {
 import Img1 from '@/public/Images/Image.png'
 import Img2 from '@/public/Images/Image.png'
 import Img3 from '@/public/Images/Image.png'
-import { Button } from './ui/Button/button'
+import { Button } from '../../../components/ui/Button/button'
 
 const Slider: React.FC = () => {
   const [current, setCurrent] = useState(0)

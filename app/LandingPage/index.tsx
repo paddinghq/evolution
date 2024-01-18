@@ -1,6 +1,6 @@
-import Category from '@/components/Category'
+import Category from '@/app/LandingPage/components/Category'
 import Navbar from '@/components/Navbar'
-import Slider from '@/components/Slider'
+import Slider from '@/app/LandingPage/components/Slider'
 
 const LandingPage = () => {
   return (
