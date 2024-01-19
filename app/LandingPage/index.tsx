@@ -13,7 +13,6 @@ const LandingPage = () => {
       <Slider />
       <Category /> 
 
-      <h1>This Event Section </h1>
       <Section />
 
     </div>

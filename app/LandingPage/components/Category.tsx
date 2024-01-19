@@ -42,10 +42,10 @@ const Category = () => {
     return (
         <div className="">
             <div className="px-48 py-5">
-            <h3 className="capitalize text-[#B1761F] text-4xl font-bold underline
-             decoration-[#F5A42C] decoration-8 decoration-slice">
+            <h3 className="capitalize text-[#B1761F] text-4xl font-bold">
                 categories
             </h3>
+            <hr className="w-[70px] border-4 border-[#B1761F] rounded-xl" />
 
             <div className="flex flex-wrap items-center content-start mt-9 justify-between">
                 <div className="flex items-center flex-col gap-2">
