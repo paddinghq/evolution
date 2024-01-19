@@ -44,7 +44,7 @@ const StepTwo = () => {
 
   return (
     <div className="m-auto container p-20">
-      <div className='cursor-pointer top-20 left-20'>
+      <div className='cursor-pointer fixed top-20 left-20'>
         <IoIosArrowBack size={24} />
       </div>
       <div className="flex flex-col gap-3 mb-6">
