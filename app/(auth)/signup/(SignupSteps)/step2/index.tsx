@@ -35,7 +35,7 @@ const formSchema = z.object({
   }),
 })
 
-const SignupStep2 = () => {
+const StepTwo = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
@@ -231,7 +231,7 @@ const SignupStep2 = () => {
               <Link href="/">Skip</Link>
             </Button>
             <Button type="submit" className=" bg-[#217873] hover:bg-[#217873] px-8">
-              <Link href="/SignupStep3">Next</Link>
+              <Link href="/signup/step3">Next</Link>
             </Button>
           </div>
         </form>
@@ -240,4 +240,4 @@ const SignupStep2 = () => {
   )
 }
 
-export default SignupStep2
+export default StepTwo
