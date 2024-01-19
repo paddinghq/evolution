@@ -21,7 +21,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { Button } from '@/components/ui/Button/button'
+import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { IoIosArrowBack } from 'react-icons/io'
 
