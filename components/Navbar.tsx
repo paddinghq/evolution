@@ -34,26 +34,19 @@ const Navbar = () => {
 					<Image src={Logo.src} alt={'Evolution logo'} width={100} height={100} />
         </Link>
 
-        <div className="flex justify-center items-center gap-3">
+        <div className="flex justify-center items-center gap-3 w-full">
           <div className="relative flex justify-center items-center">
             <IoSearchSharp
               size={24}
               className="absolute  md:left-3 sm:hidden md:block"
             />
-            {/* <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Search all"
-              className=" rounded-full outline-none px-14 py-3"
-            /> */}
-			      <Input />
+			      <Input type='search'/>
 
             <div className="absolute rounded-2xl bg-[#B1761F] text-white right-6 px-5 py-1">
               <IoOptions size={20} className=" md:left-3 sm:hidden md:block" />
             </div>
           </div>
-          <div className="flex flex-col items-center text-white gap-3">
+          <div className="flex flex-col items-center text-white gap-1">
             <IoLocationOutline size={20} />
 
             <select className="bg-transparent text-white border-none">
