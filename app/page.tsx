@@ -1,11 +1,14 @@
-import Image from 'next/image'
-import { Button } from '@/components/ui/Button/button'
 import LandingPage from './LandingPage'
 
 export default function Home() {
   return (
-    <main>
-      <LandingPage />
+    <main className="container">
+      <div className="hidden lg:block">
+        <LandingPage />
+      </div>
+      <div className="block lg:hidden">
+        mobile & tab design is not ready yet
+      </div>
     </main>
   )
 }

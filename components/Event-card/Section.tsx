@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@/components/ui/Button/button'
+import { Button } from '@/components/ui/button'
 import EventCard from './EventCard'
 import IMG from "@/public/image.jpeg"
 

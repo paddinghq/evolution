@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function Back({ children }: { children: React.ReactNode }) {
   return (
@@ -12,14 +12,14 @@ export default function Back({ children }: { children: React.ReactNode }) {
           width={500}
           height={500}
           style={{
-            width: "100%",
-            height: "100%",
-                  }}
-                  priority
+            width: '100%',
+            height: '100%',
+          }}
+          priority
           className="block"
           alt="Evolution"
         />
       </div>
     </div>
-  );
+  )
 }
