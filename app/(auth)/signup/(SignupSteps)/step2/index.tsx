@@ -23,7 +23,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/Button/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import { IoIosArrowBack } from 'react-icons/io'
