@@ -40,7 +40,7 @@ const Navbar = () => {
               size={24}
               className="absolute  md:left-3 sm:hidden md:block"
             />
-			      <Input type='search'/>
+			      <Input type='search' className="w-72 px-8 rounded-full"/>
 
             <div className="absolute rounded-2xl bg-[#B1761F] text-white right-6 px-5 py-1">
               <IoOptions size={20} className=" md:left-3 sm:hidden md:block" />
@@ -72,6 +72,15 @@ const Navbar = () => {
         ))}
         {token ? (
           <>
+              {links.map((link) => (
+              <Link
+                key={link.id}
+                href={link.href}
+                className="text-white hover:text-[#B1761F] active:bg-[#B1761F] "
+              >
+                {link.name}
+              </Link>
+            ))}
             <Link href="/profile">Profile</Link>
             <div className="flex">
               <Link
@@ -87,7 +96,7 @@ const Navbar = () => {
           <div className="flex">
             <Link
               href="/signin"
-              className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3"
+              className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3 hover:bg-[#2A6562]"
             >
               <IoTicketOutline />
               SignIn
