@@ -109,11 +109,11 @@ const Category = () => {
           <Link
             href={day.href}
             key={day.id}
-            className="border-2 border-[#252C2B] rounded-full px-10 py-1 active:bg-[#217873] active:text-white hover:bg-[#217873] "
+            className="border-2 border-[#7a7a7a] rounded-full px-10 py-1 active:bg-[#217873] active:text-white hover:bg-[#217873] text-lg hover:text-white"
           >
             {day.icon && <day.icon className="inline-block w-6 h-6" />}{' '}
-            {/* Add this line */}
-            <span className="text-[#252C2B] text-lg hover:text-white">
+            
+            <span className="">
               {day.title}
             </span>
           </Link>

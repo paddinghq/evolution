@@ -38,9 +38,9 @@ const Navbar = () => {
           <div className="relative flex justify-center items-center">
             <IoSearchSharp
               size={24}
-              className="absolute  md:left-3 sm:hidden md:block"
+              className="absolute  md:left-3 sm:hidden md:block text-[#7a7a7a]"
             />
-			      <Input type='search' className="w-72 px-8 rounded-full"/>
+			      <Input type='search' className="w-80 px-10 rounded-full" placeholder='Search all'/>
 
             <div className="absolute rounded-2xl bg-[#B1761F] text-white right-6 px-5 py-1">
               <IoOptions size={20} className=" md:left-3 sm:hidden md:block" />
