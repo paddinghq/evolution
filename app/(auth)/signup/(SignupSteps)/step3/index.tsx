@@ -40,7 +40,10 @@ const StepThree = () => {
   return (
     <div className="m-auto container p-20">
       <div>
-        <IoIosArrowBack size={24} className='cursor-pointer fixed top-20 left-20' />
+        <IoIosArrowBack
+          size={24}
+          className="cursor-pointer fixed top-20 left-20"
+        />
       </div>
       <div className="flex flex-col gap-3 mb-6">
         <h1 className="text-2xl font-bold">
