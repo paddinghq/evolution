@@ -44,7 +44,7 @@ const StepTwo = () => {
 
   return (
     <div className="m-auto container p-20">
-      <div>
+      <div className='cursor-pointer top-20 left-20'>
         <IoIosArrowBack size={24} />
       </div>
       <div className="flex flex-col gap-3 mb-6">
@@ -230,7 +230,10 @@ const StepTwo = () => {
             >
               <Link href="/">Skip</Link>
             </Button>
-            <Button type="submit" className=" bg-[#217873] hover:bg-[#217873] px-8">
+            <Button
+              type="submit"
+              className=" bg-[#217873] hover:bg-[#217873] px-8"
+            >
               <Link href="/signup/step3">Next</Link>
             </Button>
           </div>

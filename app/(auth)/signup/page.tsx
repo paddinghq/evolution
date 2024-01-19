@@ -1,12 +1,7 @@
-import Signup from "."
-
-
-
-
-
+import Signup from '.'
 
 const page = () => {
-  return <Signup/>
+  return <Signup />
 }
 
 export default page

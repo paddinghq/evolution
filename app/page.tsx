@@ -5,8 +5,8 @@ import Signup from './(auth)/signup'
 export default function Home() {
   return (
     <main>
-      <LandingPage/>
-      <Signup/>
+      <LandingPage />
+      <Signup />
     </main>
   )
 }

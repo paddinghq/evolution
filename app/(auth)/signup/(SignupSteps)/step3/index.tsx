@@ -33,8 +33,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-
+} from '@/components/ui/select'
 
 const formSchema = z.object({
   dob: z.date({ required_error: 'A date of birth is required.' }),
@@ -52,11 +51,13 @@ const StepThree = () => {
 
   return (
     <div className="m-auto container p-20">
-      <div>
+      <div className="cursor-pointer top-20 left-20">
         <IoIosArrowBack size={24} />
       </div>
       <div className="flex flex-col gap-3 mb-6">
-        <h1 className="text-2xl font-bold">We look out for you in any way possible</h1>
+        <h1 className="text-2xl font-bold">
+          We look out for you in any way possible
+        </h1>
         <p className="text-sm font-semibold">
           Let us make this journey as convenient for you as we can...
         </p>
@@ -72,7 +73,9 @@ const StepThree = () => {
             name="type"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel>How do you rate yourself in terms of your current health?</FormLabel>
+                <FormLabel>
+                  How do you rate yourself in terms of your current health?
+                </FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -162,15 +165,15 @@ const StepThree = () => {
               <FormItem className="flex flex-col">
                 <FormLabel>Please select one from the options</FormLabel>
                 <Select>
-  <SelectTrigger className="w-[180px]">
-    <SelectValue placeholder="Select" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="light">Light</SelectItem>
-    <SelectItem value="dark">Dark</SelectItem>
-    <SelectItem value="system">System</SelectItem>
-  </SelectContent>
-</Select>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="light">Light</SelectItem>
+                    <SelectItem value="dark">Dark</SelectItem>
+                    <SelectItem value="system">System</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
           />
@@ -181,7 +184,10 @@ const StepThree = () => {
             >
               <Link href="/">Skip</Link>
             </Button>
-            <Button type="submit" className=" bg-[#217873] hover:bg-[#217873] px-8">
+            <Button
+              type="submit"
+              className=" bg-[#217873] hover:bg-[#217873] px-8"
+            >
               <Link href="/">Next</Link>
             </Button>
           </div>
