@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/Button/button'
 import EventCard from './EventCard'
+import IMG from "@/public/image.jpeg"
 
 const hobbies = [
   'Badminton',
@@ -28,7 +29,7 @@ const allEvents = [
     day: 'Tuesday',
     date: '22nd January 2024',
     time: 2200,
-    image: '/../../../public/image.jpeg',
+    image: IMG,
     address: '1901 Thornridge Cir Shiloh, Hawaii 81063',
     author: 'Annette Black ',
     followers: 2000,
@@ -41,7 +42,7 @@ const allEvents = [
     day: 'Tuesday',
     date: '22nd January 2024',
     time: 2200,
-    image: '/../../../public/image.jpeg',
+    image: IMG,
     address: '1901 Thornridge Cir Shiloh, Hawaii 81063',
     author: 'Annette Black ',
     followers: 2000,
@@ -54,7 +55,7 @@ const allEvents = [
     day: 'Tuesday',
     date: '22nd January 2024',
     time: 2200,
-    image: '/../../../public/image.jpeg',
+    image: IMG,
     address: '1901 Thornridge Cir Shiloh, Hawaii 81063',
     author: 'Annette Black ',
     followers: 2000,
@@ -67,7 +68,7 @@ const allEvents = [
     day: 'Tuesday',
     date: '22nd January 2024',
     time: 2200,
-    image: '/../../../public/image.jpeg',
+    image: IMG,
     address: '1901 Thornridge Cir Shiloh, Hawaii 81063',
     author: 'Annette Black ',
     followers: 2000,
@@ -80,7 +81,7 @@ const allEvents = [
     day: 'Tuesday',
     date: '22nd January 2024',
     time: 2200,
-    image: '/../../../public/image.jpeg',
+    image: IMG,
     address: '1901 Thornridge Cir Shiloh, Hawaii 81063',
     author: 'Annette Black ',
     followers: 2000,
@@ -93,7 +94,7 @@ const allEvents = [
     day: 'Tuesday',
     date: '22nd January 2024',
     time: 2200,
-    image: '/../../../public/image.jpeg',
+    image: IMG,
     address: '1901 Thornridge Cir Shiloh, Hawaii 81063',
     author: 'Annette Black ',
     followers: 2000,
@@ -106,7 +107,7 @@ const allEvents = [
     day: 'Tuesday',
     date: '22nd January 2024',
     time: 2200,
-    image: '/../../../public/image.jpeg',
+    image: IMG,
     address: '1901 Thornridge Cir Shiloh, Hawaii 81063',
     author: 'Annette Black ',
     followers: 2000,
@@ -119,7 +120,7 @@ const allEvents = [
     day: 'Tuesday',
     date: '22nd January 2024',
     time: 2200,
-    image: '/../../../public/image.jpeg',
+    image: IMG,
     address: '1901 Thornridge Cir Shiloh, Hawaii 81063',
     author: 'Annette Black ',
     followers: 2000,
@@ -145,7 +146,7 @@ function Section() {
       <div className="flex flex-row gap-6 mt-10">
         {tagButtons.map((button) => {
           return (
-            <Button className="bg-transparent hover:bg-transparent active:text-[#2A6562] text-[#7F7F7F] p-0">
+            <Button className="bg-transparent hover:bg-transparent active:text-[#2A6562] active:underline text-[#7F7F7F] p-0">
               {button}
             </Button>
           )

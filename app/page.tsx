@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Button } from '@/components/ui/Button/button'
 import LandingPage from './LandingPage'
 import Signup from './(auth)/signup'
 
