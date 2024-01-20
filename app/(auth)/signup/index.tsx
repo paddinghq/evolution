@@ -126,12 +126,12 @@ const SignUp = () => {
             )}
           />
 
-          <Button
-            type="submit"
+          <Link 
+            href="/step2"
             className="w-full buttoncolor hover:bg-[#217873]"
           >
             Sign up
-          </Button>
+          </Link>
         </form>
       </FormProvider>
       <div className="flex items-center mt-8">
