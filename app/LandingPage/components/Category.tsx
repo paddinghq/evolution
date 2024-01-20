@@ -36,7 +36,7 @@ const days = [
 const Category = () => {
   return (
     <div className="">
-      <div className="px-48 py-5">
+      <div className="container px-36 py-8">
         <h3 className="capitalize text-[#B1761F] text-4xl font-bold">
           categories
         </h3>
@@ -104,20 +104,19 @@ const Category = () => {
         </div>
       </div>
 
-      <div className="px-48 py-5 bg-[#F2F2F2] flex justify-center gap-10 ">
-        {days.map((day) => (
-          <Link
-            href={day.href}
-            key={day.id}
-            className="border-2 border-[#252C2B] rounded-full px-10 py-1 active:bg-[#217873] active:text-white hover:bg-[#217873] "
-          >
-            {day.icon && <day.icon className="inline-block w-6 h-6" />}{' '}
-            {/* Add this line */}
-            <span className="text-[#252C2B] text-lg hover:text-white">
-              {day.title}
-            </span>
-          </Link>
-        ))}
+      <div className="px-48 py-5 bg-[#F2F2F2]  ">
+        <div className="container flex justify-center gap-10">
+          {days.map((day) => (
+            <Link
+              href={day.href}
+              key={day.id}
+              className="border-2 border-[#7a7a7a] rounded-full px-10 py-1 active:bg-[#217873] active:text-white hover:bg-[#217873] text-lg hover:text-white"
+            >
+              {day.icon && <day.icon className="inline-block w-6 h-6" />}{' '}
+              <span className="">{day.title}</span>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -28,7 +28,7 @@ const token =
 
 const Navbar = () => {
   return (
-    <div className="bg-black flex justify-between py-3 px-5">
+    <div className="bg-black flex justify-between py-3 px-5 sticky top-0">
       <div className="flex justify-between items-center gap-4">
         <Link href="/">
 					<Image src={Logo.src} alt={'Evolution logo'} width={100} height={100} />
@@ -38,9 +38,9 @@ const Navbar = () => {
           <div className="relative flex justify-center items-center">
             <IoSearchSharp
               size={24}
-              className="absolute  md:left-3 sm:hidden md:block"
+              className="absolute  md:left-3 sm:hidden md:block text-[#7a7a7a]"
             />
-			      <Input type='search'/>
+			      <Input type='search' className="w-80 px-10 rounded-full" placeholder='Search all'/>
 
             <div className="absolute rounded-2xl bg-[#B1761F] text-white right-6 px-5 py-1">
               <IoOptions size={20} className=" md:left-3 sm:hidden md:block" />
@@ -72,6 +72,15 @@ const Navbar = () => {
         ))}
         {token ? (
           <>
+              {links.map((link) => (
+              <Link
+                key={link.id}
+                href={link.href}
+                className="text-white hover:text-[#B1761F] active:bg-[#B1761F] "
+              >
+                {link.name}
+              </Link>
+            ))}
             <Link href="/profile">Profile</Link>
             <div className="flex">
               <Link
@@ -87,7 +96,7 @@ const Navbar = () => {
           <div className="flex">
             <Link
               href="/signin"
-              className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3"
+              className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3 hover:bg-[#2A6562]"
             >
               <IoTicketOutline />
               SignIn
