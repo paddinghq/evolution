@@ -4,6 +4,7 @@ import Category from "../LandingPage/components/Category"
 import Section from "@/components/Event-card/Section"
 import Trend from "./Component/trend"
 import Organizer from "./Component/organizer"
+import Event from "./Component/event"
 
 
 const LandingPage = () => {
@@ -15,6 +16,7 @@ const LandingPage = () => {
             <Section />
             <Trend />
             <Organizer />
+            <Event />
         </div>
     )
 }
