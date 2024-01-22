@@ -5,6 +5,7 @@ import Section from "@/components/Event-card/Section"
 import Trend from "./Component/trend"
 import Organizer from "./Component/organizer"
 import Event from "./Component/event"
+import Testimonial from "./Component/testimonial"
 
 
 const LandingPage = () => {
@@ -17,6 +18,7 @@ const LandingPage = () => {
             <Trend />
             <Organizer />
             <Event />
+            <Testimonial />
         </div>
     )
 }
