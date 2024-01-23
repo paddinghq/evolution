@@ -1,4 +1,4 @@
-import Section from '@/components/Event-card/Section'
+import Section from '@/components/EventCard/CardSection'
 
 const LandingPage = () => {
   return (

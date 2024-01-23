@@ -1,4 +1,4 @@
-import LandingPage from '.'
+import LandingPage from './index'
 
 const home = () => {
   return <LandingPage />

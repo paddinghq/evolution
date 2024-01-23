@@ -41,7 +41,7 @@ const Card = (prop: CardProps) => {
             {prop.attendee} people are attending this event
           </p>
           <p className="text-[#252C2B] text-sm">
-            {prop.details.slice(0, 115)}...
+            {prop.details.slice(0, 100)}...
           </p>
         </div>
       </div>

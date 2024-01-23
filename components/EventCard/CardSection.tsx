@@ -141,7 +141,7 @@ const tagButtons = [
 
 function Section() {
   return (
-    <div className="w-[70%] m-auto rounded-2xl">
+    <div className="w-[75%] m-auto rounded-2xl">
       <div className="flex flex-row gap-6 mt-10">
         {tagButtons.map((button) => {
           return (
