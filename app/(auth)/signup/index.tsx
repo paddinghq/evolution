@@ -126,10 +126,7 @@ const SignUp = () => {
             )}
           />
 
-          <Link 
-            href="/step2"
-            className="w-full buttoncolor hover:bg-[#217873]"
-          >
+          <Link href="/step2" className="w-full buttoncolor hover:bg-[#217873]">
             Sign up
           </Link>
         </form>
