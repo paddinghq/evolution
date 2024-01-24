@@ -1,7 +1,7 @@
-import LandingPage from "."
+import LandingPage from '.'
 
 const Homepage = () => {
-    return <LandingPage />
+  return <LandingPage />
 }
 
 export default Homepage
