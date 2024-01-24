@@ -3,8 +3,19 @@ import Image from 'next/image'
 const EventCard = () => {
     return (
         <div className="mt-6 container px-36 py-8">
-            <div className="bg-red-500 h-[50rem] w-full rounded-lg">
-                hello    
+            <div className="relative">
+                <Image src={Gift.src} width={1400} height={500} alt="gift" className="object-cover"/>
+
+                <div className="absolute top-96 px-16">
+                    hello
+                </div>
+            </div>
+            <div className="relative mt-10">
+                <Image src={Gift.src} width={1400} height={10} alt="gift" className="object-cover"/>
+
+                <div className="absolute top-96 px-16">
+                    hello
+                </div>
             </div>
         </div>
     )
