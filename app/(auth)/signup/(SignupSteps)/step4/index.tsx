@@ -20,6 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useRouter } from 'next/router'; 
+
+// import StepThree from "../step3/index"
 
 
 
@@ -31,18 +34,116 @@ const formSchema = z.object({
     type: z.enum(['all', 'mentions', 'none'], {
       required_error: 'You need to select a notification type.',
     }),
-  })
+})
+
+const hobies = [
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+    {
+        name: "label"
+    },
+]
+
+
 const StepFour = () => {
+    // const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {},
-      })
-      const handleSubmit = () => {}
-      
-    return <div className="p-24 bg-[#fff] ">
+    })
 
-        <IoChevronBack className="shadow-lg cursor-pointer"/>
+    const handleSubmit = () => {}
+
+    const handleback = () => {
+        // router.push('/StepThree');
+    }
+      
+    return <div className="container mt-10">
+
+        <div className="shadow-lg cursor-pointer w-fit p-2 rounded-full" onClick={(e)=> handleback()}>
+            <IoChevronBack size={24}/>
+        </div>
+        
         <div className="shadow-lg border-l-2 border-r-2 mt-10  ml-10 px-14 py-5">
             
             <h5  className="text-2xl font-bold mb-1">Good job! You’re just one step away</h5>
@@ -61,7 +162,7 @@ const StepFour = () => {
                     <FormItem className="flex flex-col mt-6">
                         <FormLabel>Select your location</FormLabel>
                         <Select>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="px-7 rounded-full">
                             <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
@@ -81,106 +182,15 @@ const StepFour = () => {
                 <h6 className="text-[#252C2B] font-base">Tell us about your hobbies</h6>
             </div>
 
-            <div className="flex justify-between flex-wrap items-center mt-5 ">
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-               
-                
+            <div className="grid grid-cols-7 gap-6 items-center mt-5 ">
+                {hobies.map((items) => 
+                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white hover:bg-[#2A6562] hover:text-white" >
+                    {items.name}
+                </div>)}
             </div>
-            <div className="flex justify-between flex-wrap items-center mt-5 ">
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-               
-                
-            </div>
-            <div className="flex justify-between flex-wrap items-center mt-5 ">
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-               
-                
-            </div>
-            <div className="flex justify-between flex-wrap items-center mt-5">
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-                <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white" >
-                    label
-                </div>
-               
-                
-            </div>
+            
+            
+            
            
         
         </div>
