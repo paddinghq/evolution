@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from '@/node_modules/next/image'
 import { Button } from '@/components/ui/button'
-import { LuSettings2 } from 'react-icons/lu'
 
 interface BookingCardProps {
   image: string
@@ -21,17 +20,18 @@ interface BookingCardProps {
 
 const BookingCard = (prop: BookingCardProps) => {
   return (
-    <div className="flex w-full p-10">
-      <div className="flex flex-row gap-5 bg-[#dbdada] rounded-xl w-[85%] p-3">
-        <div>
+    <div className="flex w-full p-8 relative">
+      <div className="w-[30px] h-[30px] bg-white absolute rounded-full top-[4%] right-[29.7%]"></div>
+      <div className="w-[30px] h-[30px] bg-white absolute rounded-full bottom-[4%] right-[29.7%]"></div>
+      <div className="flex flex-row gap-3 bg-[#dbdada] rounded-xl w-[85%] p-3">
+        <div className="w-[35%] mt-3">
           <Image
             src={prop.image}
             alt="Booking Card Image"
-            width={250}
-            height={200}
+            style={{ width: '410px', height: '230px' }}
           />
         </div>
-        <div className="w-[75%] border-r-2 border-black border-dashed p-3">
+        <div className="w-[50%] border-r-2 border-black border-dashed p-3">
           <h2 className="text-sm font-bold text-[#252C2B]">{prop.title}</h2>
           <p className="text-xs text-[#252C2B]">{prop.address}</p>
           <div className="flex ">
@@ -39,7 +39,7 @@ const BookingCard = (prop: BookingCardProps) => {
             <p className="text-xs text-[#252C2B]">. {prop.date} .</p>
             <p className="text-xs text-[#252C2B]">{prop.time}</p>
           </div>
-          <p className="text-[#252C2B] mt-3 text-sm">
+          <p className="text-[#252C2B] mt-3 text-xs">
             Quantity: {prop.quantity}
           </p>
           <p className="text-[#252C2B] mt-2 text-xs">
@@ -61,16 +61,16 @@ const BookingCard = (prop: BookingCardProps) => {
             </div>
           </div>
         </div>
-        <div className="w-[25%] flex flex-col gap-3 p-2">
+        <div className="w-[15%] flex flex-col items-center gap-3 p-2">
           <Image
             src={prop.qrCode}
             alt="QR Code"
             width={80}
             height={100}
-            className=""
+            className="mt-8"
           />
           <p className="text-xs mx-auto">BOOKING ID</p>
-          <p className="text-sm mx-auto">{prop.bookingId}</p>
+          <p className="text-md mx-auto">{prop.bookingId}</p>
           <Button className="bg-transparent text-[#2A6562] hover:bg-transparent cursor-pointer hover:text-[#B1761F] text-xs font-bold mx-auto">
             Download PDF
           </Button>
