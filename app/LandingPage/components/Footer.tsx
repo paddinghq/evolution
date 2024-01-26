@@ -84,7 +84,7 @@ const Footer = () => {
                         <Input placeholder="Enter your email address" type="email" />
                     </div>
 
-                    <Button className="flex gap-2 bg-[#F5A42C]">
+                    <Button className="flex gap-2 bg-[#F5A42C] hover:bg-[#F5FFFF] hover:text-[#252C2B]">
                         <BsEnvelopeDash />
                         Subscribe
                     </Button>
