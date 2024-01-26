@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import { Button } from './ui/button';
 
 const AboutMe = () => (
   <div className="container mx-auto p-4">
@@ -51,68 +52,68 @@ const ProfileTabs = () => {
   };
 
   return (
-    <div className="container mx-auto px-36">
+    <div className="absolute container mx-auto px-36 mt-20">
       <div className="mt-4">
         <ul className="flex space-x-4">
           <li>
-            <button
+            <Button variant="link"
               className={`${
-                activeTab === 'aboutMe' ? 'border-b-2 border-gray-500' : ''
+                activeTab === 'aboutMe' ? '' : ''
               } text-gray-500`}
               onClick={() => handleTabChange('aboutMe')}
             >
               About Me
-            </button>
+            </Button>
           </li>
           <li>
-            <button
+            <Button variant="link"
               className={`${
-                activeTab === 'myBookings' ? 'border-b-2 border-gray-500' : ''
+                activeTab === 'myBookings' ? '' : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myBookings')}
             >
               My Bookings
-            </button>
+            </Button>
           </li>
           <li>
-            <button
+            <Button variant="link"
               className={`${
-                activeTab === 'myEvents' ? 'border-b-2 border-gray-500' : ''
+                activeTab === 'myEvents' ? '' : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myEvents')}
             >
               My Events
-            </button>
+            </Button>
           </li>
           <li>
-            <button
+            <Button variant="link"
               className={`${
-                activeTab === 'myFavorites' ? 'border-b-2 border-gray-500' : ''
+                activeTab === 'myFavorites' ? '' : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myFavorites')}
             >
               My Favorites
-            </button>
+            </Button>
           </li>
           <li>
-            <button
+            <Button variant="link"
               className={`${
-                activeTab === 'myCalendar' ? 'border-b-2 border-gray-500' : ''
+                activeTab === 'myCalendar' ? '' : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myCalendar')}
             >
               My Calendar
-            </button>
+            </Button>
           </li>
           <li>
-            <button
+            <Button variant="link"
               className={`${
-                activeTab === 'settings' ? 'border-b-2 border-gray-500' : ''
+                activeTab === 'settings' ? 'b' : ''
               } text-gray-500`}
               onClick={() => handleTabChange('settings')}
             >
               Settings
-            </button>
+            </Button>
           </li>
         </ul>
       </div>
