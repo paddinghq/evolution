@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { LuMerge } from 'react-icons/lu'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { Button } from '@/components/ui/button'
 
 const upcomings = [
   {
@@ -36,15 +37,16 @@ const EventsTab = () => {
       <div className="bg-[#21787333] p-8 rounded-2xl">
         <div className="upcoming mt-3">
           <div className="flex justify-between items-center">
-            <button className="">
-              <h3 className="capitalize text-[#B1761F] text-lg font-medium">
-                Upcoming
-              </h3>
+            <Button
+              variant="ghost"
+              className="grid capitalize hover:bg-inherit hover:text-[#B1761F] text-[#B1761F] text-lg font-medium pt-0"
+            >
+              Upcoming
               <hr className="w-[35px] mt-1 border-[2.5px] border-[#F5A42C] rounded-xl" />
-            </button>
-            <button className="w-10 px-[0.56rem]  options flex justify-center rounded-lg bg-[#B1761F] text-white">
+            </Button>
+            <Button className="w-10 px-[0.56rem] hover:text-white hover:bg-[#B1761F] options flex justify-center rounded-lg bg-[#B1761F] text-white">
               <IoOptionsOutline size={28} className="" />
-            </button>
+            </Button>
           </div>
           <div className="p-4 grid grid-cols-2 gap-4 mt-8 bg-white rounded-xl">
             <div className="relative">
@@ -60,16 +62,16 @@ const EventsTab = () => {
                 priority
                 className="block"
               ></Image>
-              <button className="p-2 options absolute top-4  right-4 flex justify-center rounded-full bg-white">
-                <CiSaveUp2 size={28} className="" />
-              </button>
+              <Button className="px-2 py-6 hover:bg-white options absolute top-4  right-3 flex justify-center rounded-full text-black bg-white">
+                <CiSaveUp2 size={34} className="" />
+              </Button>
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <BsThreeDotsVertical
-                size={28}
-                className="absolute right-[-4px] top-1"
-              />
+              <Button variant="ghost" className=" absolute right-[-24px] top-1 hover:bg-inherit">
+                <BsThreeDotsVertical size={28} className="" />
+              </Button>
+
               <h6 className="text-lg font-black  ">
                 <Link
                   href=""
@@ -102,16 +104,15 @@ const EventsTab = () => {
                 priority
                 className="block"
               ></Image>
-              <button className="p-2 options absolute top-4  right-4 flex justify-center rounded-full bg-white">
-                <CiSaveUp2 size={28} className="" />
-              </button>
+              <Button className="px-2 py-6 hover:bg-white  options absolute top-4  right-3 flex justify-center rounded-full text-black bg-white">
+                <CiSaveUp2 size={34} className="" />
+              </Button>
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <BsThreeDotsVertical
-                size={28}
-                className="absolute right-[-4px] top-1"
-              />
+              <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+                <BsThreeDotsVertical size={28} className="" />
+              </Button>
               <h6 className="text-lg font-black  ">
                 <Link
                   href=""
@@ -144,16 +145,15 @@ const EventsTab = () => {
                 priority
                 className="block"
               ></Image>
-              <button className="p-2 options absolute top-4  right-4 flex justify-center rounded-full bg-white">
-                <CiSaveUp2 size={28} className="" />
-              </button>
+              <Button className="px-2 py-6 hover:bg-white options absolute top-4  right-3 flex justify-center rounded-full text-black bg-white">
+                <CiSaveUp2 size={34} className="" />
+              </Button>
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <BsThreeDotsVertical
-                size={28}
-                className="absolute right-[-4px] top-1"
-              />
+              <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+                <BsThreeDotsVertical size={28} className="" />
+              </Button>
               <h6 className="text-lg font-black  ">
                 <Link
                   href=""
@@ -186,16 +186,15 @@ const EventsTab = () => {
                 priority
                 className="block"
               ></Image>
-              <button className="p-2 options absolute top-4  right-4 flex justify-center rounded-full bg-white">
-                <CiSaveUp2 size={28} className="" />
-              </button>
+              <Button className="px-2 py-6 hover:bg-white options absolute top-4  right-3 flex justify-center rounded-full text-black bg-white">
+                <CiSaveUp2 size={34} className="" />
+              </Button>
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <BsThreeDotsVertical
-                size={28}
-                className="absolute right-[-4px] top-1"
-              />
+              <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+                <BsThreeDotsVertical size={28} className="" />
+              </Button>
               <h6 className="text-lg font-black  ">
                 <Link
                   href=""
@@ -217,15 +216,16 @@ const EventsTab = () => {
         </div>
         <div className="old mt-10">
           <div className="flex justify-between items-center">
-            <button className="">
-              <h3 className="capitalize text-[#B1761F] text-lg font-medium">
-                Older
-              </h3>
-              <hr className="w-[30px] mt-1 border-[2.5px] border-[#F5A42C] rounded-xl" />
-            </button>
-            <button className="w-10 px-[0.56rem] options flex justify-center rounded-lg bg-[#B1761F] text-white">
+            <Button
+              variant="ghost"
+              className="grid capitalize hover:bg-inherit hover:text-[#B1761F] text-[#B1761F] text-lg font-medium pt-0"
+            >
+              Older
+              <hr className="w-[26px] mt-1 border-[2.5px] border-[#F5A42C] rounded-xl" />
+            </Button>
+            <Button className="w-10 px-[0.56rem] hover:text-white hover:bg-[#B1761F] options flex justify-center rounded-lg bg-[#B1761F] text-white">
               <IoOptionsOutline size={28} className="" />
-            </button>
+            </Button>
           </div>
           <div className="p-4 grid grid-cols-2 gap-4 mt-8 bg-white rounded-xl">
             <div className="relative">
@@ -241,16 +241,15 @@ const EventsTab = () => {
                 priority
                 className="block"
               ></Image>
-              <button className="p-2 options absolute top-4  right-4 flex justify-center rounded-full bg-white">
-                <CiSaveUp2 size={28} className="" />
-              </button>
+              <Button className="px-2 py-6 hover:bg-white options absolute top-4  right-3 flex justify-center rounded-full text-black bg-white">
+                <CiSaveUp2 size={34} className="" />
+              </Button>
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <BsThreeDotsVertical
-                size={28}
-                className="absolute right-[-4px] top-1"
-              />
+              <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+                <BsThreeDotsVertical size={28} className="" />
+              </Button>
               <h6 className="text-lg font-black  ">
                 <Link
                   href=""
@@ -285,16 +284,15 @@ const EventsTab = () => {
               priority
               className="block"
             ></Image>
-            <button className="p-2 options absolute top-4  right-4 flex justify-center rounded-full bg-white">
-              <CiSaveUp2 size={28} className="" />
-            </button>
+            <Button className="px-2 py-6 hover:bg-white options absolute top-4  right-3 flex justify-center rounded-full text-black bg-white">
+              <CiSaveUp2 size={34} className="" />
+            </Button>
           </div>
           <div className="relative">
             <h3 className="text-2xl font-black">Welcome To The Party</h3>
-            <BsThreeDotsVertical
-              size={28}
-              className="absolute right-[-4px] top-1"
-            />
+            <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+                <BsThreeDotsVertical size={28} className="" />
+              </Button>
             <h6 className="text-lg font-black  ">
               <Link
                 href=""
@@ -327,16 +325,15 @@ const EventsTab = () => {
               priority
               className="block"
             ></Image>
-            <button className="p-2 options absolute top-4  right-4 flex justify-center rounded-full bg-white">
-              <CiSaveUp2 size={28} className="" />
-            </button>
+            <Button className="px-2 py-6 hover:bg-white options absolute top-4  right-3 flex justify-center rounded-full text-black bg-white">
+              <CiSaveUp2 size={34} className="" />
+            </Button>
           </div>
           <div className="relative">
             <h3 className="text-2xl font-black">Welcome To The Party</h3>
-            <BsThreeDotsVertical
-              size={28}
-              className="absolute right-[-4px] top-1"
-            />
+            <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+                <BsThreeDotsVertical size={28} className="" />
+              </Button>
             <h6 className="text-lg font-black  ">
               <Link
                 href=""
@@ -369,16 +366,15 @@ const EventsTab = () => {
               priority
               className="block"
             ></Image>
-            <button className="p-2 options absolute top-4  right-4 flex justify-center rounded-full bg-white">
-              <CiSaveUp2 size={28} className="" />
-            </button>
+            <Button className="px-2 py-6 hover:bg-white options absolute top-4  right-3 flex justify-center rounded-full text-black bg-white">
+              <CiSaveUp2 size={34} className="" />
+            </Button>
           </div>
           <div className="relative">
             <h3 className="text-2xl font-black">Welcome To The Party</h3>
-            <BsThreeDotsVertical
-              size={28}
-              className="absolute right-[-4px] top-1"
-            />
+            <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+                <BsThreeDotsVertical size={28} className="" />
+              </Button>
             <h6 className="text-lg font-black  ">
               <Link
                 href=""
