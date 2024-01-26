@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,11 +7,32 @@ import Instagram from '@/public/images/footer/Instagram.svg'
 import Twitter from '@/public/images/footer/Twitter.svg'
 import Subscribe from '@/public/images/footer/subscribe.svg'
 import Styles from './Footer.module.css'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Form, FormProvider, useForm } from 'react-hook-form'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  FormDescription,
+  FormLabel,
+} from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
+const formSchema = z.object({
+ email: z.string({ required_error: 'A email is required.' }) 
+})
 
-function footer() {
+const Footer = () => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {},
+  })
+  const handleSubmit = () => {}
+
   return (
     <div className={Styles.body}>
-      <div className="w-full min-h-[618px] pl-[22px] sm:pl-0   py-[36px] bg-[#252C2B]">
+      <div className="w-full mt-[80px] min-h-[618px] pl-[22px] sm:pl-0   py-[36px] bg-[#252C2B]">
         <div className="flex items-center justify-center gap-[16px]">
           <Link href="/">
             <Image src={Facebook} alt="Facebook" width={35} height={35} />
@@ -99,29 +121,40 @@ function footer() {
               latest fashion news & style tips!.
             </p>
 
-            <form action="" className="mt-[20px] flex flex-col">
-              <label
-                htmlFor="email"
-                className="text-[#F5FFFE] font-[700] text-[16px]"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className=" max-w-[274px] w-[full] h-[60px] mt-[8px] rounded-[8px] px-2 border-[1px] border-[#F5FFFE] outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-[#B1761F] py-[16px] px-[36px] flex items-center gap-[8px] max-w-[274px] w-[full] rounded-[8px] mt-[40px]"
-              >
+        
+            <FormProvider {...form}>
+              <form
+              onSubmit={form.handleSubmit(handleSubmit)}
+              className="mt-[20px] flex flex-col">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel htmlFor="email">Email</FormLabel>
+                      <FormControl>
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          className=" max-w-[274px] w-[full] h-[60px] mt-[8px] rounded-[8px] px-2 border-[1px] border-[#F5FFFE] outline-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage>
+                        {form.formState.errors.email?.message}
+                      </FormMessage>
+                    </FormItem>
+                  )}
+                />
+               <Button
+               type="submit"
+               className="mt-[20px] w-[274px] h-[60px] rounded-[8px] bg-[#B1761F] text-[#F5FFFE] font-[500] text-[18px] flex items-center gap-[10px]">
                 <Image src={Subscribe} alt="Subscribe" width={24} height={24} />
-                <h1 className=" text-[#F5FFFE] font-[500] text-[24px]">
-                  Subscribe
-                </h1>
-              </button>
-            </form>
+                 Subscribe
+                </Button>
+              </form>
+            </FormProvider>
           </div>
         </div>
 
@@ -134,4 +167,4 @@ function footer() {
   )
 }
 
-export default footer
+export default Footer

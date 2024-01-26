@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar'
 import Slider from '@/app/LandingPage/components/Slider'
 
 import Section from '@/components/Event-card/Section'
+import Footer from '@/components/footer/index'
 
 const LandingPage = () => {
   return (
@@ -12,6 +13,7 @@ const LandingPage = () => {
       <Category />
 
       <Section />
+      <Footer />
     </div>
   )
 }

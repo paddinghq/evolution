@@ -1,6 +1,7 @@
 import LandingPage from './LandingPage'
 import Signup from './(auth)/signup'
 
+
 export default function Home() {
   return (
     <>
