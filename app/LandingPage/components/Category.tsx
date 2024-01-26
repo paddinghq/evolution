@@ -36,7 +36,7 @@ const days = [
 const Category = () => {
   return (
     <div className="">
-      <div className="container px-36 py-8">
+      <div className="container px-28 py-8">
         <h3 className="capitalize text-[#B1761F] text-4xl font-bold">
           categories
         </h3>
@@ -104,7 +104,7 @@ const Category = () => {
         </div>
       </div>
 
-      <div className="px-48 py-5 bg-[#F2F2F2]  ">
+      <div className="px-28 py-5 bg-[#F2F2F2]  ">
         <div className="container flex justify-center gap-10">
           {days.map((day) => (
             <Link
