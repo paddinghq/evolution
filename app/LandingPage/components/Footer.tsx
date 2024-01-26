@@ -1,7 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from "react-icons/io";
+import { BsEnvelopeDash } from "react-icons/bs";
 
 const socialLinks = [
     { id: 1,  icon: IoLogoFacebook, link:"https:/facebook.com" },
@@ -77,10 +79,15 @@ const Footer = () => {
 
                     <p className="w-[15rem]">Sign up now and be the first to know about exclusive offers, latest events news!</p>
                     
-                    <div className="flex flex-col gap-3">
-                    <h4>Email</h4>
-                    <Input placeholder="Enter your email address" type="email" />
+                    <div className="flex flex-col">
+                        <h4>Email</h4>
+                        <Input placeholder="Enter your email address" type="email" />
                     </div>
+
+                    <Button className="flex gap-2 bg-[#F5A42C]">
+                        <BsEnvelopeDash />
+                        Subscribe
+                    </Button>
                     
                 </div>
             </div>
