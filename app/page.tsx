@@ -1,5 +1,5 @@
 import LandingPage from './LandingPage'
-import Signup from './(auth)/signup'
+// import LandingPage from './HomePage/page'
 
 
 export default function Home() {

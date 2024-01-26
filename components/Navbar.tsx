@@ -28,7 +28,7 @@ const token =
 
 const Navbar = () => {
   return (
-    <div className="bg-black flex justify-between py-3 px-5 sticky top-0">
+    <div className="bg-black flex justify-between py-3 px-5 sticky top-0 z-10">
       <div className="flex justify-between items-center gap-4">
         <Link href="/">
 					<Image src={Logo.src} alt={'Evolution logo'} width={100} height={100} />
