@@ -1,7 +1,7 @@
-import Signup from '.'
+import StepOne from '.'
 
 const page = () => {
-  return <Signup />
+  return <StepOne />
 }
 
 export default page
