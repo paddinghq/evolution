@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat } from 'next/font/google' // Import Montserrat font
 import './globals.css'
-
 import { cn } from '../lib/utils'
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Evolution: Event Management Website & Mobile App',
@@ -21,7 +20,7 @@ export default function RootLayout({
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
-          inter.className,
+          montserrat.className,
         )}
       >
         {children}
