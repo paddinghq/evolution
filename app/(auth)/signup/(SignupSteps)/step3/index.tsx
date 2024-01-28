@@ -1,4 +1,5 @@
 'use client'
+import { IoChevronBack } from 'react-icons/io5'
 import React from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -7,14 +8,10 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
-  FormDescription,
   FormLabel,
 } from '@/components/ui/form'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { IoIosArrowBack } from 'react-icons/io'
 import {
   Select,
   SelectContent,
@@ -22,6 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useRouter } from 'next/router'
+
+// import StepThree from "../step3/index"
 
 const formSchema = z.object({
   dob: z.date({ required_error: 'A date of birth is required.' }),
@@ -30,160 +30,177 @@ const formSchema = z.object({
   }),
 })
 
+const hobies = [
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+  {
+    name: 'label',
+  },
+]
+
 const StepThree = () => {
+  // const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
   })
+
   const handleSubmit = () => {}
 
+  const handleback = () => {
+    
+  }
+
   return (
-    <div className="m-auto container p-20">
-      <div>
-        <IoIosArrowBack
-          size={24}
-          className="cursor-pointer fixed top-20 left-20"
-        />
-      </div>
-      <div className="flex flex-col gap-3 mb-6">
-        <h1 className="text-2xl font-bold">
-          We look out for you in any way possible
-        </h1>
-        <p className="text-sm font-semibold">
-          Let us make this journey as convenient for you as we can...
-        </p>
+    <div className="container mt-10">
+      <div
+        className="shadow-lg cursor-pointer w-fit p-2 rounded-full"
+        onClick={(e) => handleback()}
+      >
+        <IoChevronBack size={24} />
       </div>
 
-      <FormProvider {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleSubmit)}
-          className="max-w-md w-full flex flex-col gap-4"
+      <div className="shadow-lg border-l-2 border-r-2 mt-10  ml-10 px-14 py-5">
+        <h5 className="text-2xl font-bold mb-1">
+          Good job! You’re just one step away
+        </h5>
+        <p>
+          We want to serve you based on where you are located and what you
+          like...
+        </p>
+
+        <FormProvider {...form}>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="max-w-md w-full flex flex-col gap-4"
+          >
+            <FormField
+              control={form.control}
+              name="dob"
+              render={({ field }) => (
+                <FormItem className="flex flex-col mt-6">
+                  <FormLabel>Select your location</FormLabel>
+                  <Select>
+                    <SelectTrigger className="px-7 rounded-full">
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="light">Nigeria</SelectItem>
+                      <SelectItem value="dark">Togo</SelectItem>
+                      <SelectItem value="system">Ivory coast</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+          </form>
+        </FormProvider>
+
+        <div className="mt-5">
+          <h6 className="text-[#252C2B] font-base">
+            Tell us about your hobbies
+          </h6>
+        </div>
+
+        <div className="grid grid-cols-7 gap-6 items-center mt-5 ">
+          {hobies.map((items) => (
+            <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white hover:bg-[#2A6562] hover:text-white">
+              {items.name}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className=" flex justify-end gap-3 mt-4">
+        <Button
+          type="submit"
+          className=" text-black hover:bg-[#217873] hover:text-white bg-white"
         >
-          <FormField
-            control={form.control}
-            name="type"
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>
-                  How do you rate yourself in terms of your current health?
-                </FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex space-y-1"
-                  >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="all" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Excellent</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="mentions" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Good</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="none" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Fair</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="none" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Poor</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="none" />
-                      </FormControl>
-                      <FormLabel className="font-normal">
-                        Prefer not to answer
-                      </FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="type"
-            render={({ field }) => (
-              <FormItem className="space-y-3">
-                <FormLabel>Do you have disability?</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex space-y-1"
-                  >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="all" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Yes</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="mentions" />
-                      </FormControl>
-                      <FormLabel className="font-normal">No</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="none" />
-                      </FormControl>
-                      <FormLabel className="font-normal">
-                        Prefer not to answer
-                      </FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="dob"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Please select one from the options</FormLabel>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
-          <div className=" flex justify-end gap-3">
-            <Button
-              type="submit"
-              className=" text-black hover:bg-[#217873] hover:text-white bg-white"
-            >
-              <Link href="/">Skip</Link>
-            </Button>
-            <Button
-              type="submit"
-              className=" bg-[#217873] hover:bg-[#217873] px-8"
-            >
-              <Link href="/">Next</Link>
-            </Button>
-          </div>
-        </form>
-      </FormProvider>
+          Skip
+        </Button>
+        <Button type="submit" className=" bg-[#2A6562] hover:bg-[#217873] px-8">
+          FinishUp
+        </Button>
+      </div>
     </div>
   )
 }
