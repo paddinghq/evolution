@@ -1,12 +1,11 @@
 import LandingPage from './LandingPage'
-import StepFour from './(auth)/signup/(SignupSteps)/step4'
+// import LandingPage from './HomePage/page'
 
 export default function Home() {
   return (
     <>
       <div className="hidden lg:block">
-        {/* <LandingPage /> */}
-        <StepFour />
+        <LandingPage />
       </div>
       <div className="block lg:hidden">
         mobile & tab design is not ready yet
