@@ -33,7 +33,7 @@ const upcomings = [
 
 const EventsTab = () => {
   return (
-    <div className=" p-28 ">
+    <div className="mt-6">
       <div className="bg-[#21787333] p-8 rounded-2xl">
         <div className="upcoming mt-3">
           <div className="flex justify-between items-center">

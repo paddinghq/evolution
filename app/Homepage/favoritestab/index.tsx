@@ -144,12 +144,16 @@ const cards = [
 
 const FavoriteTab = () => {
   return (
-    <div className="p-28">
+    <div className="mt-6">
       <div className="bg-[#21787333] p-8 rounded-2xl flex flex-col gap-10">
         <div className="filter flex justify-between items-center">
           <div className="flex items-center gap-6">
             <h3>Filter: </h3>
-            <Input className="focus-visible:ring-0 focus-visible:ring-offset-0  rounded-3xl" type="text" placeholder="Category" />
+            <Input
+              className="focus-visible:ring-0 focus-visible:ring-offset-0  rounded-3xl"
+              type="text"
+              placeholder="Category"
+            />
             <Input
               className="focus-visible:ring-0 focus-visible:ring-offset-0  rounded-3xl"
               type="text"
@@ -182,15 +186,15 @@ const FavoriteTab = () => {
                 <Button className="p-2 options absolute top-3 hover:bg-white right-14 flex justify-center rounded-full bg-white text-black">
                   <CiSaveUp2 size={22} className="" />
                 </Button>
-                <Button className="p-2 options absolute top-3  right-3 flex justify-center rounded-full hover:bg-[#D41212] bg-[#D41212] text-white">
+                <Button className="p-2 options absolute top-3  right-2 flex justify-center rounded-full hover:bg-[#D41212] bg-[#D41212] text-white">
                   <CiHeart size={22} className="" />
                 </Button>
               </div>
               <div className="flex flex-col gap-3 ">
                 <div className="relative ">
                   <h1 className="text-2xl font-bold">{card.heading1}</h1>
-                  <Button className="absolute top-[-0.26rem] right-[-26px] hover:bg-transparent bg-transparent text-black">
-                    <BsThreeDotsVertical size={24} />
+                  <Button className="absolute top-[-0.26rem] right-[-26px] hover:bg-transparent bg-transparent text-black ">
+                    <BsThreeDotsVertical size={25} />
                   </Button>
                 </div>
                 <h3 className="text-sm">{card.date}</h3>

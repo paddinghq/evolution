@@ -1,6 +1,10 @@
 'use client'
 import React, { useState } from 'react';
 import { Button } from './ui/button';
+import EventsTab from '@/app/Homepage/eventstab';
+import FavoriteTab from '@/app/Homepage/favoritestab';
+import SettingsTab from '@/app/Homepage/settingstab';
+import MyCalender from '@/app/Homepage/mycalender';
 
 const AboutMe = () => (
   <div className="container mx-auto p-4">
@@ -18,29 +22,25 @@ const MyBookings = () => (
 
 const MyEvents = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Events</h1>
-    {/* Add your events content here */}
+    <EventsTab/>
   </div>
 );
 
 const MyFavorites = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Favorites</h1>
-    {/* Add your favorites content here */}
+    <FavoriteTab/>
   </div>
 );
 
 const MyCalendar = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Calendar</h1>
-    {/* Add your calendar content here */}
+    <MyCalender/>
   </div>
 );
 
 const Settings = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">Settings</h1>
-    {/* Add your settings content here */}
+    <SettingsTab/>
   </div>
 );
 
@@ -52,7 +52,7 @@ const ProfileTabs = () => {
   };
 
   return (
-    <div className="absolute container mx-auto px-36 mt-20">
+    <div className="container mx-auto px-18 mt-20">
       <div className="mt-4">
         <ul className="flex space-x-4">
           <li>
