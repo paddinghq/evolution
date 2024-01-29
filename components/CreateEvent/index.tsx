@@ -1,3 +1,4 @@
+import Footer from "@/app/LandingPage/components/Footer"
 import Navbar from "../Navbar"
 import Tab from "./eventtab"
 
@@ -5,8 +6,9 @@ import Tab from "./eventtab"
 const Event = () => {
     return (
         <div>
-        <Navbar/>
-        <Tab />
+            <Navbar/>
+            <Tab />
+            <Footer />
         </div>
     )
 }
