@@ -1,5 +1,4 @@
 import LandingPage from './LandingPage'
-import CreateEvent from "../components/CreateEvent"
 // import LandingPage from './HomePage/page'
 
 export default function Home() {
