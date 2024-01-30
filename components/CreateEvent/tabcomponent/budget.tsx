@@ -17,7 +17,7 @@ function Budget() {
         </div>
 
         <div className="flex justify-end gap-3">
-            <Button variant="secondary">Add</Button>
+            <Button variant="secondary" className="px-10 bg-[#d9ebea] border-2">Add</Button>
             </div>
     </div>
     );

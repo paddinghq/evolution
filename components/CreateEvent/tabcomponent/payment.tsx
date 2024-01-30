@@ -92,9 +92,6 @@ export function Payment() {
           )}
         />
         <p>Note: These payment methods are the one's added to your Evolution account. Add more methods to your profile to get more options here</p>
-        <div className="flex justify-end">
-        <Button type="submit" className="bg-[#163332]">Publish Event</Button>
-        </div>
       </form>
     </Form>
         </div>
