@@ -6,6 +6,7 @@ import { GoClock, GoDeviceCameraVideo } from "react-icons/go";
 import { MdOutlineCameraAlt } from "react-icons/md";
 import { Button } from '@/components/ui/button';
 import { SetStateAction, useState } from 'react';
+import { Textarea } from '@/components/ui/textarea';
 
 const eventType = [
     {id:1, title: "Private"},
@@ -20,33 +21,33 @@ const Basic = () => {
 
     const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
         setHashtag(event.target.value);
-      };
+    };
     
-      const handleEnterKeyPress = (event: { key: string; preventDefault: () => void; }) => {
+    const handleEnterKeyPress = (event: { key: string; preventDefault: () => void; }) => {
         if (event.key === 'Enter') {
-          // Prevent the form from being submitted
-          event.preventDefault();
-    
-          // Add the entered hashtag to the list
-          setEnteredHashtags([...enteredHashtags, hashtag]);
-    
-          // Clear the input field
-          setHashtag('');
-        }
-      };
+            // Prevent the form from being submitted
+            event.preventDefault();
 
-      const handleRemoveHashtag = (index: number): void => {
-        const updatedHashtags = [...enteredHashtags];
-        updatedHashtags.splice(index, 1);
-        setEnteredHashtags(updatedHashtags);
-      };
+            // Add the entered hashtag to the list
+            setEnteredHashtags([...enteredHashtags, hashtag]);
+
+            // Clear the input field
+            setHashtag('');
+        }
+    };
+
+    const handleRemoveHashtag = (index: number): void => {
+    const updatedHashtags = [...enteredHashtags];
+    updatedHashtags.splice(index, 1);
+    setEnteredHashtags(updatedHashtags);
+    };
 
    
 
     return(
     <div className="flex flex-col gap-8   ">
         <div className="flex gap-3">
-            <Input placeholder='Event Name' style={{ color: 'red' }} />
+            <Input placeholder='Event Name' />
             <Input  placeholder='Event Type'/>
         </div>
         <div className="flex gap-3">
@@ -97,7 +98,7 @@ const Basic = () => {
             <Input placeholder='Event Format'/>
         </div>
         <div className="">
-            <Input className='h-24' placeholder='Event description'/>
+            <Textarea placeholder="Event Description" />
         </div>
         <div className="">
             <>
