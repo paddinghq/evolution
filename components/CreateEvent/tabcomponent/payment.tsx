@@ -39,9 +39,9 @@ export function Payment() {
       })
     }
     return (
-        <div className="flex rounded-lg flex-col gap-8 px-9 py-8 bg-[#d9ebea] text-black">
+        <div className="flex rounded-lg flex-col gap-8 px-9 py-8 text-black">
             <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="">
         <FormField
           control={form.control}
           name="type"
