@@ -5,42 +5,42 @@ import { Button } from './ui/button';
 const AboutMe = () => (
   <div className="container mx-auto p-4">
     <h1 className="text-4xl font-bold mb-4">About Me</h1>
-    {/* Add your about me content here */}
+    {/* Add about me content here */}
   </div>
 );
 
 const MyBookings = () => (
   <div className="container mx-auto p-4">
     <h1 className="text-4xl font-bold mb-4">My Bookings</h1>
-    {/* Add your bookings content here */}
+    {/* Add bookings content here */}
   </div>
 );
 
 const MyEvents = () => (
   <div className="container mx-auto p-4">
     <h1 className="text-4xl font-bold mb-4">My Events</h1>
-    {/* Add your events content here */}
+    {/* Add events content here */}
   </div>
 );
 
 const MyFavorites = () => (
   <div className="container mx-auto p-4">
     <h1 className="text-4xl font-bold mb-4">My Favorites</h1>
-    {/* Add your favorites content here */}
+    {/* Add favorites content here */}
   </div>
 );
 
 const MyCalendar = () => (
   <div className="container mx-auto p-4">
     <h1 className="text-4xl font-bold mb-4">My Calendar</h1>
-    {/* Add your calendar content here */}
+    {/* Add calendar content here */}
   </div>
 );
 
 const Settings = () => (
   <div className="container mx-auto p-4">
     <h1 className="text-4xl font-bold mb-4">Settings</h1>
-    {/* Add your settings content here */}
+    {/* Add settings content here */}
   </div>
 );
 

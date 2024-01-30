@@ -1,10 +1,12 @@
+import CreateEvent from '@/components/CreateEvent'
 import LandingPage from './LandingPage'
 
 export default function Home() {
   return (
     <>
       <div className="hidden lg:block">
-        <LandingPage />
+        {/* <LandingPage /> */}
+        <CreateEvent/>
         
       </div>
       <div className="block lg:hidden">
