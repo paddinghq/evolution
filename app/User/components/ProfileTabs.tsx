@@ -1,64 +1,66 @@
 'use client'
-import React, { useState } from 'react';
-import { Button } from './ui/button';
+import React, { useState } from 'react'
+import { Button } from '../../../components/ui/button'
+import About from './Tabs/About'
+import Bookings from './Tabs/Bookings'
+import Favorites from './Tabs/Favorites'
+import Calendar from './Tabs/Calendar'
+import Settings from './Tabs/Settings'
 
 const AboutMe = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">About Me</h1>
-    {/* Add about me content here */}
+    <About />
   </div>
-);
+)
 
 const MyBookings = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Bookings</h1>
-    {/* Add bookings content here */}
+    <Bookings />
   </div>
-);
+)
 
 const MyEvents = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Events</h1>
-    {/* Add events content here */}
+    <Bookings />
   </div>
-);
+)
 
 const MyFavorites = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Favorites</h1>
-    {/* Add favorites content here */}
+    <Favorites />
   </div>
-);
+)
 
 const MyCalendar = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Calendar</h1>
-    {/* Add calendar content here */}
+    <Calendar />
   </div>
-);
+)
 
-const Settings = () => (
+const SettingsTab = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">Settings</h1>
-    {/* Add settings content here */}
+    <Settings />
   </div>
-);
+)
 
 const ProfileTabs = () => {
-  const [activeTab, setActiveTab] = useState('aboutMe');
+  const [activeTab, setActiveTab] = useState('aboutMe')
 
   const handleTabChange = (tab: React.SetStateAction<string>) => {
-    setActiveTab(tab);
-  };
+    setActiveTab(tab)
+  }
 
   return (
     <div className="absolute container mx-auto px-36 mt-20">
       <div className="mt-4">
         <ul className="flex space-x-4">
           <li>
-            <Button variant="link"
+            <Button
+              variant="link"
               className={`${
-                activeTab === 'aboutMe' ? '' : ''
+                activeTab === 'aboutMe'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('aboutMe')}
             >
@@ -66,9 +68,12 @@ const ProfileTabs = () => {
             </Button>
           </li>
           <li>
-            <Button variant="link"
+            <Button
+              variant="link"
               className={`${
-                activeTab === 'myBookings' ? '' : ''
+                activeTab === 'myBookings'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myBookings')}
             >
@@ -76,9 +81,12 @@ const ProfileTabs = () => {
             </Button>
           </li>
           <li>
-            <Button variant="link"
+            <Button
+              variant="link"
               className={`${
-                activeTab === 'myEvents' ? '' : ''
+                activeTab === 'myEvents'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myEvents')}
             >
@@ -86,9 +94,12 @@ const ProfileTabs = () => {
             </Button>
           </li>
           <li>
-            <Button variant="link"
+            <Button
+              variant="link"
               className={`${
-                activeTab === 'myFavorites' ? '' : ''
+                activeTab === 'myFavorites'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myFavorites')}
             >
@@ -96,9 +107,12 @@ const ProfileTabs = () => {
             </Button>
           </li>
           <li>
-            <Button variant="link"
+            <Button
+              variant="link"
               className={`${
-                activeTab === 'myCalendar' ? '' : ''
+                activeTab === 'myCalendar'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myCalendar')}
             >
@@ -106,9 +120,12 @@ const ProfileTabs = () => {
             </Button>
           </li>
           <li>
-            <Button variant="link"
+            <Button
+              variant="link"
               className={`${
-                activeTab === 'settings' ? 'b' : ''
+                activeTab === 'settings'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('settings')}
             >
@@ -123,10 +140,10 @@ const ProfileTabs = () => {
         {activeTab === 'myEvents' && <MyEvents />}
         {activeTab === 'myFavorites' && <MyFavorites />}
         {activeTab === 'myCalendar' && <MyCalendar />}
-        {activeTab === 'settings' && <Settings />}
+        {activeTab === 'settings' && <SettingsTab />}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProfileTabs;
+export default ProfileTabs
