@@ -57,11 +57,12 @@ const Event =() => {
                     </Button>)}
             </div>
 
-            <div className="mt-4">
+            <div className="px-9 py-8 rounded-lg mt-4" style={{background: "rgba(33, 120, 115, 0.20)"}}>
+            <div className="">
                 {tabs.find((item) => item.id === activeTab)?.component}
             </div>
 
-            <div className="mt-4 flex justify-end items-center gap-4">
+            <div className="mt-7 flex justify-end items-center gap-4">
                 {activeTab > 1 && (
                     <Button onClick={handlePrevClick}>
                         Previous
@@ -70,25 +71,27 @@ const Event =() => {
                 {activeTab === 3 || activeTab === 4 ? (
                     <>
                         
-                        <Button onClick={handleSkipNowClick}>
+                        <Button  variant="link" onClick={handleSkipNowClick}>
                             Skip Now
                         </Button>
-                        <Button onClick={handleNextClick}>
+                        <Button className="bg-[#217873] px-10 text-white hover:bg-black" onClick={handleNextClick}>
                             Next
                         </Button>
                   </>
                 ) : (
                     isLastTab ? (
-                        <Button  onClick={handleSubmit}>
+                        <Button variant="secondary"  onClick={handleSubmit}>
                             Submit
                         </Button>
                     ) : (
-                        <Button onClick={handleNextClick}>
+                        <Button variant="secondary" className="bg-[#217873] px-10 text-white hover:bg-black" onClick={handleNextClick}>
                             Next
                         </Button>
                     )
                 )}
             </div>
+            </div>
+            
 
 
 
