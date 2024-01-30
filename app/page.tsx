@@ -5,7 +5,6 @@ export default function Home() {
     <>
       <div className="hidden lg:block">
         <LandingPage />
-        
       </div>
       <div className="block lg:hidden">
         mobile & tab design is not ready yet

@@ -1,14 +1,15 @@
-import Navbar from "@/components/Navbar"
-import UserProfile from "."
-import ProfileTabs from "@/components/ProfileTabs"
-
+import Navbar from '@/components/Navbar'
+import UserProfile from '.'
+import ProfileTabs from '@/app/User/components/ProfileTabs'
 
 const page = () => {
-    return <div>
-      <Navbar/>
-      <UserProfile/>
-      <ProfileTabs/>
+  return (
+    <div>
+      <Navbar />
+      <UserProfile />
+      <ProfileTabs />
     </div>
-  }
-  
-  export default page
+  )
+}
+
+export default page
