@@ -1,4 +1,12 @@
 'use client'
+<<<<<<< HEAD:components/ProfileTabs.tsx
+import React, { useState } from 'react';
+import { Button } from './ui/button';
+import EventsTab from '@/app/Homepage/eventstab';
+import FavoriteTab from '@/app/Homepage/favoritestab';
+import SettingsTab from '@/app/Homepage/settingstab';
+import MyCalender from '@/app/Homepage/mycalender';
+=======
 import React, { useState } from 'react'
 import { Button } from '../../../components/ui/button'
 import About from './Tabs/About'
@@ -6,46 +14,57 @@ import Bookings from './Tabs/Bookings'
 import Favorites from './Tabs/Favorites'
 import Calendar from './Tabs/Calendar'
 import Settings from './Tabs/Settings'
+>>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
 
 const AboutMe = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">About Me</h1>
-    {/* Add your about me content here */}
+    <About />
   </div>
 )
 
 const MyBookings = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Bookings</h1>
-    {/* Add your bookings content here */}
+    <Bookings />
   </div>
 )
 
 const MyEvents = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Events</h1>
-    {/* Add your events content here */}
+<<<<<<< HEAD:components/ProfileTabs.tsx
+    <EventsTab/>
+=======
+    <Bookings />
+>>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
   </div>
 )
 
 const MyFavorites = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Favorites</h1>
-    {/* Add your favorites content here */}
+<<<<<<< HEAD:components/ProfileTabs.tsx
+    <FavoriteTab/>
+=======
+    <Favorites />
+>>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
   </div>
 )
 
 const MyCalendar = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">My Calendar</h1>
-    {/* Add your calendar content here */}
+<<<<<<< HEAD:components/ProfileTabs.tsx
+    <MyCalender/>
+=======
+    <Calendar />
+>>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
   </div>
 )
 
-const Settings = () => (
+const SettingsTab = () => (
   <div className="container mx-auto p-4">
-    <h1 className="text-4xl font-bold mb-4">Settings</h1>
-    {/* Add your settings content here */}
+<<<<<<< HEAD:components/ProfileTabs.tsx
+    <SettingsTab/>
+=======
+    <Settings />
+>>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
   </div>
 )
 
@@ -57,13 +76,17 @@ const ProfileTabs = () => {
   }
 
   return (
-    <div className="absolute container mx-auto px-36 mt-20">
+    <div className="container mx-auto px-18 mt-20">
       <div className="mt-4">
         <ul className="flex space-x-4">
           <li>
             <Button
               variant="link"
-              className={`${activeTab === 'aboutMe' ? '' : ''} text-gray-500`}
+              className={`${
+                activeTab === 'aboutMe'
+                  ? 'focus:underline active:underline'
+                  : ''
+              } text-gray-500`}
               onClick={() => handleTabChange('aboutMe')}
             >
               About Me
@@ -73,7 +96,9 @@ const ProfileTabs = () => {
             <Button
               variant="link"
               className={`${
-                activeTab === 'myBookings' ? '' : ''
+                activeTab === 'myBookings'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myBookings')}
             >
@@ -83,7 +108,11 @@ const ProfileTabs = () => {
           <li>
             <Button
               variant="link"
-              className={`${activeTab === 'myEvents' ? '' : ''} text-gray-500`}
+              className={`${
+                activeTab === 'myEvents'
+                  ? 'focus:underline active:underline'
+                  : ''
+              } text-gray-500`}
               onClick={() => handleTabChange('myEvents')}
             >
               My Events
@@ -93,7 +122,9 @@ const ProfileTabs = () => {
             <Button
               variant="link"
               className={`${
-                activeTab === 'myFavorites' ? '' : ''
+                activeTab === 'myFavorites'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myFavorites')}
             >
@@ -104,7 +135,9 @@ const ProfileTabs = () => {
             <Button
               variant="link"
               className={`${
-                activeTab === 'myCalendar' ? '' : ''
+                activeTab === 'myCalendar'
+                  ? 'focus:underline active:underline'
+                  : ''
               } text-gray-500`}
               onClick={() => handleTabChange('myCalendar')}
             >
@@ -114,7 +147,11 @@ const ProfileTabs = () => {
           <li>
             <Button
               variant="link"
-              className={`${activeTab === 'settings' ? 'b' : ''} text-gray-500`}
+              className={`${
+                activeTab === 'settings'
+                  ? 'focus:underline active:underline'
+                  : ''
+              } text-gray-500`}
               onClick={() => handleTabChange('settings')}
             >
               Settings
@@ -128,7 +165,7 @@ const ProfileTabs = () => {
         {activeTab === 'myEvents' && <MyEvents />}
         {activeTab === 'myFavorites' && <MyFavorites />}
         {activeTab === 'myCalendar' && <MyCalendar />}
-        {activeTab === 'settings' && <Settings />}
+        {activeTab === 'settings' && <SettingsTab />}
       </div>
     </div>
   )
