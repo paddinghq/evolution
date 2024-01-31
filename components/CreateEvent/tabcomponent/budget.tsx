@@ -8,8 +8,8 @@ function Budget() {
     return (
         <div className="flex rounded-lg flex-col gap-8 px-9 py-8  text-black">
         <div className="flex gap-3">
-            <Input placeholder='Event Name'/>
-            <Input />
+            <Input placeholder='Commodity Name'/>
+            <Input placeholder="Amount Alloted" />
         </div>
 
         <div>
