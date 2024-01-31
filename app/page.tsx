@@ -5,7 +5,8 @@ export default function Home() {
   return (
     <>
       <div className="hidden lg:block">
-        <LandingPage />
+        {/* <LandingPage /> */}
+        <CreateEvent />
       </div>
       <div className="block lg:hidden">
         mobile & tab design is not ready yet

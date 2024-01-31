@@ -1,109 +1,118 @@
 import { Input } from "@/components/ui/input";
-import { SetStateAction, useState } from "react";
+import React, { useState, SetStateAction, ChangeEvent, KeyboardEvent } from 'react';
 import { IoClose } from "react-icons/io5";
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Form, FormProvider, useForm } from 'react-hook-form'
+import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
-const  Invitee = () => {
-    const [email, setemail] = useState('');
+const formSchema = z.object({
+    inviteEmail: z.string().email(),
+    invitePhone: z.string()
+
+})
+
+const  Invitee:React.FC = () => {
+    const [email, setEmail] = useState<string>('');
     const [enteredEmail, setEnteredEmail] = useState<string[]>([]);
 
-    const [phone, setPhone] = useState('');
-    const [enteredPhone, setEnteredPhone] = useState<(string | number)[]>([]);
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setEmail(event.target.value);
+  };
 
-    
-    const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
-        setemail(event.target.value);
-    };
+  const handleEnterKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === 'Enter') {
+      // Prevent the form from being submitted
+      event.preventDefault();
+  
+      // Add the entered hashtag to the list
+      setEnteredEmail([...enteredEmail, email]);
+  
+      // Clear the input field in the form state
+      form.reset({ inviteEmail: '' });
+    }
+  };
 
-    const handleEnterKeyPress = (event: { key: string; preventDefault: () => void; }) => {
-        if (event.key === 'Enter') {
-            // Prevent the form from being submitted
-            event.preventDefault();
-
-            // Add the entered hashtag to the list
-            setEnteredEmail([...enteredEmail, email]);
-
-            // Clear the input field
-            setemail('');
-        }
-    };
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          inviteEmail: "",
+          invitePhone: "",
+        },
+    })
 
     const handleRemoveHashtag = (index: number): void => {
         const updatedHashtags = [...enteredEmail];
         updatedHashtags.splice(index, 1);
         setEnteredEmail(updatedHashtags);
     };
-
-    const handleNumberChange = (event: { target: { value: SetStateAction<string>; }; }) => {
-        setPhone(event.target.value);
-    };
-    const handleEnterPress = (event: { key: string; preventDefault: () => void; }) => {
-        if (event.key === 'Enter') {
-            // Prevent the form from being submitted
-            event.preventDefault();
-
-            // Add the entered hashtag to the list
-            setEnteredPhone([...enteredPhone, Number(phone)]);
-
-            // Clear the input field
-            setPhone('');
-        }
-    };
-
-    const handleRemoveNumber = (index: number): void => {
-        const updatedNumber = [...enteredPhone];
-        updatedNumber.splice(index, 1);
-        setEnteredPhone(updatedNumber);
-    };
-    
+ 
     return (
-        <div className="flex justify-between gap-3">
-            <div className="w-full">
-            <>
-                <Input placeholder='Enter Email Address'
-                value={email}
-                onChange={handleInputChange}
-                onKeyPress={handleEnterKeyPress}
-                />
+        <FormProvider {...form}>
+            <Form className="flex flex-col gap-4">
+                
+                <div className="flex justify-between gap-3">
+                <FormField 
+    control={form.control} 
+    name="inviteEmail"  
+    render={({ field }) => {
+        return (
+            <FormItem className="w-full">
+                <FormControl >
+                    <Input
+                        placeholder="Event Name"
+                        type="eventName"
+                        {...field}
+                        onChange={(e) => {
+                            field.onChange(e);  // This line is added
+                            handleInputChange(e);
+                        }}
+                        onKeyPress={handleEnterKeyPress}
+                    />
+                </FormControl>
+                
 
                 {enteredEmail.length > 0 && (
-                    <div className='mt-5 bg-white py-4 px-3 flex flex-wrap gap-3 rounded-lg'>
-                    {enteredEmail.map((enteredEmail, index) => (
-                        <span key={index} className='border-2 rounded-full border-black flex px-4'>{enteredEmail}
-                            <button onClick={() => handleRemoveHashtag(index)}>
-                                <IoClose />
-                            </button>
-                        </span>
-                    ))}
-                    </div>
-                )}
-            </>
-            
-            
-            </div>
-            <div className="w-full">
-            <>
-                <Input placeholder='Enter Phone Number'
-                value={phone}
-                onChange={handleNumberChange}
-                onKeyPress={handleEnterPress}
-                />
+                        <div className='mt-10 bg-white py-4 px-3 flex flex-wrap gap-3 rounded-lg'>
+                        {enteredEmail.map((email, index) => (
+                            <span key={index}className='border-2 rounded-full border-black px-3 flex'>
+                                {email}
+                                <button onClick={() => handleRemoveHashtag(index)}>
+                                    <IoClose />
+                                </button>
+                                </span>
+                        ))}
+                        </div>
+                    )}
+                </FormItem>
+                );
+                }}
+                >
+            </FormField>
 
-                {enteredPhone.length > 0 && (
-                    <div className='mt-5 bg-white py-4 px-3 flex flex-wrap gap-3 rounded-lg'>
-                    {enteredPhone.map((enteredPhone, index) => (
-                        <span key={index} className='border-2 rounded-full border-black px-3 flex items-center gap-3'>{enteredPhone}
-                            <button onClick={() => handleRemoveNumber(index)}>
-                                <IoClose />
-                            </button>
-                        </span>
-                    ))}
-                    </div>
-                )}
-            </>
-            
-            
+            <FormField 
+                control={form.control} 
+                name="invitePhone"  
+                render={({ field }) => {
+                    return (
+                        <FormItem className="w-full">
+                            <FormControl>
+                                <Input
+                                    placeholder="Event Type"
+                                    type="eventName"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        );
+                    }}
+            >
+            </FormField>
             </div>
-        </div>
+            
+        </Form>
+    </FormProvider>
     )
 }
 
