@@ -1,12 +1,10 @@
 'use client'
-<<<<<<< HEAD:components/ProfileTabs.tsx
-import React, { useState } from 'react';
-import { Button } from './ui/button';
+;
+
 import EventsTab from '@/app/Homepage/eventstab';
 import FavoriteTab from '@/app/Homepage/favoritestab';
 import SettingsTab from '@/app/Homepage/settingstab';
 import MyCalender from '@/app/Homepage/mycalender';
-=======
 import React, { useState } from 'react'
 import { Button } from '../../../components/ui/button'
 import About from './Tabs/About'
@@ -14,7 +12,6 @@ import Bookings from './Tabs/Bookings'
 import Favorites from './Tabs/Favorites'
 import Calendar from './Tabs/Calendar'
 import Settings from './Tabs/Settings'
->>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
 
 const AboutMe = () => (
   <div className="container mx-auto p-4">
@@ -30,41 +27,29 @@ const MyBookings = () => (
 
 const MyEvents = () => (
   <div className="container mx-auto p-4">
-<<<<<<< HEAD:components/ProfileTabs.tsx
     <EventsTab/>
-=======
     <Bookings />
->>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
   </div>
 )
 
 const MyFavorites = () => (
   <div className="container mx-auto p-4">
-<<<<<<< HEAD:components/ProfileTabs.tsx
     <FavoriteTab/>
-=======
     <Favorites />
->>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
   </div>
 )
 
 const MyCalendar = () => (
   <div className="container mx-auto p-4">
-<<<<<<< HEAD:components/ProfileTabs.tsx
     <MyCalender/>
-=======
     <Calendar />
->>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
   </div>
 )
 
 const SettingsTab = () => (
   <div className="container mx-auto p-4">
-<<<<<<< HEAD:components/ProfileTabs.tsx
     <SettingsTab/>
-=======
     <Settings />
->>>>>>> 51d917a8b35d2f70d5a5fb3fa0882f29c35efb03:app/User/components/ProfileTabs.tsx
   </div>
 )
 
