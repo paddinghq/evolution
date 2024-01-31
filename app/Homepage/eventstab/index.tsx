@@ -68,7 +68,10 @@ const EventsTab = () => {
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <Button variant="ghost" className=" absolute right-[-24px] top-1 hover:bg-inherit">
+              <Button
+                variant="ghost"
+                className=" absolute right-[-24px] top-1 hover:bg-inherit"
+              >
                 <BsThreeDotsVertical size={28} className="" />
               </Button>
 
@@ -110,7 +113,10 @@ const EventsTab = () => {
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+              <Button
+                variant="ghost"
+                className="hover:bg-inherit absolute right-[-24px] top-1"
+              >
                 <BsThreeDotsVertical size={28} className="" />
               </Button>
               <h6 className="text-lg font-black  ">
@@ -151,7 +157,10 @@ const EventsTab = () => {
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+              <Button
+                variant="ghost"
+                className="hover:bg-inherit absolute right-[-24px] top-1"
+              >
                 <BsThreeDotsVertical size={28} className="" />
               </Button>
               <h6 className="text-lg font-black  ">
@@ -192,7 +201,10 @@ const EventsTab = () => {
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+              <Button
+                variant="ghost"
+                className="hover:bg-inherit absolute right-[-24px] top-1"
+              >
                 <BsThreeDotsVertical size={28} className="" />
               </Button>
               <h6 className="text-lg font-black  ">
@@ -247,7 +259,10 @@ const EventsTab = () => {
             </div>
             <div className="relative">
               <h3 className="text-2xl font-black">Welcome To The Party</h3>
-              <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
+              <Button
+                variant="ghost"
+                className="hover:bg-inherit absolute right-[-24px] top-1"
+              >
                 <BsThreeDotsVertical size={28} className="" />
               </Button>
               <h6 className="text-lg font-black  ">
@@ -290,9 +305,12 @@ const EventsTab = () => {
           </div>
           <div className="relative">
             <h3 className="text-2xl font-black">Welcome To The Party</h3>
-            <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
-                <BsThreeDotsVertical size={28} className="" />
-              </Button>
+            <Button
+              variant="ghost"
+              className="hover:bg-inherit absolute right-[-24px] top-1"
+            >
+              <BsThreeDotsVertical size={28} className="" />
+            </Button>
             <h6 className="text-lg font-black  ">
               <Link
                 href=""
@@ -331,9 +349,12 @@ const EventsTab = () => {
           </div>
           <div className="relative">
             <h3 className="text-2xl font-black">Welcome To The Party</h3>
-            <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
-                <BsThreeDotsVertical size={28} className="" />
-              </Button>
+            <Button
+              variant="ghost"
+              className="hover:bg-inherit absolute right-[-24px] top-1"
+            >
+              <BsThreeDotsVertical size={28} className="" />
+            </Button>
             <h6 className="text-lg font-black  ">
               <Link
                 href=""
@@ -372,9 +393,12 @@ const EventsTab = () => {
           </div>
           <div className="relative">
             <h3 className="text-2xl font-black">Welcome To The Party</h3>
-            <Button variant="ghost" className="hover:bg-inherit absolute right-[-24px] top-1">
-                <BsThreeDotsVertical size={28} className="" />
-              </Button>
+            <Button
+              variant="ghost"
+              className="hover:bg-inherit absolute right-[-24px] top-1"
+            >
+              <BsThreeDotsVertical size={28} className="" />
+            </Button>
             <h6 className="text-lg font-black  ">
               <Link
                 href=""
