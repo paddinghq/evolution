@@ -37,7 +37,7 @@ const Footer = () => {
   const paddedYear = currentYear.toString().padStart(4, '0')
 
   return (
-    <div className="bg-[#252C2B]">
+    <footer className="bg-[#252C2B]">
       <div className="mt-6 container px-24 py-6 flex flex-col gap-4">
         <div className="flex justify-center gap-4 text-white mb-5">
           {socialLinks.map((item) => {
@@ -119,7 +119,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 
