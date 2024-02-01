@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Button } from '../../../components/ui/button'
 import About from './Tabs/About'
-import Bookings from './Tabs/Bookings'
+import Bookings from './Tabs/Bookings/page'
 import Favorites from './Tabs/Favorites'
 import Calendar from './Tabs/Calendar'
 import Settings from './Tabs/Settings'

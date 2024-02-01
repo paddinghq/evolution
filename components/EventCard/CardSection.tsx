@@ -1,7 +1,7 @@
-import React from 'react'
-import { Button } from '../ui/button'
-import EventCard from './EventCard'
-import Hobbies from './Hobbies'
+import React from 'react';
+import { Button } from '../ui/button';
+import EventCard from '../Event-card/EventCard';
+import Hobbies from '../Event-card/Section';
 
 const allEvents = [
   {

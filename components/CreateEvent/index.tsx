@@ -1,4 +1,4 @@
-import Footer from "@/app/LandingPage/components/Footer"
+import Footer from "@/components/Footer"
 import Navbar from "../Navbar"
 import Tab from "./eventtab"
 

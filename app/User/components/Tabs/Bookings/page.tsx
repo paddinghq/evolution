@@ -129,7 +129,7 @@ const bookings = [
 const Bookings = () => {
   return (
     <div
-      className="mx-auto rounded-3xl w-[70%] p-10"
+      className="mx-auto rounded-3xl my-12 p-10"
       style={{ background: 'rgba(33, 120, 115, 0.20)' }}
     >
       <div>
