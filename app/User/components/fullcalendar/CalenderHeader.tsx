@@ -59,19 +59,19 @@ const CalendarHeader: React.FC<HeaderProps> = ({ calendarRef }) => {
     <div className="flex justify-between gap-3">
       <div className="flex gap-4 ">
         <Button
-          className="text-[#252C2B] hover:bg-[#2A6562] hover:text-white mt-[0.3rem] w-20 h-10 bg-transparent  border-solid border-2 border-slate-600"
+          className="text-[#252C2B] focus:bg-[#2A6562] focus:text-white hover:bg-[#2A6562] hover:text-white mt-[0.3rem] w-20 h-10 bg-transparent  border-solid border-2 border-slate-600"
           onClick={() => calendarRef.current.getApi().prev()}
         >
           <FaArrowLeftLong size={22} />
         </Button>
         <Button
-          className="text-[#252C2B] hover:bg-[#2A6562] hover:text-white w-20 h-12  bg-transparent  border-solid border-2 border-slate-600"
+          className="text-[#252C2B] focus:bg-[#2A6562] focus:text-white hover:bg-[#2A6562] hover:text-white w-20 h-12  bg-transparent  border-solid border-2 border-slate-600"
           onClick={() => calendarRef.current.getApi().today()}
         >
           Today
         </Button>
         <Button
-          className="text-[#252C2B] hover:bg-[#2A6562] hover:text-white mt-[0.3rem] w-20 h-10 bg-transparent  border-solid border-2 border-slate-600"
+          className="text-[#252C2B] focus:bg-[#2A6562] focus:text-white hover:bg-[#2A6562] hover:text-white mt-[0.3rem] w-20 h-10 bg-transparent  border-solid border-2 border-slate-600"
           onClick={() => calendarRef.current.getApi().next()}
         >
           <FaArrowRightLong size={22} />
@@ -79,25 +79,25 @@ const CalendarHeader: React.FC<HeaderProps> = ({ calendarRef }) => {
       </div>
       <div className="flex gap-4">
         <Button
-          className="bg-transparent text-[#7F7F7F] hover:bg-[#2A6562] hover:text-white"
+          className="bg-transparent text-[#7F7F7F] hover:bg-[#2A6562] focus:bg-[#2A6562] focus:text-white hover:text-white"
           onClick={handleDay}
         >
           Day
         </Button>
         <Button
-          className="bg-transparent text-[#7F7F7F] hover:bg-[#2A6562] hover:text-white"
+          className="bg-transparent text-[#7F7F7F] hover:bg-[#2A6562] focus:bg-[#2A6562] focus:text-white hover:text-white"
           onClick={handleWeek}
         >
           Week
         </Button>
         <Button
-          className="bg-transparent text-[#7F7F7F] hover:bg-[#2A6562] hover:text-white"
+          className="bg-transparent text-[#7F7F7F] hover:bg-[#2A6562] focus:bg-[#2A6562] focus:text-white hover:text-white"
           onClick={handleMonth}
         >
           Month
         </Button>
         <Button
-          className="bg-transparent text-[#7F7F7F] hover:bg-[#2A6562] hover:text-white"
+          className="bg-transparent text-[#7F7F7F] hover:bg-[#2A6562] focus:bg-[#2A6562] focus:text-white hover:text-white"
           onClick={handleYear}
         >
           Year
