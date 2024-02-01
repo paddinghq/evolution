@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
  
-import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -12,10 +11,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { RadioGroup} from "@/components/ui/radio-group"
 import { toast } from "@/components/ui/use-toast"
 import { Checkbox } from "@/components/ui/checkbox"
 import { FaCcPaypal } from "react-icons/fa";
+import { RiVisaLine } from "react-icons/ri";
+import { FaGooglePay } from "react-icons/fa6";
+import UPI from '@/public/Images/UPI.jpg';
+import Image from 'next/image';
  
 const FormSchema = z.object({
   type: z.enum(["all", "mentions", "none"], {
@@ -54,6 +57,7 @@ export function Payment() {
                   defaultValue={field.value}
                   className="flex flex-col space-y-1"
                 >
+                    <div className="flex justify-between">
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <Checkbox value="all" />
@@ -62,6 +66,8 @@ export function Payment() {
                       Credit card/Debit card
                     </FormLabel>
                   </FormItem>
+                  <RiVisaLine size={24} />
+                  </div>
                   <div className="flex justify-between">
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
@@ -73,25 +79,31 @@ export function Payment() {
                   </FormItem>
                   <FaCcPaypal size={24}/>
                   </div>
+                  <div className="flex justify-between">
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <Checkbox value="none" />
                     </FormControl>
                     <FormLabel className="font-normal">Google Pay</FormLabel>
                   </FormItem>
+                  <FaGooglePay size={24}/>
+                  </div>
+                  <div className="flex justify-between">
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <Checkbox value="none" />
                     </FormControl>
                     <FormLabel className="font-normal">UPI</FormLabel>
                   </FormItem>
+                  <Image src={UPI.src} alt="UPI" width={25} height={25} />
+                  </div>
                 </RadioGroup>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <p>Note: These payment methods are the one's added to your Evolution account. Add more methods to your profile to get more options here</p>
+        <p className="mt-5">Note: These payment methods are the one's added to your Evolution account. Add more methods to your profile to get more options here.</p>
       </form>
     </Form>
         </div>
