@@ -1,12 +1,21 @@
-import Bookings from '../Pages/MyBookings/Bookings'
+import Category from '@/app/LandingPage/components/Category'
+import Navbar from '@/components/Navbar'
+import Slider from '@/app/LandingPage/components/Slider'
+
+import Section from '@/components/Event-card/Section'
+import EventCard from '@/app/LandingPage/components/Event'
+import Footer from './components/Footer'
 
 const LandingPage = () => {
   return (
-    <div className="">
-      <h1 className="text-2xl my-10 ml-5 text-[#2A6562]">
-        This is My Bookings page
-      </h1>
-      <Bookings />
+    <div>
+      <Navbar />
+      <Slider />
+      <Category />
+
+      <Section />
+      <EventCard />
+      <Footer />
     </div>
   )
 }
