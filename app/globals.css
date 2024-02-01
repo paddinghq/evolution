@@ -84,3 +84,32 @@
 .buttoncolor {
   background-color: rgba(177, 118, 31, 1);
 }
+
+.fc-event {
+  background-color: #26a39d96; /* Change the event background color */
+  border-color: #f5c6cb; /* Change the event border color */
+  color: #721c24;
+  padding: 0.5rem;
+  border-left-width: 2.5px;
+  border-left-color: #0c131396; 
+  /* Change the event text color */
+}
+
+.fc-day-today {
+   /* Change the current day background color */
+  color: #575151; /* Change the current day text color */
+}
+
+.fc {
+  background-color: #fff; /* Change to your desired background color */
+}
+
+.fc-dayGrid-view .fc-content, 
+.fc-timeGrid-view .fc-content {
+  border: 2px solid #ddd; /* Adjust border color for grid lines */
+}
+
+.fc-daygrid-header th.fc-sun,
+.fc-daygrid-header th.fc-sat {
+  background-color: lightblue; /* Set the background color for Sunday and Saturday */
+}

@@ -41,6 +41,47 @@
   resolved "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.1.tgz"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
+"@fullcalendar/core@~6.1.10":
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.10.tgz"
+  integrity sha512-oTXGJSAGpCf1oY+CKp5qYjMHkJCPBkJ3SHitl63n8Q6xKeiwQ4EF6Au451euUovREwJpLmD1AyZrCnWmtB9AVg==
+  dependencies:
+    preact "~10.12.1"
+
+"@fullcalendar/daygrid@~6.1.10":
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-6.1.10.tgz"
+  integrity sha512-Z4GRm1IyHKgxXFTWGcEI0nTsvYOIkpE0aMt3/o3ER2SZkF+hfwcDFhtj0c9+WhMjXFIWYeoTnA9rUOY7Zl/nxA==
+
+"@fullcalendar/interaction@~6.1.10":
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/@fullcalendar/interaction/-/interaction-6.1.10.tgz"
+  integrity sha512-aZRlwCpmDasq2RNeWV0ub20Uevare9Cb6iMlxCacx0fhOC14H28G9d1FsduJIecInL84SPGwt5ItqAYMsWv7zw==
+
+"@fullcalendar/list@~6.1.10":
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/@fullcalendar/list/-/list-6.1.10.tgz"
+  integrity sha512-WE4vuSUCzol4tJd0ZP0cNxeyRPaZcsVVYs2I3qdf3OZQkXwDCdSyWEz0Hluf+XZWcZXt21aEYKlxRjwUpQcf4Q==
+
+"@fullcalendar/multimonth@~6.1.10":
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/@fullcalendar/multimonth/-/multimonth-6.1.10.tgz"
+  integrity sha512-mLGEgD+sv8rNfKphyOCWRQapX7/nAvHgQmDTjuy4STlhHsddCYVmFlsSgF373ph1tXh41wAJUVdNO/pDmCvUfA==
+  dependencies:
+    "@fullcalendar/daygrid" "~6.1.10"
+
+"@fullcalendar/react@^6.1.10":
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/@fullcalendar/react/-/react-6.1.10.tgz"
+  integrity sha512-RVYevo5T4RUZzR8omlbnBwRCqVNJWKryzI0ZrFULyqIYggN6uPmMuB9GvbrTjDfKhsm438KQwwhJerg2lGh3xA==
+
+"@fullcalendar/timegrid@~6.1.10":
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/@fullcalendar/timegrid/-/timegrid-6.1.10.tgz"
+  integrity sha512-hFKyQXJaPbNyq1reZmvkCmM64O99krHoIcJAbDS+dntCm3FzZUcDtAcRKIbMiantHrezCG/1MEYk3m9e3aKvIQ==
+  dependencies:
+    "@fullcalendar/daygrid" "~6.1.10"
+
 "@hookform/resolvers@^3.3.4":
   version "3.3.4"
   resolved "https://registry.npmjs.org/@hookform/resolvers/-/resolvers-3.3.4.tgz"
@@ -872,6 +913,18 @@ fraction.js@^4.3.6:
   resolved "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.7.tgz"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
 
+fullcalendar@^6.1.10:
+  version "6.1.10"
+  resolved "https://registry.npmjs.org/fullcalendar/-/fullcalendar-6.1.10.tgz"
+  integrity sha512-JVka6cf3s90vKY221Xa2V8sq42J9SRYxbUILy+o2mIAzG4BqCNLPLr9uBTDtAf7eK3bNhqohnlofRzVBX0BPMw==
+  dependencies:
+    "@fullcalendar/core" "~6.1.10"
+    "@fullcalendar/daygrid" "~6.1.10"
+    "@fullcalendar/interaction" "~6.1.10"
+    "@fullcalendar/list" "~6.1.10"
+    "@fullcalendar/multimonth" "~6.1.10"
+    "@fullcalendar/timegrid" "~6.1.10"
+
 function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz"
@@ -1255,6 +1308,11 @@ postcss@8.4.31:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
+preact@~10.12.1:
+  version "10.12.1"
+  resolved "https://registry.npmjs.org/preact/-/preact-10.12.1.tgz"
+  integrity sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==
+
 prettier@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npmjs.org/prettier/-/prettier-3.1.1.tgz"
@@ -1301,7 +1359,7 @@ react-day-picker@^8.10.0:
   resolved "https://registry.npmjs.org/react-day-picker/-/react-day-picker-8.10.0.tgz"
   integrity sha512-mz+qeyrOM7++1NCb1ARXmkjMkzWVh2GL9YiPbRjKe0zHccvekk4HE+0MPOZOrosn8r8zTHIIeOUXTmXRqmkRmg==
 
-"react-dom@^16.14.0 || ^17 || ^18", "react-dom@^16.8 || ^17.0 || ^18.0", react-dom@^18, react-dom@^18.2.0, react-dom@>=16.3.0, react-dom@>=16.8.0:
+"react-dom@^16.14.0 || ^17 || ^18", "react-dom@^16.7.0 || ^17 || ^18", "react-dom@^16.8 || ^17.0 || ^18.0", react-dom@^18, react-dom@^18.2.0, react-dom@>=16.3.0, react-dom@>=16.8.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -1371,7 +1429,7 @@ react-style-singleton@^2.2.1:
     invariant "^2.2.4"
     tslib "^2.0.0"
 
-react@*, "react@^16.14.0 || ^17 || ^18", "react@^16.5.1 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18, react@^18.2.0, "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", react@>=15.0.0, react@>=16, react@>=16.3.0, react@>=16.8.0:
+react@*, "react@^16.14.0 || ^17 || ^18", "react@^16.5.1 || ^17.0.0 || ^18.0.0", "react@^16.7.0 || ^17 || ^18", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18, react@^18.2.0, "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", react@>=15.0.0, react@>=16, react@>=16.3.0, react@>=16.8.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
