@@ -74,11 +74,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-.linktext {
-  color: rgba(33, 120, 115, 1);
-}
-
-.buttoncolor {
-  background-color: rgba(177, 118, 31, 1);
-}
