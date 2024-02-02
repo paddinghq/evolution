@@ -28,16 +28,21 @@ const Calendar = () => {
   const calendarRef = useRef<any>(null)
   const dayHeaderContent = (arg: any) => {
     // arg.date is the date for the current day header cell
-    const weekday = arg.date.toLocaleDateString('en-US', { weekday: 'short' })
-    const dayNumber = arg.date.getDate()
-
+    const weekday = arg.date.toLocaleDateString('en-US', { weekday: 'short' });
+    const dayNumber = arg.date.getDate();
+  
+    // Check if the weekday is Saturday or Sunday and capitalize it
+    const capitalizedWeekday = ['sat', 'sun'].includes(weekday.toLowerCase())
+      ? weekday.toUpperCase()
+      : weekday;
+  
     return (
-      <div className="custom-day-header ">
-        <div className="day-header-weekday">{weekday}</div>
+      <div className="custom-day-header">
+        <div className="day-header-weekday">{capitalizedWeekday}</div>
         <div className="day-header-number">{dayNumber}</div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="mt-6">

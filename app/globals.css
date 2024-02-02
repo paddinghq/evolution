@@ -85,7 +85,23 @@
   background-color: rgba(177, 118, 31, 1);
 }
 
+.fc  .day-header-weekday{
+  color: #7F7F7F;
+  font-size: 0.9rem;
 
+}
+
+
+
+.fc .fc-col-header-cell-cushion {
+  padding-top: 1rem;
+  
+}
+
+.fc  .day-header-number{
+  font-size: 1.7rem;
+  color: #4b4848;
+}
 
 .fc-day {
   text-align: left !important;
@@ -94,6 +110,8 @@
   background-color: #F2F2F2;
   text-transform: uppercase;
 }
+
+
 
 .fc-day-thu {
   background-color: #F5FFFE;
