@@ -6,6 +6,7 @@ import { ChangeEvent, JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactE
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { FiPlus } from "react-icons/fi";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
     eventChecklist: z.string(),
@@ -107,6 +108,7 @@ const  Event:React.FC = () => {
                             </h3>
                             {subcategories[index]?.map((subcategory: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined, subIndex: Key | null | undefined) => (
                                 <div key={subIndex} className="flex gap-3 items-center">
+                                    <Checkbox />
                                     <span>{subcategory}</span>
                                 </div>
                             ))}
@@ -117,7 +119,7 @@ const  Event:React.FC = () => {
                                             type='text'
                                             value={subcategoryInputValue}
                                             onChange={(e) => setSubcategoryInputValue(e.target.value)}
-                                            className=''
+                                            className='w-'
                                         />
 
                                         <button onClick={() => handleAddSubcategory(index, subcategoryInputValue)}>Add</button>
