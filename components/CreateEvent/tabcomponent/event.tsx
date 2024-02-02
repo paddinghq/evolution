@@ -20,7 +20,7 @@ const  Event:React.FC = () => {
     const [checkList, setCheckList] = useState<string>("")
     const [showInputIndex, setShowInputIndex] = useState<null | number>(null);
 
-    const [enteredCheckList, setEnteredCheckList] = useState<string[]>([])
+    const [category, setcategory] = useState<string[]>([])
     
 
     const handleCheckList = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -30,7 +30,7 @@ const  Event:React.FC = () => {
 
     const handleAdd = (): void =>  {
 
-        setEnteredCheckList([...enteredCheckList, checkList])
+        setcategory([...category, checkList])
 
         form.reset({ eventChecklist: '' });
     }
@@ -80,9 +80,9 @@ const  Event:React.FC = () => {
                 <Button variant="secondary" className="px-10 border-2 border-solid" onClick={(e) => handleAdd() }>Add</Button>
             </div>
 
-            {enteredCheckList.length > 0 && (
+            {category.length > 0 && (
                             <div className='mt-10 bg-white py-4 px-3 rounded-lg '>
-                                {enteredCheckList.map((event, index) => (
+                                {category.map((event, index) => (
                                     <div className="flex gap-3 items-center">
                                         <h3 key={index}className='font-bold capitalize'>
                                             {event}
