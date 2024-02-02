@@ -26,9 +26,22 @@ const events: Event[] = [
 
 const Calendar = () => {
   const calendarRef = useRef<any>(null)
+  const dayHeaderContent = (arg: any) => {
+    // arg.date is the date for the current day header cell
+    const weekday = arg.date.toLocaleDateString('en-US', { weekday: 'short' })
+    const dayNumber = arg.date.getDate()
+
+    return (
+      <div className="custom-day-header ">
+        <div className="day-header-weekday">{weekday}</div>
+        <div className="day-header-number">{dayNumber}</div>
+      </div>
+    )
+  }
+
   return (
     <div className="mt-6">
-      <div className="bg-[#21787333] pt-16 px-16 rounded-2xl flex flex-col gap-10">
+      <div className="bg-[#21787333] py-16 px-16 rounded-2xl flex flex-col gap-10">
         <CalendarHeader calendarRef={calendarRef} />
         <FullCalendar
           ref={calendarRef}
@@ -40,6 +53,7 @@ const Calendar = () => {
           editable={true}
           selectable={true}
           events={events}
+          dayHeaderContent={dayHeaderContent}
         />
       </div>
     </div>

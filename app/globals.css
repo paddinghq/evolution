@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -84,6 +85,20 @@
   background-color: rgba(177, 118, 31, 1);
 }
 
+
+
+.fc-day {
+  text-align: left !important;
+}
+ .fc-day-sun, .fc-day-sat {
+  background-color: #F2F2F2;
+  text-transform: uppercase;
+}
+
+.fc-day-thu {
+  background-color: #F5FFFE;
+}
+
 .fc-event {
   background-color: #26a39d96; /* Change the event background color */
   border-color: #f5c6cb; /* Change the event border color */
@@ -94,12 +109,13 @@
 }
 
 .fc-day-today {
-  /* Change the current day background color */
+  
   color: #575151; /* Change the current day text color */
 }
 
 .fc {
-  background-color: #fff; /* Change to your desired background color */
+  background-color: #fff;
+  /* Change to your desired background color */
 }
 
 .fc-dayGrid-view .fc-content,
