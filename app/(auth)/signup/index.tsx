@@ -14,12 +14,15 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   name: z.string().min(3),
   emailAddress: z.string().email(),
   password: z.string().min(3),
-  terms: z.boolean().default(false).optional(),
+  terms: z.boolean().refine((value) => value, {
+    message: 'You must agree to terms and condition',
+  }),
 })
 
 const SignUp = () => {
@@ -32,8 +35,12 @@ const SignUp = () => {
       terms: false,
     },
   })
+  const router = useRouter()
+
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values)
+
+    router.push('/signup/step3')
   }
   return (
     <div className="shadow-lg p-6 rounded-md ">
@@ -57,7 +64,7 @@ const SignUp = () => {
                       placeholder="Name"
                       type="name"
                       {...field}
-                      className="shadow-md rounded-2xl px-4 py-6 border-t-white"
+                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -76,7 +83,7 @@ const SignUp = () => {
                       placeholder="Email address"
                       type="email"
                       {...field}
-                      className="shadow-md rounded-2xl px-4 py-6 border-t-white"
+                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -95,7 +102,7 @@ const SignUp = () => {
                       placeholder="Password"
                       type="password"
                       {...field}
-                      className="shadow-md rounded-2xl px-4 py-6 border-t-white"
+                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
                   </FormControl>
                   <FormMessage />

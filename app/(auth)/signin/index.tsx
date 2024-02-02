@@ -59,7 +59,7 @@ const SignIn = () => {
                       placeholder="Email address"
                       type="email"
                       {...field}
-                      className="shadow-md rounded-2xl px-4 py-6 border-t-white"
+                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
                   </FormControl>
                   <FormMessage />
@@ -78,7 +78,7 @@ const SignIn = () => {
                       placeholder="Password"
                       type="password"
                       {...field}
-                      className="shadow-md rounded-2xl px-4 py-6 border-t-white"
+                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
                   </FormControl>
                   <FormMessage />
