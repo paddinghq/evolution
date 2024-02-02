@@ -1,9 +1,7 @@
-import EventsTab from "."
+import EventsTab from '.'
 
 const page = () => {
-  return (
-    <EventsTab/>
-  )
+  return <EventsTab />
 }
 
 export default page

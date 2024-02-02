@@ -3,7 +3,9 @@ import Settings from '.'
 
 const page = () => {
   return (
-    <div><Settings/></div>
+    <div>
+      <Settings />
+    </div>
   )
 }
 

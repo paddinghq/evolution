@@ -1,7 +1,5 @@
-import Event from "."
+import Event from '.'
 const page = () => {
-    return (
-        <Event />
-    )
+  return <Event />
 }
 export default page
