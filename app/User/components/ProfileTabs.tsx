@@ -1,5 +1,5 @@
 'use client'
-import EventsTab from '@/app/HomePage/eventstab'
+import EventsTab from '@/app/HomePage/eventstab/index'
 import React, { useState } from 'react'
 import { Button } from '../../../components/ui/button'
 import About from './Tabs/About'
