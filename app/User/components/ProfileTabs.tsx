@@ -1,12 +1,12 @@
 'use client'
 import React, { useState } from 'react'
 import { Button } from '../../../components/ui/button'
-import About from './Tabs/About'
+import About from './Tabs/About/About'
 import Bookings from './Tabs/Bookings/page'
-import Favorites from './Tabs/Favorites'
-import Calendar from './Tabs/Calendar'
-import Settings from './Tabs/Settings'
-import Events from './Tabs/Events'
+import Favorites from './Tabs/Favorites/Favorites'
+import Calendar from './Tabs/Calendar/page'
+import Settings from './Tabs/Settings/Settings'
+import Events from './Tabs/Events/Events'
 
 const AboutMe = () => (
   <div className="container mx-auto p-4">
