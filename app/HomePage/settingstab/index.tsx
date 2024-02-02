@@ -21,7 +21,7 @@ const FormSchema = z.object({
   chat_notifications: z.boolean().default(false).optional(),
 })
 
-const Settings = () => {
+const SettingsTab = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -94,4 +94,4 @@ const Settings = () => {
   )
 }
 
-export default Settings
+export default SettingsTab

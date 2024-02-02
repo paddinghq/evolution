@@ -1,4 +1,5 @@
 'use client'
+import EventsTab from '@/app/Homepage/eventstab'
 import React, { useState } from 'react'
 import { Button } from '../../../components/ui/button'
 import About from './Tabs/About'
@@ -21,7 +22,7 @@ const MyBookings = () => (
 
 const MyEvents = () => (
   <div className="container mx-auto p-4">
-    <Bookings />
+    <EventsTab />
   </div>
 )
 
@@ -51,7 +52,7 @@ const ProfileTabs = () => {
   }
 
   return (
-    <div className="container mx-auto px-36 mt-20">
+    <div className="container mx-auto px-18 mt-20">
       <div className="mt-4">
         <ul className="flex space-x-4">
           <li>
