@@ -1,5 +1,5 @@
 import Footer from "@/components/Footer"
-import Navbar from "../Navbar"
+import Navbar from "@/components/Navbar";
 import Tab from "./eventtab"
 
 

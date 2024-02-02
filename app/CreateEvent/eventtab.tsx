@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
 import Basic from "./tabcomponent/basic"
 import Invite from "./tabcomponent/invitee"
 import EventCheck from "./tabcomponent/event"

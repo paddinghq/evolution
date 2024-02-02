@@ -1,7 +1,7 @@
 import Event from "."
-const EventScreen = () => {
+const page = () => {
     return (
         <Event />
     )
 }
-export default EventScreen
+export default page
