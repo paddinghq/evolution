@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { FormField, FormItem, FormControl } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, ReactPortal, SetStateAction, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { FiPlus } from "react-icons/fi";
@@ -11,6 +11,10 @@ const formSchema = z.object({
     eventChecklist: z.string(),
     
 })
+
+interface EventFormValues {
+    eventChecklist: string;
+  }
 
 
 
@@ -21,6 +25,9 @@ const  Event:React.FC = () => {
     const [showInputIndex, setShowInputIndex] = useState<null | number>(null);
 
     const [category, setcategory] = useState<string[]>([])
+    const [subcategories, setSubcategories] = useState<string[][]>([]);
+    const [subcategoryInputValue, setSubcategoryInputValue] = useState("");
+
     
 
     const handleCheckList = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -46,6 +53,17 @@ const  Event:React.FC = () => {
         },
     })
 
+    const handleAddSubcategory = (categoryIndex: number, subcategory: string): void => {
+        const updatedSubcategories = [...subcategories];
+        updatedSubcategories[categoryIndex] = [...(updatedSubcategories[categoryIndex] || []), subcategory];
+        setSubcategories(updatedSubcategories);
+        setShowInputIndex(null); // Reset the input index
+    
+        // Clear the subcategory input field
+        setSubcategoryInputValue("");
+    
+        form.reset({ eventChecklist: '' }); // Reset the form
+    };
     return (
         <FormProvider {...form}>
             
@@ -81,35 +99,39 @@ const  Event:React.FC = () => {
             </div>
 
             {category.length > 0 && (
-                            <div className='mt-10 bg-white py-4 px-3 rounded-lg '>
-                                {category.map((event, index) => (
-                                    <div className="flex gap-3 items-center">
-                                        <h3 key={index}className='font-bold capitalize'>
-                                            {event}
-                                            
-                                        </h3>
-                                        <div className='flex items-center'>
-                                            {showInputIndex === index ? (
-                                            <>
-                                                <Input
-                                                type='text'
-                                                // value={inputValue}
-                                                // onChange={handleInputChange}
-                                                className=''
-                                                />
-                                                <button>Add</button>
-                                            </>
-                                            ) : (
-                                            <div onClick={() => handleIconClick(index)} className='cursor-pointer'>
-                                                <FiPlus size={18} />
-                                            </div>
-                                            )}
-                                        </div>
+                <div className='mt-10 bg-white py-4 px-3 rounded-lg '>
+                    {category.map((event, index) => (
+                        <div key={index}>
+                            <h3 className='font-bold capitalize'>
+                                {event}
+                            </h3>
+                            {subcategories[index]?.map((subcategory: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined, subIndex: Key | null | undefined) => (
+                                <div key={subIndex} className="flex gap-3 items-center">
+                                    <span>{subcategory}</span>
+                                </div>
+                            ))}
+                            <div className='flex items-center'>
+                                {showInputIndex === index ? (
+                                    <>
+                                        <Input
+                                            type='text'
+                                            value={subcategoryInputValue}
+                                            onChange={(e) => setSubcategoryInputValue(e.target.value)}
+                                            className=''
+                                        />
+
+                                        <button onClick={() => handleAddSubcategory(index, subcategoryInputValue)}>Add</button>
+                                    </>
+                                ) : (
+                                    <div onClick={() => handleIconClick(index)} className='cursor-pointer'>
+                                        <FiPlus size={18} />
                                     </div>
-                                ))}
-                                
+                                )}
                             </div>
-                        )}
+                        </div>
+                    ))}
+                </div>
+            )}
     </FormProvider>
     )
 }
