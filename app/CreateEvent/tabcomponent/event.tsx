@@ -133,12 +133,12 @@ const Event: React.FC = () => {
               )}
               <div className="flex items-center">
                 {showInputIndex === index ? (
-                  <>
+                  <div className='flex items-center gap-3'>
                     <Input
                       type="text"
                       value={subcategoryInputValue}
                       onChange={(e) => setSubcategoryInputValue(e.target.value)}
-                      className="w-"
+                      className="w-24"
                     />
 
                     <button
@@ -148,7 +148,7 @@ const Event: React.FC = () => {
                     >
                       Add
                     </button>
-                  </>
+                  </div>
                 ) : (
                   <div
                     onClick={() => handleIconClick(index)}
