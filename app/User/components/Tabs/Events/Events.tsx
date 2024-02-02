@@ -31,7 +31,7 @@ const upcomings = [
   },
 ]
 
-const EventsTab = () => {
+const Events = () => {
   return (
     <div className="mt-6">
       <div className="bg-[#21787333] p-8 rounded-2xl">
@@ -422,4 +422,4 @@ const EventsTab = () => {
   )
 }
 
-export default EventsTab
+export default Events

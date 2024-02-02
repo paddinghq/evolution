@@ -4,7 +4,7 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import CalendarHeader from '../fullcalendar/CalenderHeader'
+import CalendarHeader from './fullcalendar/CalenderHeader'
 
 interface Event {
   title: string
