@@ -4,4 +4,4 @@ const page = () => {
   return <EventsTab />
 }
 
-export default page
+export default page;

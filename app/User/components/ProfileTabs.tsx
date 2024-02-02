@@ -1,5 +1,4 @@
 'use client'
-import EventsTab from '@/app/HomePage/eventstab'
 import React, { useState } from 'react'
 import { Button } from '../../../components/ui/button'
 import About from './Tabs/About'
@@ -7,6 +6,7 @@ import Bookings from './Tabs/Bookings/page'
 import Favorites from './Tabs/Favorites'
 import Calendar from './Tabs/Calendar'
 import Settings from './Tabs/Settings'
+import Events from './Tabs/Events'
 
 const AboutMe = () => (
   <div className="container mx-auto p-4">
@@ -22,7 +22,7 @@ const MyBookings = () => (
 
 const MyEvents = () => (
   <div className="container mx-auto p-4">
-    <EventsTab />
+    <Events />
   </div>
 )
 
