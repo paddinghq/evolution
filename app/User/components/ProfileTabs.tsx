@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Button } from '../../../components/ui/button'
 import About from './Tabs/About'
-import Bookings from './Tabs/Bookings'
+import Bookings from './Tabs/Bookings/page'
 import Favorites from './Tabs/Favorites'
 import Calendar from './Tabs/Calendar'
 import Settings from './Tabs/Settings'
@@ -51,7 +51,7 @@ const ProfileTabs = () => {
   }
 
   return (
-    <div className="absolute container mx-auto px-36 mt-20">
+    <div className="container mx-auto px-36 mt-20">
       <div className="mt-4">
         <ul className="flex space-x-4">
           <li>
