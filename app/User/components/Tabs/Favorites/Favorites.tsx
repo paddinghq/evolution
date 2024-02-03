@@ -144,7 +144,7 @@ const cards = [
 
 const FavoriteTab = () => {
   return (
-    <div className="mt-6">
+    <div>
       <div className="bg-[#21787333] p-8 rounded-2xl flex flex-col gap-10">
         <div className="filter flex justify-between items-center">
           <div className="flex items-center gap-6">

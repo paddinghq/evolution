@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <div className="bg-[#21787333] my-16 py-14 px-12 rounded-xl">
+    <div className="bg-[#21787333] py-14 px-12 rounded-xl">
       <p>
         Lorem ipsum dolor sit amet consectetur. Dis massa tortor feugiat varius
         commodo neque. Integer diam tristique auctor sed. Rutrum nec morbi

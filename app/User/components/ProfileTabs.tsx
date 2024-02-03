@@ -135,7 +135,8 @@ const ProfileTabs = () => {
           </li>
         </ul>
       </div>
-      <div className="mt-4">
+
+      <div className="my-10">
         {activeTab === 'aboutMe' && <AboutMe />}
         {activeTab === 'myBookings' && <MyBookings />}
         {activeTab === 'myEvents' && <MyEvents />}

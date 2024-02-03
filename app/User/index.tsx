@@ -20,7 +20,7 @@ const user = {
 
 const UserProfile = () => {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full container mx-auto">
       <Image src={Hero.src} width={1400} height={10} alt="Hero" />
       <div className="flex absolute w-full top-0 px-16 py-5 items-start mb-50 gap-5">
         <div className="rounded-lg">

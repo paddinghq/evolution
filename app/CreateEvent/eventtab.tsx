@@ -6,7 +6,7 @@ import Invite from './tabcomponent/invitee'
 import EventCheck from './tabcomponent/event'
 import Budget from './tabcomponent/budget'
 import Payment from './tabcomponent/payment'
-import { SetStateAction, useState } from 'react'
+import React, { SetStateAction, useState } from 'react'
 const tabs = [
   { id: 1, title: 'Basic Info', component: <Basic /> },
   { id: 2, title: 'Invitee Info', component: <Invite /> },
@@ -17,6 +17,10 @@ const tabs = [
 
 const Event = () => {
   const [activeTab, setActiveTab] = useState(1)
+
+  const handleSelectedTab = (tab: React.SetStateAction<number>) => {
+    setActiveTab(tab)
+  }
 
   const handleNextClick = () => {
     const nextTabId = activeTab < tabs.length ? activeTab + 1 : activeTab
@@ -58,7 +62,9 @@ const Event = () => {
               activeTab === items.id ? 'text-[#217873] font-bold underline' : ''
             }`}
           >
-            {items.title}
+            <span onClick={() => handleSelectedTab(items.id)}>
+              {items.title}
+            </span>
           </Button>
         ))}
       </div>

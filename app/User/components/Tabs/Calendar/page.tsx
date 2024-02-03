@@ -45,7 +45,7 @@ const Calendar = () => {
   }
 
   return (
-    <div className="mt-6">
+    <div>
       <div className="bg-[#21787333] py-16 px-16 rounded-2xl flex flex-col gap-10">
         <CalendarHeader calendarRef={calendarRef} />
         <FullCalendar

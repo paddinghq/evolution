@@ -34,7 +34,7 @@ const Settings = () => {
     console.log(values)
   }
   return (
-    <div className="mt-6">
+    <div>
       <div className="bg-[#21787333] p-8 rounded-2xl flex flex-col gap-10">
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)}>
