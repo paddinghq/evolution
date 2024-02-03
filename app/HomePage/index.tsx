@@ -6,6 +6,7 @@ import Trend from './Component/trend'
 import Organizer from './Component/organizer'
 import Event from './Component/event'
 import Testimonial from './Component/testimonial'
+import Footer from '@/components/Footer'
 
 const LandingPage = () => {
   return (
@@ -18,6 +19,7 @@ const LandingPage = () => {
       <Organizer />
       <Event />
       <Testimonial />
+      <Footer />
     </div>
   )
 }
