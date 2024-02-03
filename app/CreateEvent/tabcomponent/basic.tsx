@@ -6,6 +6,16 @@ import { GoClock, GoDeviceCameraVideo } from 'react-icons/go'
 import { MdOutlineCameraAlt } from 'react-icons/md'
 import { Button } from '@/components/ui/button'
 import { SetStateAction, useState } from 'react'
+import { Textarea } from '@/components/ui/textarea'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Form, FormProvider, useForm } from 'react-hook-form'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form'
 
 import {
   Select,
@@ -23,7 +33,48 @@ const eventType = [
   { id: 3, type: 'Open' },
 ]
 
+const MAX_FILE_SIZE = 5000000
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+]
+
+const formSchema = z.object({
+  eventName: z.string(),
+  eventType: z.string({ required_error: 'Enter event type' }),
+  eventPrice: z.string({ required_error: 'Enter event price' }),
+  price: z.number({ required_error: 'Enter event price' }),
+  date: z.date({ required_error: 'Enter event date' }),
+  location: z.string({ required_error: 'Enter event location' }),
+  startTime: z.number({ required_error: 'Enter event start time' }),
+  endTime: z.number(),
+  category: z.string(),
+  format: z.string(),
+  hashtag: z.string(),
+  description: z.string(),
+})
+
 const Basic = () => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      eventName: '',
+      eventType: '',
+      eventPrice: '',
+      price: 0,
+      date: new Date(),
+      location: '',
+      startTime: 0,
+      endTime: 0,
+      category: '',
+      format: '',
+      hashtag: '',
+      description: '',
+    },
+  })
+
   const [hashtag, setHashtag] = useState('')
   const [enteredHashtags, setEnteredHashtags] = useState<string[]>([])
 
@@ -38,13 +89,10 @@ const Basic = () => {
     preventDefault: () => void
   }) => {
     if (event.key === 'Enter') {
-      // Prevent the form from being submitted
       event.preventDefault()
 
-      // Add the entered hashtag to the list
       setEnteredHashtags([...enteredHashtags, hashtag])
 
-      // Clear the input field
       setHashtag('')
     }
   }
@@ -99,7 +147,7 @@ const Basic = () => {
         <div className="relative flex items-center w-full">
           <Input
             type="search"
-            className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            className="pr-10 pl-3"
             placeholder="Start time"
           />
 
@@ -156,19 +204,19 @@ const Basic = () => {
               className="border-r-4 border-black ml-3"
             />
 
-            <GoDeviceCameraVideo size={36} />
+              <GoDeviceCameraVideo size={36} />
+            </div>
+            <h1>Drag and drop a file</h1>
+
+            <p>Drag and drop or select an image or video file(s).</p>
+
+            <Button variant="outline" className="flex gap-3 bg-none">
+              <IoCloudUpload size={24} />
+              Upload media
+            </Button>
           </div>
-          <h1>Drag and drop a file</h1>
-
-          <p>Drag and drop or select an image or video file(s).</p>
-
-          <Button variant="outline" className="flex gap-3 bg-none">
-            <IoCloudUpload size={24} />
-            Upload media
-          </Button>
         </div>
       </div>
-    </div>
   )
 }
 
