@@ -43,16 +43,6 @@ const formSchema = z.object({
   format: z.string(),
   hashtag: z.string(),
   description: z.string(),
-  image: z
-    .any()
-    .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max image size is 5MB.`,
-    )
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      'Only .jpg, .jpeg, .png and .webp formats are supported.',
-    ),
 })
 
 const Basic = () => {
@@ -71,7 +61,6 @@ const Basic = () => {
       format: '',
       hashtag: '',
       description: '',
-      image: File,
     },
   })
 
