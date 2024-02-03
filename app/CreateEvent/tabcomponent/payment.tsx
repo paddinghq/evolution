@@ -41,6 +41,7 @@ export function Payment() {
       ),
     })
   }
+  
   return (
     <div className="flex rounded-lg flex-col gap-8 px-9 py-8 text-black">
       <Form {...form}>

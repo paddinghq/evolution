@@ -8,12 +8,12 @@ function Budget() {
   return (
     <div className="flex rounded-lg flex-col gap-8 px-9 py-8  text-black">
       <div className="flex gap-3">
-        <Input placeholder="Commodity Name" />
-        <Input placeholder="Amount Alloted" />
+        <Input placeholder="Commodity Name" className='focus-visible:ring-0 focus-visible:ring-offset-0' />
+        <Input placeholder="Amount Alloted" className='focus-visible:ring-0 focus-visible:ring-offset-0' />
       </div>
 
       <div>
-        <Textarea placeholder="Description" />
+        <Textarea placeholder="Description" className='focus-visible:ring-0 focus-visible:ring-offset-0' />
       </div>
 
       <div className="flex justify-end gap-3">
