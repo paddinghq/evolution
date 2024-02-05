@@ -1,6 +1,6 @@
 import LandingPage from './LandingPage'
-import { Provider } from 'react-redux';
-import {store }from './../lib/Store';
+import { Provider } from "react-redux";
+import store from './Redux/store';
 
 export default function Home() {
   return (
