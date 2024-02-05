@@ -114,7 +114,7 @@ const Basic = () => {
         <div className="w-[49.49%]">
           <Select>
             <SelectTrigger className="w-full focus-visible:!ring-0 focus-visible:!ring-offset-0">
-              <SelectValue placeholder="Select a fruit" />
+              <SelectValue placeholder="Select an EventType" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
