@@ -25,7 +25,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from '@/components/ui/select'
 
 const eventType = [
   { id: 1, type: 'Private' },
@@ -103,13 +103,20 @@ const Basic = () => {
     setEnteredHashtags(updatedHashtags)
   }
 
-  const options = eventType.map(event => ({ value: event.id, label: event.type }));
+  const options = eventType.map((event) => ({
+    value: event.id,
+    label: event.type,
+  }))
 
   return (
     <div className="flex flex-col gap-8   ">
       <div className="flex gap-3 w-full justify-between">
         <div className="w-[49.49%]">
-          <Input placeholder="Event Name" style={{ color: 'red' }} className='focus-visible:ring-0 focus-visible:ring-offset-0' />
+          <Input
+            placeholder="Event Name"
+            style={{ color: 'red' }}
+            className="focus-visible:ring-0 focus-visible:ring-offset-0"
+          />
         </div>
         <div className="w-[49.49%]">
           <Select>
@@ -118,9 +125,11 @@ const Basic = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel className='text-gray-500'>Event Type</SelectLabel>
-                {eventType.map(event => (
-                  <SelectItem key={event.id} value={event.type}>{event.type}</SelectItem>
+                <SelectLabel className="text-gray-500">Event Type</SelectLabel>
+                {eventType.map((event) => (
+                  <SelectItem key={event.id} value={event.type}>
+                    {event.type}
+                  </SelectItem>
                 ))}
               </SelectGroup>
             </SelectContent>
@@ -128,17 +137,34 @@ const Basic = () => {
         </div>
       </div>
       <div className="flex gap-3">
-        <Input placeholder="Priced event" className='focus-visible:ring-0 focus-visible:ring-offset-0' />
-        <Input placeholder="Price (₦)" className='focus-visible:ring-0 focus-visible:ring-offset-0' />
+        <Input
+          placeholder="Priced event"
+          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
+        <Input
+          placeholder="Price (₦)"
+          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
       </div>
       <div className="flex gap-3">
         <div className="relative flex items-center w-full">
-          <Input type="search" className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Location" />
+          <Input
+            type="search"
+            className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            placeholder="Location"
+          />
 
-          <IoCalendar size={24} className="absolute right-3 text-[#7a7a7a] focus-visible:ring-0 focus-visible:ring-offset-0" />
+          <IoCalendar
+            size={24}
+            className="absolute right-3 text-[#7a7a7a] focus-visible:ring-0 focus-visible:ring-offset-0"
+          />
         </div>
         <div className="relative flex items-center w-full">
-          <Input type="search" className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Location" />
+          <Input
+            type="search"
+            className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            placeholder="Location"
+          />
 
           <IoLocation size={24} className="absolute right-3 text-[#7a7a7a]" />
         </div>
@@ -154,19 +180,35 @@ const Basic = () => {
           <GoClock size={24} className="absolute right-3 text-[#7a7a7a]" />
         </div>
         <div className="relative flex items-center w-full">
-          <Input type="search" className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="End time" />
+          <Input
+            type="search"
+            className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+            placeholder="End time"
+          />
 
-          <GoClock size={24} className="absolute right-3 text-[#7a7a7a] focus-visible:ring-0 focus-visible:ring-offset-0" />
+          <GoClock
+            size={24}
+            className="absolute right-3 text-[#7a7a7a] focus-visible:ring-0 focus-visible:ring-offset-0"
+          />
         </div>
       </div>
       <div className="flex gap-3">
-        <Input placeholder="Event Category" className='focus-visible:ring-0 focus-visible:ring-offset-0' />
+        <Input
+          placeholder="Event Category"
+          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
       </div>
       <div className="flex gap-3">
-        <Input placeholder="Event Format" className='focus-visible:ring-0 focus-visible:ring-offset-0' />
+        <Input
+          placeholder="Event Format"
+          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+        />
       </div>
       <div className="">
-        <Input className="h-24 focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Event description" />
+        <Input
+          className="h-24 focus-visible:ring-0 focus-visible:ring-offset-0"
+          placeholder="Event description"
+        />
       </div>
       <div className="">
         <>
@@ -175,7 +217,7 @@ const Basic = () => {
             value={hashtag}
             onChange={handleInputChange}
             onKeyPress={handleEnterKeyPress}
-            className='focus-visible:ring-0 focus-visible:ring-offset-0'
+            className="focus-visible:ring-0 focus-visible:ring-offset-0"
           />
 
           {enteredHashtags.length > 0 && (
@@ -204,19 +246,19 @@ const Basic = () => {
               className="border-r-4 border-black ml-3"
             />
 
-              <GoDeviceCameraVideo size={36} />
-            </div>
-            <h1>Drag and drop a file</h1>
-
-            <p>Drag and drop or select an image or video file(s).</p>
-
-            <Button variant="outline" className="flex gap-3 bg-none">
-              <IoCloudUpload size={24} />
-              Upload media
-            </Button>
+            <GoDeviceCameraVideo size={36} />
           </div>
+          <h1>Drag and drop a file</h1>
+
+          <p>Drag and drop or select an image or video file(s).</p>
+
+          <Button variant="outline" className="flex gap-3 bg-none">
+            <IoCloudUpload size={24} />
+            Upload media
+          </Button>
         </div>
       </div>
+    </div>
   )
 }
 

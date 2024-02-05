@@ -34,7 +34,6 @@ const days = [
   },
 ]
 const Category = () => {
-  
   return (
     <div className="">
       <div className="container px-28 py-8">

@@ -9,7 +9,6 @@ export default function Home() {
       <div className="block lg:hidden">
         mobile & tab design is not ready yet
       </div>
-  
     </>
   )
 }
