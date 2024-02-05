@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const CreateEventSlice = createSlice({
 	name: "createEvent",
 	initialState: {
-		eventName: ""
+		eventName: "johnson"
 		
 	},
 	reducers: {

@@ -1,6 +1,5 @@
-"use client"
 import { configureStore } from "@reduxjs/toolkit";
-import CreateEventSlice from "./createEventSlice";
+import CreateEventSlice from "./slice/createEventSlice";
 
 
 const store = configureStore({
