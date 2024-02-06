@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import {useSelector, useDispatch} from "react-redux"
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -37,10 +38,11 @@ const SignUp = () => {
   })
   const router = useRouter()
 
+
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values)
 
-    router.push('/signup/step3')
+    
   }
   return (
     <div className="shadow-lg p-6 rounded-md ">
@@ -133,9 +135,12 @@ const SignUp = () => {
             )}
           />
 
-          <Link href="/step2" className="w-full buttoncolor hover:bg-[#217873]">
-            Sign up
-          </Link>
+          <Button
+            type="submit"
+            className="w-full buttoncolor hover:bg-[#217873]"
+          >
+            Sign Up
+          </Button>
         </form>
       </FormProvider>
       <div className="flex items-center mt-8">
