@@ -1,7 +1,7 @@
-import OTP from "."
+import OTP from '.'
 
-const page =()=> {
-    return <OTP />
+const page = () => {
+  return <OTP />
 }
 
 export default page

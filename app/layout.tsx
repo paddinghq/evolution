@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google' // Import Montserrat font
 import './globals.css'
 import { cn } from '../lib/utils'
 import Providers from './Redux/Provider'
+import { Toaster } from '@/components/ui/toaster'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
       >
         <Providers>
           <div>{children}</div>
+          <Toaster />
         </Providers>
       </body>
     </html>
