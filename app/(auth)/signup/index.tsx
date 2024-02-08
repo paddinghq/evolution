@@ -63,45 +63,7 @@ const SignUp = () => {
 
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    dispatch(setSubmitting(true))
-
-    try{
-      const response = await axios.post("https://evolution-stagin.onrender.com/api/v1/auth/signup", {
-        fullName: values.name,
-        email: values.emailAddress,
-        phone: values.phone,
-        password: values.password
-      });
-
-      console.log(response)
-      
-      if(response.status === 201) {
-
-        dispatch(setSubmitting(false))
-        toast({
-          description: response.data.message,
-      })
-      router.push("/otp")
-      form.reset()
-
-      } else {
-        dispatch(setSubmitting(false))
-        toast({
-          variant: "destructive",
-          description: response.data.message,
-      })
-      router.push("/")
-      form.reset()
-        
-      }
-    }catch(err) {
-      toast({
-        variant: "destructive",
-        description: "Error occured try again"
-      })
-      router.push("/")
-      form.reset()
-    }
+   console.log(values)
 
     
 
