@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import axios from 'axios';
+import axios from 'axios'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormProvider, useForm } from 'react-hook-form'
@@ -16,44 +16,44 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import {useSelector, useDispatch} from "react-redux"
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { setSubmitting } from '@/app/Redux/slice/signupSlice';
-import {RootState} from  "@/app/Redux/slice/interface"
+import { useSelector, useDispatch } from 'react-redux'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
-
 
 const formSchema = z.object({
   name: z.string().min(3),
   phone: z.string().max(11),
   emailAddress: z.string().email(),
-  password: z.string().min(3)
-  .refine((value) => /[A-Z]/.test(value), {
-    message: 'Password must include at least one capital letter',
-  })
-  .refine((value) => /\d/.test(value), {
-    message: 'Password must include at least one number',
-  })
-  .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
-    message: 'Password must include at least one special character',
-  })
-  ,
+  password: z
+    .string()
+    .min(3)
+    .refine((value) => /[A-Z]/.test(value), {
+      message: 'Password must include at least one capital letter',
+    })
+    .refine((value) => /\d/.test(value), {
+      message: 'Password must include at least one number',
+    })
+    .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
+      message: 'Password must include at least one special character',
+    }),
   terms: z.boolean().refine((value) => value, {
     message: 'You must agree to terms and condition',
   }),
 })
 
 const SignUp = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
-  const submitting = useSelector((state: RootState) => state.auth.submitting);
+  const submitting = useSelector((state: RootState) => state.auth.submitting)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      phone: "",
+      phone: '',
       emailAddress: '',
       password: '',
       terms: false,
@@ -61,13 +61,47 @@ const SignUp = () => {
   })
   const router = useRouter()
 
-
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-   console.log(values)
+    dispatch(setSubmitting(true))
 
-    
+    try {
+      const response = await axios.post(
+        'https://evolution-stagin.onrender.com/api/v1/auth/signup',
+        {
+          fullName: values.name,
+          email: values.emailAddress,
+          phone: values.phone,
+          password: values.password,
+        },
+      )
 
-    
+      console.log(response)
+
+      if (response.status === 201) {
+        dispatch(setSubmitting(false))
+        toast({
+          description: response.data.message,
+        })
+        localStorage.setItem('userEmail', response.data.user.email)
+        router.push('/otp')
+        form.reset()
+      } else {
+        dispatch(setSubmitting(false))
+        toast({
+          variant: 'destructive',
+          description: response.data.message,
+        })
+        // router.push("/")
+        form.reset()
+      }
+    } catch (err) {
+      toast({
+        variant: 'destructive',
+        description: 'Error occured try again',
+      })
+      // router.push("/")
+      form.reset()
+    }
   }
   return (
     <div className="shadow-lg p-6 rounded-md ">
@@ -155,13 +189,17 @@ const SignUp = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         className="cursor-pointer absolute right-4 top-6"
                       >
-                        {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        {showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
                       </span>
                     </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
-              );
+              )
             }}
           />
           <FormField
@@ -191,7 +229,7 @@ const SignUp = () => {
             type="submit"
             className="w-full buttoncolor hover:bg-[#217873]"
           >
-           {submitting ? "Signing up..." : "Signup"}
+            {submitting ? 'Signing up...' : 'Signup'}
           </Button>
         </form>
       </FormProvider>

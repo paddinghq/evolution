@@ -1,23 +1,19 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form, FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-  FormLabel,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
-import Link from 'next/link'
 import axios from 'axios'
-import { Toast } from '@/components/ui/toast'
 import { useToast } from '@/components/ui/use-toast'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   otp1: z.string().max(1),
@@ -30,6 +26,8 @@ const formSchema = z.object({
 
 const OTP = () => {
   const { toast } = useToast()
+  const router = useRouter()
+  const [userEmail, setUserEmail] = useState('');
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,19 +39,32 @@ const OTP = () => {
       otp6: '',
     },
   })
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const storedEmail = localStorage.getItem('userEmail');
+
+      if (storedEmail) {
+        setUserEmail(storedEmail);
+      }
+    }
+  }, []);
+
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    const router = useRouter()
     const Otp = `${values.otp1}${values.otp2}${values.otp3}${values.otp4}${values.otp5}${values.otp6}`
 
     try {
       const response = await axios.post(
         'https://evolution-stagin.onrender.com/api/v1/auth/verify-otp',
         {
+          email: userEmail,
           otp: Otp,
         },
       )
+      console.log(response)
 
       if (response.status === 200) {
+        localStorage.removeItem('userEmail')
         toast({
           description: response.data.message,
         })
@@ -81,6 +92,7 @@ const OTP = () => {
         <h1 className="text-2xl font-bold">
           {' '}
           Enter your verification code sent to your email
+          {userEmail}
         </h1>
       </div>
 
