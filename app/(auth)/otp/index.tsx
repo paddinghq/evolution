@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
+import { OTPLogic } from './otpLogic'
 
 const formSchema = z.object({
   otp1: z.string().max(1),
@@ -54,14 +55,10 @@ const OTP = () => {
     const Otp = `${values.otp1}${values.otp2}${values.otp3}${values.otp4}${values.otp5}${values.otp6}`
 
     try {
-      const response = await axios.post(
-        'https://evolution-stagin.onrender.com/api/v1/auth/verify-otp',
-        {
-          email: userEmail,
-          otp: Otp,
-        },
-      )
-      console.log(response)
+     const response = await OTPLogic({
+        email: userEmail,
+        otp: Otp,
+     })
 
       if (response.status === 200) {
         localStorage.removeItem('userEmail')
