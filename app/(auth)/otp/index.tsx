@@ -59,6 +59,7 @@ const OTP = () => {
         email: userEmail,
         otp: Otp,
      })
+     console.log(response)
 
       if (response.status === 200) {
         localStorage.removeItem('userEmail')
@@ -86,10 +87,12 @@ const OTP = () => {
   return (
     <div className="shadow-lg p-6 rounded-md ">
       <div className="flex flex-col gap-8 mb-8">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-lg font-bold text-center">
           {' '}
           Enter your verification code sent to your email
-          {userEmail}
+          <br />
+          <span className="text-[#217873] text-sm">{userEmail}</span>
+          
         </h1>
       </div>
 
