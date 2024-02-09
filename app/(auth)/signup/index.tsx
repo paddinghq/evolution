@@ -1,6 +1,5 @@
 'use client'
 import React, { useState } from 'react'
-import axios from 'axios'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormProvider, useForm } from 'react-hook-form'
@@ -21,6 +20,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { setSubmitting } from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
+import { signUp } from './signUpLogic'
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -65,17 +65,12 @@ const SignUp = () => {
     dispatch(setSubmitting(true))
 
     try {
-      const response = await axios.post(
-        'https://evolution-stagin.onrender.com/api/v1/auth/signup',
-        {
+      const response = await signUp({
           fullName: values.name,
           email: values.emailAddress,
           phone: values.phone,
           password: values.password,
-        },
-      )
-
-      console.log(response)
+      })
 
       if (response.status === 201) {
         dispatch(setSubmitting(false))
