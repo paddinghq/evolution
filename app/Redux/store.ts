@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import CreateEventSlice from './slice/createEventSlice'
+import AuthSlice from './slice/signupSlice'
 
 const store = configureStore({
   reducer: {
-    createEvent: CreateEventSlice.reducer,
+    auth: AuthSlice,
   },
 })
 
