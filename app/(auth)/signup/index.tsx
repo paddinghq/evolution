@@ -1,5 +1,6 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormProvider, useForm } from 'react-hook-form'
@@ -15,21 +16,44 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useSelector, useDispatch } from 'react-redux'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { RootState } from '@/app/Redux/slice/interface'
+import { useToast } from '@/components/ui/use-toast'
 
 const formSchema = z.object({
   name: z.string().min(3),
+  phone: z.string().max(11),
   emailAddress: z.string().email(),
-  password: z.string().min(3),
+  password: z
+    .string()
+    .min(3)
+    .refine((value) => /[A-Z]/.test(value), {
+      message: 'Password must include at least one capital letter',
+    })
+    .refine((value) => /\d/.test(value), {
+      message: 'Password must include at least one number',
+    })
+    .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
+      message: 'Password must include at least one special character',
+    }),
   terms: z.boolean().refine((value) => value, {
     message: 'You must agree to terms and condition',
   }),
 })
 
 const SignUp = () => {
+  const [showPassword, setShowPassword] = useState(false)
+  const dispatch = useDispatch()
+  const { toast } = useToast()
+  const submitting = useSelector((state: RootState) => state.auth.submitting)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
+      phone: '',
       emailAddress: '',
       password: '',
       terms: false,
@@ -37,10 +61,47 @@ const SignUp = () => {
   })
   const router = useRouter()
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    dispatch(setSubmitting(true))
 
-    router.push('/signup/step3')
+    try {
+      const response = await axios.post(
+        'https://evolution-stagin.onrender.com/api/v1/auth/signup',
+        {
+          fullName: values.name,
+          email: values.emailAddress,
+          phone: values.phone,
+          password: values.password,
+        },
+      )
+
+      console.log(response)
+
+      if (response.status === 201) {
+        dispatch(setSubmitting(false))
+        toast({
+          description: response.data.message,
+        })
+        localStorage.setItem('userEmail', response.data.user.email)
+        router.push('/otp')
+        form.reset()
+      } else {
+        dispatch(setSubmitting(false))
+        toast({
+          variant: 'destructive',
+          description: response.data.message,
+        })
+        // router.push("/")
+        form.reset()
+      }
+    } catch (err) {
+      toast({
+        variant: 'destructive',
+        description: 'Error occured try again',
+      })
+      // router.push("/")
+      form.reset()
+    }
   }
   return (
     <div className="shadow-lg p-6 rounded-md ">
@@ -63,6 +124,25 @@ const SignUp = () => {
                     <Input
                       placeholder="Name"
                       type="name"
+                      {...field}
+                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
+          />
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      placeholder="Phone number"
+                      type="phone"
                       {...field}
                       className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
@@ -98,12 +178,24 @@ const SignUp = () => {
               return (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      placeholder="Password"
-                      type="password"
-                      {...field}
-                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
-                    />
+                    <div className="relative">
+                      <Input
+                        placeholder="Password"
+                        type={showPassword ? 'text' : 'password'}
+                        {...field}
+                        className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
+                      />
+                      <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="cursor-pointer absolute right-4 top-6"
+                      >
+                        {showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
+                      </span>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,9 +225,12 @@ const SignUp = () => {
             )}
           />
 
-          <Link href="/step2" className="w-full buttoncolor hover:bg-[#217873]">
-            Sign up
-          </Link>
+          <Button
+            type="submit"
+            className="w-full buttoncolor hover:bg-[#217873]"
+          >
+            {submitting ? 'Signing up...' : 'Signup'}
+          </Button>
         </form>
       </FormProvider>
       <div className="flex items-center mt-8">
