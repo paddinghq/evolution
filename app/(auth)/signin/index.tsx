@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormProvider, useForm } from 'react-hook-form'
@@ -14,14 +14,28 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
+import {useSelector, useDispatch} from "react-redux"
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 const formSchema = z.object({
   emailAddress: z.string().email(),
-  password: z.string().min(3),
+  password: z.string().min(3)
+  .refine((value) => /[A-Z]/.test(value), {
+    message: 'Password must include at least one capital letter',
+  })
+  .refine((value) => /\d/.test(value), {
+    message: 'Password must include at least one number',
+  })
+  .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
+    message: 'Password must include at least one special character',
+  })
+  ,
   remember: z.boolean().default(false).optional(),
 })
 
 const SignIn = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -67,23 +81,31 @@ const SignIn = () => {
               )
             }}
           />
-          <FormField
+           <FormField
             control={form.control}
             name="password"
             render={({ field }) => {
               return (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      placeholder="Password"
-                      type="password"
-                      {...field}
-                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
-                    />
+                    <div className="relative">
+                      <Input
+                        placeholder="Password"
+                        type={showPassword ? 'text' : 'password'}
+                        {...field}
+                        className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
+                      />
+                      <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="cursor-pointer absolute right-4 top-6"
+                      >
+                        {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                      </span>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
-              )
+              );
             }}
           />
           <div className="flex items-center gap-24">
