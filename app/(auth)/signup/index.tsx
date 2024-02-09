@@ -72,6 +72,8 @@ const SignUp = () => {
           password: values.password,
       })
 
+      console.log(response)
+
       if (response.status === 201) {
         dispatch(setSubmitting(false))
         toast({
