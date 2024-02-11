@@ -59,7 +59,6 @@ const OTP = () => {
         email: userEmail,
         otp: Otp,
      })
-     console.log(response)
 
       if (response.status === 200) {
         localStorage.removeItem('userEmail')
