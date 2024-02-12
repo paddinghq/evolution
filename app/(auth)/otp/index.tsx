@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import { Oval } from "react-loader-spinner";
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -11,10 +12,11 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import axios from 'axios'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { OTPLogic } from './otpLogic'
+import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { useDispatch } from 'react-redux';
 
 const formSchema = z.object({
   otp1: z.string().max(1),
@@ -27,8 +29,10 @@ const formSchema = z.object({
 
 const OTP = () => {
   const { toast } = useToast()
+  const dispatch = useDispatch()
   const router = useRouter()
   const [userEmail, setUserEmail] = useState('');
+  const [splashScreenLoading, setSplashScreenLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,12 +56,15 @@ const OTP = () => {
   }, []);
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    const Otp = `${values.otp1}${values.otp2}${values.otp3}${values.otp4}${values.otp5}${values.otp6}`
+    dispatch(setSubmitting(true))
+  setSplashScreenLoading(!splashScreenLoading);
+    const OtpDigit = `${values.otp1}${values.otp2}${values.otp3}${values.otp4}${values.otp5}${values.otp6}`
+    
 
     try {
      const response = await OTPLogic({
         email: userEmail,
-        otp: Otp,
+        otp: OtpDigit,
      })
 
       if (response.status === 200) {
@@ -65,13 +72,16 @@ const OTP = () => {
         toast({
           description: response.data.message,
         })
-        router.push('/signin')
+        setTimeout(() => {
+          router.push('/signin')
+        }, 3000);
         form.reset()
       } else {
         toast({
           variant: 'destructive',
           description: response.data.message,
         })
+        window.location.reload()
         form.reset()
       }
     } catch (err) {
@@ -79,6 +89,7 @@ const OTP = () => {
         variant: 'destructive',
         description: 'Error occured try again',
       })
+      window.location.reload()
       form.reset()
     }
   }
@@ -110,6 +121,7 @@ const OTP = () => {
                       <Input
                         type="text"
                         {...field}
+                        maxLength={1}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white text-center"
                       />
                     </FormControl>
@@ -128,6 +140,7 @@ const OTP = () => {
                       <Input
                         type="text"
                         {...field}
+                        maxLength={1}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white text-center"
                       />
                     </FormControl>
@@ -146,6 +159,7 @@ const OTP = () => {
                       <Input
                         type="text"
                         {...field}
+                        maxLength={1}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white text-center"
                       />
                     </FormControl>
@@ -164,6 +178,7 @@ const OTP = () => {
                       <Input
                         type="text"
                         {...field}
+                        maxLength={1}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white text-center"
                       />
                     </FormControl>
@@ -182,6 +197,7 @@ const OTP = () => {
                       <Input
                         type="text"
                         {...field}
+                        maxLength={1}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white text-center"
                       />
                     </FormControl>
@@ -200,6 +216,7 @@ const OTP = () => {
                       <Input
                         type="text"
                         {...field}
+                        maxLength={1}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white text-center"
                       />
                     </FormControl>
@@ -211,13 +228,38 @@ const OTP = () => {
           </div>
         </form>
         <div className="flex justify-center mt-5">
-          <Button
+        <div className="mt-5">
+              {!splashScreenLoading && (
+                <Button
+                type="submit"
+                className="w-full buttoncolor hover:bg-[#217873]"
+                onClick={form.handleSubmit(handleSubmit)}
+              >
+            
+                Verify Otp
+              </Button>
+              )}
+              {splashScreenLoading && (
+                <div className="w-[20%] m-auto">
+                  <Oval
+                    visible={true}
+                    height="100%"
+                    width="100%"
+                    color="#B1761F"
+                    ariaLabel="oval-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                </div>
+              )}
+            </div>
+          {/* <Button
             type="submit"
             className="buttoncolor hover:bg-[#217873]"
             onClick={form.handleSubmit(handleSubmit)}
           >
             Verify Account
-          </Button>
+          </Button> */}
         </div>
       </FormProvider>
     </div>

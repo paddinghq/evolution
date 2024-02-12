@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import { Oval } from "react-loader-spinner";
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormProvider, useForm } from 'react-hook-form'
@@ -48,6 +49,7 @@ const SignUp = () => {
   const dispatch = useDispatch()
   const { toast } = useToast()
   const submitting = useSelector((state: RootState) => state.auth.submitting)
+  const [splashScreenLoading, setSplashScreenLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,7 +65,8 @@ const SignUp = () => {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
-
+    setSplashScreenLoading(!splashScreenLoading);
+    
     try {
       const response = await signUp({
           fullName: values.name,
@@ -78,7 +81,10 @@ const SignUp = () => {
           description: response.data.message,
         })
         localStorage.setItem('userEmail', response.data.user.email)
-        router.push('/otp')
+        setTimeout(() => {
+          router.push('/otp')
+        }, 2000);
+        
         form.reset()
       } else {
         dispatch(setSubmitting(false))
@@ -86,7 +92,9 @@ const SignUp = () => {
           variant: 'destructive',
           description: response.data.message,
         })
-        // router.push("/")
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000);
         form.reset()
       }
     } catch (err) {
@@ -94,7 +102,7 @@ const SignUp = () => {
         variant: 'destructive',
         description: 'Error occured try again',
       })
-      // router.push("/")
+      window.location.reload()
       form.reset()
     }
   }
@@ -219,13 +227,32 @@ const SignUp = () => {
               </FormItem>
             )}
           />
+          <div className="mt-5">
+              {!splashScreenLoading && (
+                <Button
+                type="submit"
+                className="w-full buttoncolor hover:bg-[#217873]"
+              >
+            
+                SignUp
+              </Button>
+              )}
+              {splashScreenLoading && (
+                <div className="w-[20%] m-auto">
+                  <Oval
+                    visible={true}
+                    height="100%"
+                    width="100%"
+                    color="#B1761F"
+                    ariaLabel="oval-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                </div>
+              )}
+            </div>
 
-          <Button
-            type="submit"
-            className="w-full buttoncolor hover:bg-[#217873]"
-          >
-            {submitting ? 'Signing up...' : 'Signup'}
-          </Button>
+          
         </form>
       </FormProvider>
       <div className="flex items-center mt-8">
