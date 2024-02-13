@@ -1,9 +1,7 @@
 'use client'
-import React, { useState } from 'react'
-import { Oval } from "react-loader-spinner";
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form, FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
   FormControl,
   FormField,
@@ -18,10 +16,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { setSubmitting,setLoading, setShowPassword } from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
 import { signUp } from './signUpLogic'
+import Loader from '@/components/Loader';
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -45,11 +44,13 @@ const formSchema = z.object({
 })
 
 const SignUp = () => {
-  const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
-  const submitting = useSelector((state: RootState) => state.auth.submitting)
-  const [splashScreenLoading, setSplashScreenLoading] = useState(false);
+
+
+  const loading = useSelector((state: RootState) => state.auth.loading)
+  const password = useSelector((state: RootState) => state.auth.showPassword)
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,7 +66,7 @@ const SignUp = () => {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
-    setSplashScreenLoading(!splashScreenLoading);
+    dispatch(setLoading(true));
     
     try {
       const response = await signUp({
@@ -184,15 +185,15 @@ const SignUp = () => {
                     <div className="relative">
                       <Input
                         placeholder="Password"
-                        type={showPassword ? 'text' : 'password'}
+                        type={password ? 'text' : 'password'}
                         {...field}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                       />
                       <span
-                        onClick={() => setShowPassword(!showPassword)}
+                        onClick={() => dispatch(setShowPassword(!password))}
                         className="cursor-pointer absolute right-4 top-6"
                       >
-                        {showPassword ? (
+                        {password ? (
                           <AiOutlineEyeInvisible />
                         ) : (
                           <AiOutlineEye />
@@ -228,29 +229,18 @@ const SignUp = () => {
             )}
           />
           <div className="mt-5">
-              {!splashScreenLoading && (
+            {!loading && (
                 <Button
-                type="submit"
-                className="w-full buttoncolor hover:bg-[#217873]"
-              >
-            
-                SignUp
-              </Button>
+                  type="submit"
+                  className="w-full buttoncolor hover:bg-[#217873]"
+                >
+                  SignUp
+                </Button>
               )}
-              {splashScreenLoading && (
-                <div className="w-[20%] m-auto">
-                  <Oval
-                    visible={true}
-                    height="100%"
-                    width="100%"
-                    color="#B1761F"
-                    ariaLabel="oval-loading"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                  />
-                </div>
+              {loading && (
+                <Loader />
               )}
-            </div>
+          </div>
 
           
         </form>
@@ -275,7 +265,7 @@ const SignUp = () => {
       <div className="flex justify-center mt-8">
         <p className="text-xs font-semibold">
           Have an account?{' '}
-          <Link href="/signin" className="linktext ml-1 font-bold">
+          <Link href="/signin" className="linktext ml-1 font-bold px-3 py-2 hover:bg-[#B1761f] hover:text-white">
             Sign in
           </Link>
         </p>

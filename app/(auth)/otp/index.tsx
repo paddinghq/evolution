@@ -15,8 +15,10 @@ import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { OTPLogic } from './otpLogic'
-import { setSubmitting } from '@/app/Redux/slice/signupSlice'
-import { useDispatch } from 'react-redux';
+import { setLoading, setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/app/Redux/slice/interface';
+import Loader from '@/components/Loader';
 
 const formSchema = z.object({
   otp1: z.string().max(1),
@@ -31,8 +33,12 @@ const OTP = () => {
   const { toast } = useToast()
   const dispatch = useDispatch()
   const router = useRouter()
+
+
   const [userEmail, setUserEmail] = useState('');
-  const [splashScreenLoading, setSplashScreenLoading] = useState(false);
+ const loading = useSelector((state: RootState) => state.auth.loading)
+ 
+ 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,7 +63,8 @@ const OTP = () => {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
-  setSplashScreenLoading(!splashScreenLoading);
+    dispatch(setLoading(true));
+    
     const OtpDigit = `${values.otp1}${values.otp2}${values.otp3}${values.otp4}${values.otp5}${values.otp6}`
     
 
@@ -229,7 +236,7 @@ const OTP = () => {
         </form>
         <div className="flex justify-center mt-5">
         <div className="mt-5">
-              {!splashScreenLoading && (
+              {!loading && (
                 <Button
                 type="submit"
                 className="w-full buttoncolor hover:bg-[#217873]"
@@ -239,27 +246,10 @@ const OTP = () => {
                 Verify Otp
               </Button>
               )}
-              {splashScreenLoading && (
-                <div className="w-[20%] m-auto">
-                  <Oval
-                    visible={true}
-                    height="100%"
-                    width="100%"
-                    color="#B1761F"
-                    ariaLabel="oval-loading"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                  />
-                </div>
+              {loading && (
+                <Loader />
               )}
             </div>
-          {/* <Button
-            type="submit"
-            className="buttoncolor hover:bg-[#217873]"
-            onClick={form.handleSubmit(handleSubmit)}
-          >
-            Verify Account
-          </Button> */}
         </div>
       </FormProvider>
     </div>
