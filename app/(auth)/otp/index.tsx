@@ -27,7 +27,7 @@ const formSchema = z.object({
 const OTP = () => {
   const { toast } = useToast()
   const router = useRouter()
-  const [userEmail, setUserEmail] = useState('');
+  const [userEmail, setUserEmail] = useState('')
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,13 +42,13 @@ const OTP = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
-      const storedEmail = localStorage.getItem('userEmail');
+      const storedEmail = localStorage.getItem('userEmail')
 
       if (storedEmail) {
-        setUserEmail(storedEmail);
+        setUserEmail(storedEmail)
       }
     }
-  }, []);
+  }, [])
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     const Otp = `${values.otp1}${values.otp2}${values.otp3}${values.otp4}${values.otp5}${values.otp6}`

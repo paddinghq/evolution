@@ -9,6 +9,7 @@ import {
 } from 'react-icons/io5'
 import SignIn from '../app/(auth)/signin/index'
 import Image from 'next/image'
+import Notification from './Notification'
 
 const priceOptions = [
   { value: 'nigeria', label: 'Nigeria' },
@@ -70,6 +71,9 @@ const Navbar = () => {
             {link.name}
           </Link>
         ))}
+
+        <Notification />
+        
         {token ? (
           <>
               {links.map((link) => (
