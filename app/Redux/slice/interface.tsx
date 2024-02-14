@@ -13,7 +13,7 @@ export interface RootState {
     health: string
     disability: string
     locate: string
-    hobbies: string
+    hobbies: string[]
     loading: boolean
   }
 }

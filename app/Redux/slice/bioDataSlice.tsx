@@ -9,7 +9,7 @@ const initialState = {
         health: "",
         disability: "",
         locate: "",
-        hobbies: ""
+        hobbies: []
 	},
 	steps: 1,
 	loading: false
