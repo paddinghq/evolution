@@ -17,7 +17,7 @@ const tabs = [
 
 const Event = () => {
   const [activeTab, setActiveTab] = useState(1)
-  
+
   const handleSelectedTab = (tab: React.SetStateAction<number>) => {
     setActiveTab(tab)
   }
@@ -68,7 +68,7 @@ const Event = () => {
           </Button>
         ))}
       </div>
- 
+
       <div
         className="px-9 py-8 rounded-lg mt-4"
         style={{ background: 'rgba(33, 120, 115, 0.20)' }}

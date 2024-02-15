@@ -24,20 +24,35 @@ import {
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { IoIosArrowBack } from 'react-icons/io'
+import { useSelector } from 'react-redux'
 
 const formSchema = z.object({
   dob: z.date({ required_error: 'A date of birth is required.' }),
-  type: z.enum(['all', 'mentions', 'none'], {
+  type: z.enum(['male', 'female', 'others', 'pns'], {
     required_error: 'You need to select a notification type.',
   }),
+  gender: z.string(),
+  maritalStatus: z.string(),
+  kids: z.string(),
 })
 
-const StepOne = () => {
+interface BasicInfoProps {
+  handleNextStep: (stepValues: any) => void
+  // other prop types
+}
+
+const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
+  const bioData = useSelector((state: any) => state.bioData.bioData)
+  console.log(bioData)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      dob: bioData.dob,
+      gender: bioData.gender,
+      maritalStatus: bioData.maritalStatus,
+      kids: bioData.kids,
+    },
   })
-  const handleSubmit = () => {}
 
   return (
     <div className="m-auto container p-20">
@@ -56,7 +71,8 @@ const StepOne = () => {
 
       <FormProvider {...form}>
         <form
-          onSubmit={form.handleSubmit(handleSubmit)}
+          defaultValue={bioData}
+          onSubmit={(values) => handleNextStep(values)}
           className="max-w-md w-full flex flex-col gap-4"
         >
           <FormField
@@ -117,25 +133,25 @@ const StepOne = () => {
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="all" />
+                        <RadioGroupItem value="male" />
                       </FormControl>
                       <FormLabel className="font-normal">Male</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="mentions" />
+                        <RadioGroupItem value="female" />
                       </FormControl>
                       <FormLabel className="font-normal">Female</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="none" />
+                        <RadioGroupItem value="others" />
                       </FormControl>
                       <FormLabel className="font-normal">Other</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="none" />
+                        <RadioGroupItem value="pns" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Prefer not to answer
@@ -224,17 +240,17 @@ const StepOne = () => {
             )}
           />
           <div className=" flex justify-end gap-3">
-            <Button
+            {/* <Button
               type="submit"
               className=" text-black hover:bg-[#217873] hover:text-white bg-white"
             >
               <Link href="/">Skip</Link>
-            </Button>
+            </Button> */}
             <Button
               type="submit"
               className=" bg-[#217873] hover:bg-[#217873] px-8"
             >
-              <Link href="/signup/step3">Next</Link>
+              Next
             </Button>
           </div>
         </form>
@@ -243,4 +259,4 @@ const StepOne = () => {
   )
 }
 
-export default StepOne
+export default BasicInfo

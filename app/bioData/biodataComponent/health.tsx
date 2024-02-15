@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useSelector } from 'react-redux'
 
 const formSchema = z.object({
   dob: z.date({ required_error: 'A date of birth is required.' }),
@@ -30,12 +31,22 @@ const formSchema = z.object({
   }),
 })
 
-const StepTwo = () => {
+interface HealthProps {
+  handleNextStep: (stepValues: any) => void
+  handlePreviousStep: any
+}
+
+const Health: React.FC<HealthProps> = ({
+  handlePreviousStep,
+  handleNextStep,
+}) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
   })
-  const handleSubmit = () => {}
+
+  const bioData = useSelector((state: any) => state.bioData.bioData)
+  console.log(bioData)
 
   return (
     <div className="m-auto container p-20">
@@ -56,7 +67,8 @@ const StepTwo = () => {
 
       <FormProvider {...form}>
         <form
-          onSubmit={form.handleSubmit(handleSubmit)}
+          defaultValue={bioData}
+          onSubmit={(values) => handleNextStep(values)}
           className="max-w-md w-full flex flex-col gap-4"
         >
           <FormField
@@ -171,15 +183,16 @@ const StepTwo = () => {
           <div className=" flex justify-end gap-3">
             <Button
               type="submit"
+              onClick={handlePreviousStep}
               className=" text-black hover:bg-[#217873] hover:text-white bg-white"
             >
-              <Link href="/">Skip</Link>
+              Skip
             </Button>
             <Button
               type="submit"
               className=" bg-[#217873] hover:bg-[#217873] px-8"
             >
-              <Link href="/">Next</Link>
+              Next
             </Button>
           </div>
         </form>
@@ -188,4 +201,4 @@ const StepTwo = () => {
   )
 }
 
-export default StepTwo
+export default Health

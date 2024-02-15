@@ -19,6 +19,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useSelector } from 'react-redux'
+
+interface HobbiesProps {
+  handleSubmit: (stepValues: any) => void
+  handlePreviousStep: any
+}
 
 const formSchema = z.object({
   dob: z.date({ required_error: 'A date of birth is required.' }),
@@ -114,24 +120,21 @@ const hobies = [
   },
 ]
 
-const StepThree = () => {
-  // const router = useRouter();
+const Hobbies: React.FC<HobbiesProps> = ({
+  handlePreviousStep,
+  handleSubmit,
+}) => {
+  const bioData = useSelector((state: any) => state.bioData.bioData)
+  console.log(bioData)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
   })
 
-  const handleSubmit = () => {}
-
-  const handleback = () => {}
-
   return (
     <div className="container mt-10">
-      <div
-        className="shadow-lg cursor-pointer w-fit p-2 rounded-full"
-        onClick={(e) => handleback()}
-      >
+      <div className="shadow-lg cursor-pointer w-fit p-2 rounded-full">
         <IoChevronBack size={24} />
       </div>
 
@@ -146,7 +149,8 @@ const StepThree = () => {
 
         <FormProvider {...form}>
           <form
-            onSubmit={form.handleSubmit(handleSubmit)}
+            defaultValue={bioData}
+            onSubmit={(values) => handleSubmit(values)}
             className="max-w-md w-full flex flex-col gap-4"
           >
             <FormField
@@ -188,6 +192,7 @@ const StepThree = () => {
       <div className=" flex justify-end gap-3 mt-4">
         <Button
           type="submit"
+          onClick={handlePreviousStep}
           className=" text-black hover:bg-[#217873] hover:text-white bg-white"
         >
           Skip
@@ -200,4 +205,4 @@ const StepThree = () => {
   )
 }
 
-export default StepThree
+export default Hobbies

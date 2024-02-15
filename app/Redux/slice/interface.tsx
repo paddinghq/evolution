@@ -3,7 +3,7 @@ export interface RootState {
     loading: boolean
     submitting: boolean
     showPassword: boolean
-  },
+  }
 
   bioData: {
     dob: string
