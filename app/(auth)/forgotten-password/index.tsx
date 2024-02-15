@@ -36,34 +36,34 @@ const ForgottenPassword = () => {
   })
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    
     dispatch(setSubmitting(!submitting))
-    const postEmail = {
-      email: values.email,
-    }
+
+    
+    const postEmail = { email: values.email }
     try {
       const response = await resetpassword.sendEmail(postEmail)
-      console.log(postEmail)
-
-      if (response.status === 201) {
+      
+      if (response.status === 200) {
         dispatch(setSubmitting(submitting))
-        if (response.data) {
+        
           toast({
             description: response.data.message,
           })
-          localStorage.setItem('userEmail', response.data.user.email)
-        }
-        router.push('/new-password')
-        form.reset()
+        
+          
+          setTimeout(() => {
+            router.push('/new-password')
+          }, 2000)
+       
       } else {
         dispatch(setSubmitting(submitting))
-        if (response.data) {
-          toast({
-            variant: 'destructive',
-            description: response.data.message,
-          })
-        }
 
-        form.reset()
+        toast({
+          variant: 'destructive',
+          description: response.data.message,
+        })
+        
       }
     } catch (err) {
       toast({
@@ -71,7 +71,7 @@ const ForgottenPassword = () => {
         description: 'Error occured try again',
       })
       dispatch(setSubmitting(submitting))
-      form.reset()
+      
     }
   }
 

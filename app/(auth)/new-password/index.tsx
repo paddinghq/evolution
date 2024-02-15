@@ -79,15 +79,17 @@ const NewPassword = () => {
       const response = await resetpassword.updatePassword(postPassword)
 
       console.log(response)
+      console.log('sending', postPassword)
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         dispatch(setSubmitting(submitting))
         toast({
           description: response.data.message,
         })
 
-        router.push('/signin')
-        form.reset()
+        setTimeout(() => {
+          router.push('/signin')
+        }, 2000)
       } else {
         dispatch(setSubmitting(submitting))
         toast({
@@ -98,11 +100,11 @@ const NewPassword = () => {
         form.reset()
       }
     } catch (err) {
-      dispatch(setSubmitting(submitting))
       toast({
         variant: 'destructive',
         description: 'Error occured try again',
       })
+      dispatch(setSubmitting(submitting))
 
       //form.reset()
     }
