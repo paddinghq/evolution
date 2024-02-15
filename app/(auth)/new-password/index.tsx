@@ -21,29 +21,36 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { setSubmitting } from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
+import resetpassword from '../forgotten-password/userdata'
+const formSchema = z
+  .object({
+    email: z.string().email(),
+    otp: z.string().length(6),
+    password: z
+      .string()
+      .min(3)
+      .refine((value) => /[A-Z]/.test(value), {
+        message: 'Password must include at least one capital letter',
+      })
+      .refine((value) => /\d/.test(value), {
+        message: 'Password must include at least one number',
+      })
+      .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
+        message: 'Password must include at least one special character',
+      }),
+    confirmPassword: z.string(),
+  })
+  .refine(
+    (data) => {
+      return data.password === data.confirmPassword
+    },
+    {
+      message: 'Passwords do not match',
+      path: ['confirmPassword'],
+    },
+  )
 
-const formSchema = z.object({
-  name: z.string().min(3),
-  phone: z.string().max(11),
-  emailAddress: z.string().email(),
-  password: z
-    .string()
-    .min(3)
-    .refine((value) => /[A-Z]/.test(value), {
-      message: 'Password must include at least one capital letter',
-    })
-    .refine((value) => /\d/.test(value), {
-      message: 'Password must include at least one number',
-    })
-    .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
-      message: 'Password must include at least one special character',
-    }),
-  terms: z.boolean().refine((value) => value, {
-    message: 'You must agree to terms and condition',
-  }),
-})
-
-const SignUp = () => {
+const NewPassword = () => {
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
@@ -52,61 +59,58 @@ const SignUp = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      phone: '',
-      emailAddress: '',
+      email: '',
+      otp: '',
       password: '',
-      terms: false,
+      confirmPassword: '',
     },
   })
   const router = useRouter()
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    dispatch(setSubmitting(true))
-
+    dispatch(setSubmitting(!submitting))
+    const postPassword = {
+      email: values.email,
+      otp: values.otp,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+    }
     try {
-      const response = await axios.post(
-        'https://evolution-stagin.onrender.com/api/v1/auth/signup',
-        {
-          fullName: values.name,
-          email: values.emailAddress,
-          phone: values.phone,
-          password: values.password,
-        },
-      )
+      const response = await resetpassword.updatePassword(postPassword)
 
       console.log(response)
 
       if (response.status === 201) {
-        dispatch(setSubmitting(false))
+        dispatch(setSubmitting(submitting))
         toast({
           description: response.data.message,
         })
-        localStorage.setItem('userEmail', response.data.user.email)
-        router.push('/otp')
+
+        router.push('/signin')
         form.reset()
       } else {
-        dispatch(setSubmitting(false))
+        dispatch(setSubmitting(submitting))
         toast({
           variant: 'destructive',
           description: response.data.message,
         })
-        // router.push("/")
+
         form.reset()
       }
     } catch (err) {
+      dispatch(setSubmitting(submitting))
       toast({
         variant: 'destructive',
         description: 'Error occured try again',
       })
-      // router.push("/")
-      form.reset()
+
+      //form.reset()
     }
   }
   return (
-    <div className="shadow-lg p-6 rounded-md ">
+    <div className="shadow-lg p-6 rounded-md  ">
       <div className="flex flex-col gap-8 mb-8">
-        <h1 className="text-2xl font-bold">Get started now</h1>
+        <h1 className="text-2xl font-bold text-center">Update Password</h1>
       </div>
 
       <FormProvider {...form}>
@@ -116,14 +120,14 @@ const SignUp = () => {
         >
           <FormField
             control={form.control}
-            name="name"
+            name="email"
             render={({ field }) => {
               return (
                 <FormItem>
                   <FormControl>
                     <Input
-                      placeholder="Name"
-                      type="name"
+                      placeholder="Email address"
+                      type="email"
                       {...field}
                       className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
@@ -135,14 +139,14 @@ const SignUp = () => {
           />
           <FormField
             control={form.control}
-            name="phone"
+            name="otp"
             render={({ field }) => {
               return (
                 <FormItem>
                   <FormControl>
                     <Input
-                      placeholder="Phone number"
-                      type="phone"
+                      placeholder="Please enter OTP"
+                      type="text"
                       {...field}
                       className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
@@ -152,7 +156,6 @@ const SignUp = () => {
               )
             }}
           />
-           
           <FormField
             control={form.control}
             name="password"
@@ -163,6 +166,38 @@ const SignUp = () => {
                     <div className="relative">
                       <Input
                         placeholder="Password"
+                        type={showPassword ? 'text' : 'password'}
+                        {...field}
+                        className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white "
+                      />
+                      <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="cursor-pointer absolute right-4 top-6"
+                      >
+                        {showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
+                      </span>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
+          />
+
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        placeholder="Confirm Password"
                         type={showPassword ? 'text' : 'password'}
                         {...field}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
@@ -184,64 +219,16 @@ const SignUp = () => {
               )
             }}
           />
-          <FormField
-            control={form.control}
-            name="terms"
-            render={({ field }) => (
-              <FormItem className=" flex items-center  gap-3">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <div className="space-y-3 pb-2 text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  <FormLabel>
-                    I agree to the{' '}
-                    <Link href="" className="underline decoration-solid">
-                      terms and conditions
-                    </Link>
-                  </FormLabel>
-                </div>
-              </FormItem>
-            )}
-          />
-
           <Button
             type="submit"
             className="w-full buttoncolor hover:bg-[#217873]"
           >
-            {submitting ? 'Signing up...' : 'Signup'}
+            {submitting ? 'Updating Password...' : 'Update Password'}
           </Button>
         </form>
       </FormProvider>
-      <div className="flex items-center mt-8">
-        <hr className="flex-grow border-t-2 border-slate-300" />
-        <span className="px-2 bg-white text-slate-900">or</span>
-        <hr className="flex-grow border-t-2 border-slate-300" />
-      </div>
-      <div className="flex gap-16 mt-8">
-        <div>
-          <Button className="bg-white hover:bg-white text-xs font-semibold text-black border-solid border-2 border-slate-300">
-            <Link href="/">Sign up with Google</Link>
-          </Button>
-        </div>
-        <div>
-          <Button className="bg-white hover:bg-white text-xs font-semibold text-black border-solid border-2 border-slate-300">
-            <Link href="/">Sign up with Apple</Link>
-          </Button>
-        </div>
-      </div>
-      <div className="flex justify-center mt-8">
-        <p className="text-xs font-semibold">
-          Have an account?{' '}
-          <Link href="/signin" className="linktext ml-1 font-bold">
-            Sign in
-          </Link>
-        </p>
-      </div>
     </div>
   )
 }
 
-export default SignUp
+export default NewPassword
