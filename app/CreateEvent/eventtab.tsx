@@ -7,16 +7,58 @@ import EventCheck from './tabcomponent/event'
 import Budget from './tabcomponent/budget'
 import Payment from './tabcomponent/payment'
 import React, { SetStateAction, useState } from 'react'
-const tabs = [
-  { id: 1, title: 'Basic Info', component: <Basic /> },
-  { id: 2, title: 'Invitee Info', component: <Invite /> },
-  { id: 3, title: 'Event Checklist', component: <EventCheck /> },
-  { id: 4, title: 'Budget Info', component: <Budget /> },
-  { id: 5, title: 'Payment Info', component: <Payment /> },
-]
 
 const Event = () => {
   const [activeTab, setActiveTab] = useState(1)
+  const [formData, setFormData] = useState({
+    eventName: '',
+    eventType: '',
+    pricedEvent: '',
+    price: '',
+    date: '',
+    location: '',
+    startTime: '',
+    endTime: '',
+    eventCategory: '',
+    eventFormat: '',
+    eventDescription: '',
+    eventHashTag: '',
+    media: '',
+    inviteName: '',
+    inviteNumber: '',
+    eventChecklist: '',
+    commodityName: '',
+    amountAllocated: '',
+    budgetDescription: '',
+    paymentMethod: '',
+  })
+  const tabs = [
+    {
+      id: 1,
+      title: 'Basic Info',
+      component: <Basic formData={formData} setFormData={setFormData} />,
+    },
+    {
+      id: 2,
+      title: 'Invitee Info',
+      component: <Invite formData={formData} setFormData={setFormData} />,
+    },
+    {
+      id: 3,
+      title: 'Event Checklist',
+      component: <EventCheck formData={formData} setFormData={setFormData} />,
+    },
+    {
+      id: 4,
+      title: 'Budget Info',
+      component: <Budget formData={formData} setFormData={setFormData} />,
+    },
+    {
+      id: 5,
+      title: 'Payment Info',
+      component: <Payment formData={formData} setFormData={setFormData} />,
+    },
+  ]
 
   const handleSelectedTab = (tab: React.SetStateAction<number>) => {
     setActiveTab(tab)
@@ -68,7 +110,7 @@ const Event = () => {
           </Button>
         ))}
       </div>
- 
+
       <div
         className="px-9 py-8 rounded-lg mt-4"
         style={{ background: 'rgba(33, 120, 115, 0.20)' }}

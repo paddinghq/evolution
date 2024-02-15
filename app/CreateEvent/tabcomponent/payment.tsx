@@ -19,6 +19,8 @@ import { RiVisaLine } from 'react-icons/ri'
 import { FaGooglePay } from 'react-icons/fa6'
 import UPI from '@/public/Images/UPI.jpg'
 import Image from 'next/image'
+import { EventFormData } from './types'
+import { SetStateAction } from 'react'
 
 const FormSchema = z.object({
   type: z.enum(['all', 'mentions', 'none'], {
@@ -26,7 +28,12 @@ const FormSchema = z.object({
   }),
 })
 
-export function Payment() {
+type Props = {
+  formData: EventFormData
+  setFormData: React.Dispatch<SetStateAction<EventFormData>>
+}
+
+export const Payment: React.FC<Props> = ({ formData, setFormData }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })

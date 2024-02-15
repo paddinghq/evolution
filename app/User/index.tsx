@@ -5,6 +5,9 @@ import { LuPencil } from 'react-icons/lu'
 import Image from 'next/image'
 import Hero from '@/public/Images/Hero.png'
 import profile from '@/public/Images/profile.png'
+import { useDispatch } from 'react-redux'
+import updateProfile from './profileAction'
+import Link from '@/node_modules/next/link'
 
 const user = {
   name: 'Dean Dun Kirk',
@@ -19,6 +22,11 @@ const user = {
 }
 
 const UserProfile = () => {
+  const dispatch = useDispatch()
+  const handleUpdateProfile = (userId: any, updatedProfileData: any) => {
+    dispatch(updateProfile(userId, updatedProfileData))
+  }
+
   return (
     <div className="relative w-full container mx-auto">
       <Image src={Hero.src} width={1400} height={10} alt="Hero" />
@@ -33,7 +41,9 @@ const UserProfile = () => {
               {user.name}
             </h2>
             <div className="bg-white rounded-full p-3">
-              <LuPencil />
+              <Link href="../edit/step1">
+                <LuPencil />
+              </Link>
             </div>
           </div>
           <p>Date of Birth: {user.dateOfBirth}</p>

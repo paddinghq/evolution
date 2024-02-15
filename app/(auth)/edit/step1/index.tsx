@@ -228,13 +228,13 @@ const StepOne = () => {
               type="submit"
               className=" text-black hover:bg-[#217873] hover:text-white bg-white"
             >
-              <Link href="/">Skip</Link>
+              <Link href="/edit/step2">Skip</Link>
             </Button>
             <Button
               type="submit"
               className=" bg-[#217873] hover:bg-[#217873] px-8"
             >
-              <Link href="/signup/step2">Next</Link>
+              <Link href="/edit/step2">Next</Link>
             </Button>
           </div>
         </form>

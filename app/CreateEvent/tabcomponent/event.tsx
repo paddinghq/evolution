@@ -17,6 +17,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { FiPlus } from 'react-icons/fi'
 import { Checkbox } from '@/components/ui/checkbox'
+import { EventFormData } from './types'
 
 const formSchema = z.object({
   eventChecklist: z.string(),
@@ -26,7 +27,12 @@ interface EventFormValues {
   eventChecklist: string
 }
 
-const Event: React.FC = () => {
+type Props = {
+  formData: EventFormData
+  setFormData: React.Dispatch<SetStateAction<EventFormData>>
+}
+
+const Event: React.FC<Props> = ({ formData, setFormData }) => {
   const [showInput, setShowInput] = useState<boolean>(false)
   const [checkList, setCheckList] = useState<string>('')
   const [showInputIndex, setShowInputIndex] = useState<null | number>(null)
@@ -48,7 +54,9 @@ const Event: React.FC = () => {
   const handleIconClick = (index: SetStateAction<null | number>) => {
     setShowInputIndex(index)
   }
-
+  const handleSubmit = (data: any) => {
+    setFormData({ ...formData, eventChecklist: data })
+  }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -85,10 +93,12 @@ const Event: React.FC = () => {
                 <Input
                   placeholder="Checklist name"
                   type="eventName"
+                  value={formData.eventChecklist}
                   {...field}
                   onChange={(e) => {
                     field.onChange(e) // This line is added
                     handleCheckList(e)
+                    setFormData({ ...formData, eventChecklist: e.target.value })
                   }}
                 />
               </FormControl>
@@ -136,7 +146,7 @@ const Event: React.FC = () => {
                   <div className="flex items-center gap-3">
                     <Input
                       type="text"
-                      value={subcategoryInputValue}
+                      value={[subcategoryInputValue, formData.eventChecklist]}
                       onChange={(e) => setSubcategoryInputValue(e.target.value)}
                       className="w-24"
                     />

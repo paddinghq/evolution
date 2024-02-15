@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { EventFormData } from './types'
 
 const eventType = [
   { id: 1, type: 'Private' },
@@ -56,7 +57,11 @@ const formSchema = z.object({
   description: z.string(),
 })
 
-const Basic = () => {
+type Props = {
+  formData: EventFormData
+  setFormData: React.Dispatch<SetStateAction<EventFormData>>
+}
+const Basic: React.FC<Props> = ({ formData, setFormData }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -75,13 +80,16 @@ const Basic = () => {
     },
   })
 
+  const handleSubmit = (data: any) => {
+    console.log(console.log(data))
+  }
   const [hashtag, setHashtag] = useState('')
   const [enteredHashtags, setEnteredHashtags] = useState<string[]>([])
 
-  const handleInputChange = (event: {
-    target: { value: SetStateAction<string> }
-  }) => {
+  const handleInputChange = (event: { target: { value: string } }) => {
     setHashtag(event.target.value)
+
+    setFormData({ ...formData, eventName: event.target.value })
   }
 
   const handleEnterKeyPress = (event: {
@@ -92,7 +100,7 @@ const Basic = () => {
       event.preventDefault()
 
       setEnteredHashtags([...enteredHashtags, hashtag])
-
+      console.log(form)
       setHashtag('')
     }
   }
@@ -109,13 +117,17 @@ const Basic = () => {
   }))
 
   return (
-    <div className="flex flex-col gap-8   ">
+    <div className="flex flex-col gap-8">
       <div className="flex gap-3 w-full justify-between">
         <div className="w-[49.49%]">
           <Input
             placeholder="Event Name"
             style={{ color: 'red' }}
             className="focus-visible:ring-0 focus-visible:ring-offset-0"
+            value={formData?.eventName || ''}
+            onChange={(event) =>
+              setFormData({ ...formData, eventName: event.target.value })
+            }
           />
         </div>
         <div className="w-[49.49%]">
@@ -140,10 +152,18 @@ const Basic = () => {
         <Input
           placeholder="Priced event"
           className="focus-visible:ring-0 focus-visible:ring-offset-0"
+          value={formData?.pricedEvent || ''}
+          onChange={(event) =>
+            setFormData({ ...formData, pricedEvent: event.target.value })
+          }
         />
         <Input
           placeholder="Price (₦)"
           className="focus-visible:ring-0 focus-visible:ring-offset-0"
+          value={formData?.price || ''}
+          onChange={(event) =>
+            setFormData({ ...formData, price: event.target.value })
+          }
         />
       </div>
       <div className="flex gap-3">
@@ -152,6 +172,10 @@ const Basic = () => {
             type="search"
             className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0"
             placeholder="Location"
+            value={formData?.date || ''}
+            onChange={(event) =>
+              setFormData({ ...formData, date: event.target.value })
+            }
           />
 
           <IoCalendar
@@ -164,6 +188,10 @@ const Basic = () => {
             type="search"
             className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0"
             placeholder="Location"
+            value={formData?.location || ''}
+            onChange={(event) =>
+              setFormData({ ...formData, location: event.target.value })
+            }
           />
 
           <IoLocation size={24} className="absolute right-3 text-[#7a7a7a]" />
@@ -175,6 +203,10 @@ const Basic = () => {
             type="search"
             className="pr-10 pl-3"
             placeholder="Start time"
+            value={formData?.startTime || ''}
+            onChange={(event) =>
+              setFormData({ ...formData, startTime: event.target.value })
+            }
           />
 
           <GoClock size={24} className="absolute right-3 text-[#7a7a7a]" />
@@ -184,6 +216,10 @@ const Basic = () => {
             type="search"
             className="pr-10 pl-3 focus-visible:ring-0 focus-visible:ring-offset-0"
             placeholder="End time"
+            value={formData?.endTime || ''}
+            onChange={(event) =>
+              setFormData({ ...formData, endTime: event.target.value })
+            }
           />
 
           <GoClock
@@ -196,25 +232,37 @@ const Basic = () => {
         <Input
           placeholder="Event Category"
           className="focus-visible:ring-0 focus-visible:ring-offset-0"
+          value={formData?.eventCategory || ''}
+          onChange={(event) =>
+            setFormData({ ...formData, eventCategory: event.target.value })
+          }
         />
       </div>
       <div className="flex gap-3">
         <Input
           placeholder="Event Format"
           className="focus-visible:ring-0 focus-visible:ring-offset-0"
+          value={formData?.eventFormat || ''}
+          onChange={(event) =>
+            setFormData({ ...formData, eventFormat: event.target.value })
+          }
         />
       </div>
       <div className="">
         <Input
           className="h-24 focus-visible:ring-0 focus-visible:ring-offset-0"
           placeholder="Event description"
+          value={formData?.eventDescription || ''}
+          onChange={(event) =>
+            setFormData({ ...formData, eventDescription: event.target.value })
+          }
         />
       </div>
       <div className="">
         <>
           <Input
             placeholder="Event Hashtag"
-            value={hashtag}
+            value={[hashtag, formData?.eventHashTag || '']}
             onChange={handleInputChange}
             onKeyPress={handleEnterKeyPress}
             className="focus-visible:ring-0 focus-visible:ring-offset-0"

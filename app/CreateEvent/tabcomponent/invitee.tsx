@@ -16,13 +16,17 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { EventFormData } from './types'
 
 const formSchema = z.object({
   inviteEmail: z.string().email(),
   invitePhone: z.string(),
 })
-
-const Invitee: React.FC = () => {
+type Props = {
+  formData: EventFormData
+  setFormData: React.Dispatch<SetStateAction<EventFormData>>
+}
+const Invitee: React.FC<Props> = ({ formData, setFormData }) => {
   const [email, setEmail] = useState<string>('')
   const [enteredEmail, setEnteredEmail] = useState<string[]>([])
 
@@ -94,6 +98,7 @@ const Invitee: React.FC = () => {
                     <Input
                       placeholder="Event Name"
                       type="eventName"
+                      // value={formData.inviteName}
                       {...field}
                       onChange={(e) => {
                         field.onChange(e) // This line is added
@@ -136,6 +141,7 @@ const Invitee: React.FC = () => {
                     <Input
                       placeholder="Phone number"
                       type="eventName"
+                      value={formData.inviteNumber}
                       {...field}
                       onChange={(e) => {
                         field.onChange(e) // This line is added
