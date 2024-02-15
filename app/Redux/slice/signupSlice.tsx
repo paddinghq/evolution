@@ -1,16 +1,6 @@
-// authSlice.ts
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-// interface AuthState {
-//   loading: boolean;
-//   submitting: boolean;
-//   showPassword: boolean;
-// }
 
-// const initialState: AuthState = {
-
-// };
 
 const authSlice = createSlice({
   name: 'auth',
@@ -33,5 +23,5 @@ const authSlice = createSlice({
   },
 })
 
-export const { setLoading, setSubmitting, setShowPassword } = authSlice.actions
+export const { setLoading, setSubmitting, setShowPassword} = authSlice.actions
 export default authSlice.reducer

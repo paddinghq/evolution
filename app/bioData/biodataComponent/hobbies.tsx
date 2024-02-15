@@ -19,9 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useRouter } from 'next/router'
-
-// import StepThree from "../step3/index"
 
 const formSchema = z.object({
   dob: z.date({ required_error: 'A date of birth is required.' }),
