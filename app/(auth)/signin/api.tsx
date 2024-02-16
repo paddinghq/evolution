@@ -1,18 +1,13 @@
-const API_BASE_URL = 'https://evolution-stagin.onrender.com/api/v1/auth/signin';
 
-export const signIn = async (username: any, password: any) => {
-  const response = await fetch(`$https://evolution-stagin.onrender.com/api/v1/auth/signin`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ username, password }),
-  });
+import axios from 'axios';
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message);
+const API_BASE = "https://evolution-stagin.onrender.com/api/v1/auth/signin";
+
+export const signIn = async (userData: any) => {
+  try {
+    const response = await axios.post(`${API_BASE}`, userData);
+    return response;
+  } catch (error) {
+    throw error;
   }
-
-  return response.json();
-};
+}

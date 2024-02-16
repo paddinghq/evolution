@@ -16,6 +16,11 @@ import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
 import {useSelector, useDispatch} from "react-redux"
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { signIn } from './api'
+import { toast, useToast } from '@/components/ui/use-toast'
+import { useRouter } from 'next/navigation'
+import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { RootState } from '@/app/Redux/slice/interface'
 
 const formSchema = z.object({
   emailAddress: z.string().email(),
@@ -36,6 +41,8 @@ const formSchema = z.object({
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch()
+  const { toast } = useToast()
+  const submitting = useSelector((state: RootState) => state.auth.submitting)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,9 +51,54 @@ const SignIn = () => {
       remember: false,
     },
   })
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+
+  const router = useRouter()
+  
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    dispatch(setSubmitting(true))
+
+    try {
+      const response = await signIn({
+          email: values.emailAddress,
+          password: values.password,
+      })
+
+      console.log(response)
+
+      if (response.status === 200) {
+        dispatch(setSubmitting(false))
+        toast({
+          description: response.data.message,
+        })
+        
+        if (response.data.user.registerationCompleted === false) {
+          router.push('/CreateEvent')
+        }
+        else {
+          router.push('/HomePage')
+        }
+        
+        router.push('/HomePage')
+        form.reset()
+      } else {
+        dispatch(setSubmitting(false))
+        toast({
+          variant: 'destructive',
+          description: response.data.message,
+        })
+        // router.push("/")
+        form.reset()
+      }
+    } catch (err) {
+      toast({
+        variant: 'destructive',
+        description: 'Error occured try again',
+      })
+      // router.push("/")
+      form.reset()
+    }
   }
+
 
   return (
     <div className="shadow-lg p-6 rounded-md ">
