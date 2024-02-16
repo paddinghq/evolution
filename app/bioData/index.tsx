@@ -1,9 +1,7 @@
-import Tab from "./tab"
+import Tab from './tab'
 
 const Data = () => {
-    return (
-        <Tab />
-    )
+  return <Tab />
 }
 
 export default Data
