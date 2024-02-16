@@ -1,9 +1,7 @@
 'use client'
-import React, { useState } from 'react'
-import axios from 'axios'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form, FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
   FormControl,
   FormField,
@@ -18,9 +16,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { setSubmitting,setLoading, setShowPassword } from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
+import { signUp } from './signUpLogic'
+import Loader from '@/components/Loader';
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -44,10 +44,13 @@ const formSchema = z.object({
 })
 
 const SignUp = () => {
-  const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
-  const submitting = useSelector((state: RootState) => state.auth.submitting)
+
+
+  const loading = useSelector((state: RootState) => state.auth.loading)
+  const password = useSelector((state: RootState) => state.auth.showPassword)
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,19 +66,15 @@ const SignUp = () => {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
-
+    dispatch(setLoading(true));
+    
     try {
-      const response = await axios.post(
-        'https://evolution-stagin.onrender.com/api/v1/auth/signup',
-        {
+      const response = await signUp({
           fullName: values.name,
           email: values.emailAddress,
           phone: values.phone,
           password: values.password,
-        },
-      )
-
-      console.log(response)
+      })
 
       if (response.status === 201) {
         dispatch(setSubmitting(false))
@@ -83,7 +82,10 @@ const SignUp = () => {
           description: response.data.message,
         })
         localStorage.setItem('userEmail', response.data.user.email)
-        router.push('/otp')
+        setTimeout(() => {
+          router.push('/otp')
+        }, 2000);
+        
         form.reset()
       } else {
         dispatch(setSubmitting(false))
@@ -91,7 +93,9 @@ const SignUp = () => {
           variant: 'destructive',
           description: response.data.message,
         })
-        // router.push("/")
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000);
         form.reset()
       }
     } catch (err) {
@@ -99,7 +103,7 @@ const SignUp = () => {
         variant: 'destructive',
         description: 'Error occured try again',
       })
-      // router.push("/")
+      window.location.reload()
       form.reset()
     }
   }
@@ -181,15 +185,15 @@ const SignUp = () => {
                     <div className="relative">
                       <Input
                         placeholder="Password"
-                        type={showPassword ? 'text' : 'password'}
+                        type={password ? 'text' : 'password'}
                         {...field}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                       />
                       <span
-                        onClick={() => setShowPassword(!showPassword)}
+                        onClick={() => dispatch(setShowPassword(!password))}
                         className="cursor-pointer absolute right-4 top-6"
                       >
-                        {showPassword ? (
+                        {password ? (
                           <AiOutlineEyeInvisible />
                         ) : (
                           <AiOutlineEye />
@@ -224,13 +228,21 @@ const SignUp = () => {
               </FormItem>
             )}
           />
+          <div className="mt-5">
+            {!loading && (
+                <Button
+                  type="submit"
+                  className="w-full buttoncolor hover:bg-[#217873]"
+                >
+                  SignUp
+                </Button>
+              )}
+              {loading && (
+                <Loader />
+              )}
+          </div>
 
-          <Button
-            type="submit"
-            className="w-full buttoncolor hover:bg-[#217873]"
-          >
-            {submitting ? 'Signing up...' : 'Signup'}
-          </Button>
+          
         </form>
       </FormProvider>
       <div className="flex items-center mt-8">
@@ -253,7 +265,7 @@ const SignUp = () => {
       <div className="flex justify-center mt-8">
         <p className="text-xs font-semibold">
           Have an account?{' '}
-          <Link href="/signin" className="linktext ml-1 font-bold">
+          <Link href="/signin" className="linktext ml-1 font-bold px-3 py-2 hover:bg-[#B1761f] hover:text-white">
             Sign in
           </Link>
         </p>
