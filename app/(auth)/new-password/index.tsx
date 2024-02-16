@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import axios from 'axios'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormProvider, useForm } from 'react-hook-form'
@@ -14,79 +15,88 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { signIn } from './api'
-import { toast, useToast } from '@/components/ui/use-toast'
-import { useRouter } from 'next/navigation'
 import { setSubmitting } from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
+import { useToast } from '@/components/ui/use-toast'
+import resetpassword from '../forgotten-password/userdata'
+const formSchema = z
+  .object({
+    email: z.string().email(),
+    otp: z.string().length(6),
+    password: z
+      .string()
+      .min(3)
+      .refine((value) => /[A-Z]/.test(value), {
+        message: 'Password must include at least one capital letter',
+      })
+      .refine((value) => /\d/.test(value), {
+        message: 'Password must include at least one number',
+      })
+      .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
+        message: 'Password must include at least one special character',
+      }),
+    confirmPassword: z.string(),
+  })
+  .refine(
+    (data) => {
+      return data.password === data.confirmPassword
+    },
+    {
+      message: 'Passwords do not match',
+      path: ['confirmPassword'],
+    },
+  )
 
-const formSchema = z.object({
-  emailAddress: z.string().email(),
-  password: z
-    .string()
-    .min(3)
-    .refine((value) => /[A-Z]/.test(value), {
-      message: 'Password must include at least one capital letter',
-    })
-    .refine((value) => /\d/.test(value), {
-      message: 'Password must include at least one number',
-    })
-    .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
-      message: 'Password must include at least one special character',
-    }),
-  remember: z.boolean().default(false).optional(),
-})
-
-const SignIn = () => {
+const NewPassword = () => {
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
   const submitting = useSelector((state: RootState) => state.auth.submitting)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      emailAddress: '',
+      email: '',
+      otp: '',
       password: '',
-      remember: false,
+      confirmPassword: '',
     },
   })
-
   const router = useRouter()
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    dispatch(setSubmitting(true))
-
+    dispatch(setSubmitting(!submitting))
+    const postPassword = {
+      email: values.email,
+      otp: values.otp,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+    }
     try {
-      const response = await signIn({
-        email: values.emailAddress,
-        password: values.password,
-      })
+      const response = await resetpassword.updatePassword(postPassword)
 
       console.log(response)
+      console.log('sending', postPassword)
 
       if (response.status === 200) {
-        dispatch(setSubmitting(false))
+        dispatch(setSubmitting(submitting))
         toast({
           description: response.data.message,
         })
 
-        if (response.data.user.registerationCompleted === false) {
-          router.push('/CreateEvent')
-        } else {
-          router.push('/HomePage')
-        }
-
-        router.push('/HomePage')
-        form.reset()
+        setTimeout(() => {
+          router.push('/signin')
+        }, 2000)
       } else {
-        dispatch(setSubmitting(false))
+        dispatch(setSubmitting(submitting))
         toast({
           variant: 'destructive',
           description: response.data.message,
         })
-        // router.push("/")
+
         form.reset()
       }
     } catch (err) {
@@ -94,18 +104,15 @@ const SignIn = () => {
         variant: 'destructive',
         description: 'Error occured try again',
       })
-      // router.push("/")
-      form.reset()
+      dispatch(setSubmitting(submitting))
+
+      //form.reset()
     }
   }
-
   return (
-    <div className="shadow-lg p-6 rounded-md ">
+    <div className="shadow-lg p-6 rounded-md  ">
       <div className="flex flex-col gap-8 mb-8">
-        <h1 className="text-2xl font-bold">Welcome back!</h1>
-        <p className="text-sm font-semibold">
-          Enter your credentials to access your account
-        </p>
+        <h1 className="text-2xl font-bold text-center">Update Password</h1>
       </div>
 
       <FormProvider {...form}>
@@ -115,7 +122,7 @@ const SignIn = () => {
         >
           <FormField
             control={form.control}
-            name="emailAddress"
+            name="email"
             render={({ field }) => {
               return (
                 <FormItem>
@@ -123,6 +130,25 @@ const SignIn = () => {
                     <Input
                       placeholder="Email address"
                       type="email"
+                      {...field}
+                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
+          />
+          <FormField
+            control={form.control}
+            name="otp"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      placeholder="Please enter OTP"
+                      type="text"
                       {...field}
                       className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                     />
@@ -144,6 +170,38 @@ const SignIn = () => {
                         placeholder="Password"
                         type={showPassword ? 'text' : 'password'}
                         {...field}
+                        className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white "
+                      />
+                      <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="cursor-pointer absolute right-4 top-6"
+                      >
+                        {showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
+                      </span>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
+          />
+
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        placeholder="Confirm Password"
+                        type={showPassword ? 'text' : 'password'}
+                        {...field}
                         className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
                       />
                       <span
@@ -163,67 +221,16 @@ const SignIn = () => {
               )
             }}
           />
-          <div className="flex items-center gap-24">
-            <FormField
-              control={form.control}
-              name="remember"
-              render={({ field }) => (
-                <FormItem className=" flex items-center  gap-2">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <div className="space-y-3 pb-2 text-sm font-medium text-slate-600 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                    <FormLabel className="">Remember me</FormLabel>
-                  </div>
-                </FormItem>
-              )}
-            />
-            <div>
-              <Link href="/">
-                <p className="text-sm font-medium text-[#217873]">
-                  Forgotten password
-                </p>
-              </Link>
-            </div>
-          </div>
           <Button
             type="submit"
             className="w-full buttoncolor hover:bg-[#217873]"
           >
-            Sign in
+            {submitting ? 'Updating Password...' : 'Update Password'}
           </Button>
         </form>
       </FormProvider>
-      <div className="flex items-center mt-8">
-        <hr className="flex-grow border-t-2 border-slate-300" />
-        <span className="px-2 bg-white text-slate-900">or</span>
-        <hr className="flex-grow border-t-2 border-slate-300" />
-      </div>
-      <div className="flex justify-between mt-8">
-        <div>
-          <Button className="bg-white  hover:bg-white text-xs font-semibold text-black border-solid border-2 border-slate-300">
-            <Link href="/">Sign in with Google</Link>
-          </Button>
-        </div>
-        <div>
-          <Button className="bg-white hover:bg-white text-xs font-semibold text-black border-solid border-2 border-slate-300">
-            <Link href="/">Sign in with Apple</Link>{' '}
-          </Button>
-        </div>
-      </div>
-      <div className="flex justify-center mt-8">
-        <p className="text-xs font-semibold">
-          Dont have an account?{' '}
-          <Link href="/signup" className="linktext ml-1">
-            Sign up
-          </Link>
-        </p>
-      </div>
     </div>
   )
 }
 
-export default SignIn
+export default NewPassword

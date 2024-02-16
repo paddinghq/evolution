@@ -117,5 +117,4 @@ const Tab = () => {
 
   return <div>{bioData}</div>
 }
-
 export default Tab

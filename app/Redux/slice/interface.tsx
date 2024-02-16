@@ -1,3 +1,5 @@
+import { UserState } from './userSlice'
+
 export interface RootState {
   auth: {
     loading: boolean
@@ -16,4 +18,5 @@ export interface RootState {
     hobbies: string[]
     loading: boolean
   }
+  user: UserState
 }

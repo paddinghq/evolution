@@ -158,25 +158,7 @@ const SignUp = () => {
               )
             }}
           />
-          <FormField
-            control={form.control}
-            name="emailAddress"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="Email address"
-                      type="email"
-                      {...field}
-                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )
-            }}
-          />
+
           <FormField
             control={form.control}
             name="password"
