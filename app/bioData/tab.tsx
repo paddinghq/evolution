@@ -1,7 +1,5 @@
 const Tab = () => {
-    return (
-        <h1>BioData</h1>
-    )
+  return <h1>BioData</h1>
 }
 
-export default Tab 
+export default Tab

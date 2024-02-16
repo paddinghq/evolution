@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import Link from 'next/link'
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from 'react-redux'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { signIn } from './api'
 import { toast, useToast } from '@/components/ui/use-toast'
@@ -24,22 +24,23 @@ import { RootState } from '@/app/Redux/slice/interface'
 
 const formSchema = z.object({
   emailAddress: z.string().email(),
-  password: z.string().min(3)
-  .refine((value) => /[A-Z]/.test(value), {
-    message: 'Password must include at least one capital letter',
-  })
-  .refine((value) => /\d/.test(value), {
-    message: 'Password must include at least one number',
-  })
-  .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
-    message: 'Password must include at least one special character',
-  })
-  ,
+  password: z
+    .string()
+    .min(3)
+    .refine((value) => /[A-Z]/.test(value), {
+      message: 'Password must include at least one capital letter',
+    })
+    .refine((value) => /\d/.test(value), {
+      message: 'Password must include at least one number',
+    })
+    .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value), {
+      message: 'Password must include at least one special character',
+    }),
   remember: z.boolean().default(false).optional(),
 })
 
 const SignIn = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
   const submitting = useSelector((state: RootState) => state.auth.submitting)
@@ -53,14 +54,14 @@ const SignIn = () => {
   })
 
   const router = useRouter()
-  
+
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
 
     try {
       const response = await signIn({
-          email: values.emailAddress,
-          password: values.password,
+        email: values.emailAddress,
+        password: values.password,
       })
 
       console.log(response)
@@ -70,14 +71,13 @@ const SignIn = () => {
         toast({
           description: response.data.message,
         })
-        
+
         if (response.data.user.registerationCompleted === false) {
           router.push('/CreateEvent')
-        }
-        else {
+        } else {
           router.push('/HomePage')
         }
-        
+
         router.push('/HomePage')
         form.reset()
       } else {
@@ -98,7 +98,6 @@ const SignIn = () => {
       form.reset()
     }
   }
-
 
   return (
     <div className="shadow-lg p-6 rounded-md ">
@@ -133,7 +132,7 @@ const SignIn = () => {
               )
             }}
           />
-           <FormField
+          <FormField
             control={form.control}
             name="password"
             render={({ field }) => {
@@ -151,13 +150,17 @@ const SignIn = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         className="cursor-pointer absolute right-4 top-6"
                       >
-                        {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        {showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
                       </span>
                     </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
-              );
+              )
             }}
           />
           <div className="flex items-center gap-24">

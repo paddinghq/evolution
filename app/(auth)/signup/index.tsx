@@ -16,11 +16,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { setSubmitting,setLoading, setShowPassword } from '@/app/Redux/slice/signupSlice'
+import {
+  setSubmitting,
+  setLoading,
+  setShowPassword,
+} from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
 import { signUp } from './signUpLogic'
-import Loader from '@/components/Loader';
+import Loader from '@/components/Loader'
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -47,10 +51,8 @@ const SignUp = () => {
   const dispatch = useDispatch()
   const { toast } = useToast()
 
-
   const loading = useSelector((state: RootState) => state.auth.loading)
   const password = useSelector((state: RootState) => state.auth.showPassword)
-
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,14 +68,14 @@ const SignUp = () => {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
-    dispatch(setLoading(true));
-    
+    dispatch(setLoading(true))
+
     try {
       const response = await signUp({
-          fullName: values.name,
-          email: values.emailAddress,
-          phone: values.phone,
-          password: values.password,
+        fullName: values.name,
+        email: values.emailAddress,
+        phone: values.phone,
+        password: values.password,
       })
 
       if (response.status === 201) {
@@ -84,8 +86,8 @@ const SignUp = () => {
         localStorage.setItem('userEmail', response.data.user.email)
         setTimeout(() => {
           router.push('/otp')
-        }, 2000);
-        
+        }, 2000)
+
         form.reset()
       } else {
         dispatch(setSubmitting(false))
@@ -95,7 +97,7 @@ const SignUp = () => {
         })
         setTimeout(() => {
           window.location.reload()
-        }, 2000);
+        }, 2000)
         form.reset()
       }
     } catch (err) {
@@ -156,7 +158,7 @@ const SignUp = () => {
               )
             }}
           />
-           
+
           <FormField
             control={form.control}
             name="password"
@@ -212,19 +214,15 @@ const SignUp = () => {
           />
           <div className="mt-5">
             {!loading && (
-                <Button
-                  type="submit"
-                  className="w-full buttoncolor hover:bg-[#217873]"
-                >
-                  SignUp
-                </Button>
-              )}
-              {loading && (
-                <Loader />
-              )}
+              <Button
+                type="submit"
+                className="w-full buttoncolor hover:bg-[#217873]"
+              >
+                SignUp
+              </Button>
+            )}
+            {loading && <Loader />}
           </div>
-
-          
         </form>
       </FormProvider>
       <div className="flex items-center mt-8">
@@ -247,7 +245,10 @@ const SignUp = () => {
       <div className="flex justify-center mt-8">
         <p className="text-xs font-semibold">
           Have an account?{' '}
-          <Link href="/signin" className="linktext ml-1 font-bold px-3 py-2 hover:bg-[#B1761f] hover:text-white">
+          <Link
+            href="/signin"
+            className="linktext ml-1 font-bold px-3 py-2 hover:bg-[#B1761f] hover:text-white"
+          >
             Sign in
           </Link>
         </p>

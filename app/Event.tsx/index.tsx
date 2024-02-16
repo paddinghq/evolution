@@ -35,4 +35,3 @@ const EventList = (props: any) => {
 }
 
 export default EventList
-  

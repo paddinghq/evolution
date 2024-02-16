@@ -1,8 +1,4 @@
-
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-
 
 const authSlice = createSlice({
   name: 'auth',
@@ -25,5 +21,5 @@ const authSlice = createSlice({
   },
 })
 
-export const { setLoading, setSubmitting, setShowPassword} = authSlice.actions
+export const { setLoading, setSubmitting, setShowPassword } = authSlice.actions
 export default authSlice.reducer

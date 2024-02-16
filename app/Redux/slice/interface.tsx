@@ -1,11 +1,11 @@
-import { UserState } from "./userSlice"
+import { UserState } from './userSlice'
 
 export interface RootState {
   auth: {
     loading: boolean
     submitting: boolean
     showPassword: boolean
-  },
+  }
 
   bioData: {
     dob: string
@@ -18,5 +18,5 @@ export interface RootState {
     hobbies: string[]
     loading: boolean
   }
-  user: UserState;
+  user: UserState
 }

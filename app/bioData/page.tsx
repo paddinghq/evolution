@@ -1,4 +1,4 @@
-import Data from "."
+import Data from '.'
 
 const page = () => {
   return <Data />
