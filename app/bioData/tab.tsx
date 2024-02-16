@@ -40,6 +40,8 @@ const Tab = () => {
   // const token =  localStorage.getItem("token")
 
   const handleNextStep = (stepValues: any) => {
+    console.log({stepValues})
+
     dispatch(setBioData(stepValues))
     dispatch(setSteps())
   }

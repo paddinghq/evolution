@@ -25,9 +25,12 @@ import {
 import { useSelector } from 'react-redux'
 
 const formSchema = z.object({
-  dob: z.date({ required_error: 'A date of birth is required.' }),
-  type: z.enum(['all', 'mentions', 'none'], {
-    required_error: 'You need to select a notification type.',
+  disabilty: z.enum(['yes', 'no',  'prefer not to say'], {
+    required_error: 'You need to select a gender.',
+  }),
+  
+  health: z.enum(['excellent', 'good', 'fair',  'poor', 'prefer not to say'], {
+    required_error: 'You need to select a gender.',
   }),
 })
 
@@ -40,13 +43,29 @@ const Health: React.FC<HealthProps> = ({
   handlePreviousStep,
   handleNextStep,
 }) => {
+  const bioData = useSelector((state: any) => state.bioData.bioData)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      ...bioData
+    },
   })
 
-  const bioData = useSelector((state: any) => state.bioData.bioData)
-  console.log(bioData)
+  const handleSubmit =(values: z.infer<typeof formSchema>)=> {
+    const payLoad = {
+      dob: bioData.dob,
+      gender: bioData.gender,
+      maritalStatus: bioData.maritalStatus,
+      kid: bioData.kids,
+      health: values.health,
+      disability: values.disabilty
+    }
+    handleNextStep(payLoad)
+  }
+
+
+
+  
 
   return (
     <div className="m-auto container p-20">
@@ -67,13 +86,12 @@ const Health: React.FC<HealthProps> = ({
 
       <FormProvider {...form}>
         <form
-          defaultValue={bioData}
-          onSubmit={(values) => handleNextStep(values)}
+          onSubmit={form.handleSubmit(handleSubmit)}
           className="max-w-md w-full flex flex-col gap-4"
         >
           <FormField
             control={form.control}
-            name="type"
+            name="health"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>
@@ -87,31 +105,31 @@ const Health: React.FC<HealthProps> = ({
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="all" />
+                        <RadioGroupItem value="excellent" />
                       </FormControl>
                       <FormLabel className="font-normal">Excellent</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="mentions" />
+                        <RadioGroupItem value="good" />
                       </FormControl>
                       <FormLabel className="font-normal">Good</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="none" />
+                        <RadioGroupItem value="fair" />
                       </FormControl>
                       <FormLabel className="font-normal">Fair</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="none" />
+                        <RadioGroupItem value="poor" />
                       </FormControl>
                       <FormLabel className="font-normal">Poor</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="none" />
+                        <RadioGroupItem value="prefer not to say" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Prefer not to answer
@@ -125,7 +143,7 @@ const Health: React.FC<HealthProps> = ({
           />
           <FormField
             control={form.control}
-            name="type"
+            name="disabilty"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>Do you have disability?</FormLabel>
@@ -137,19 +155,19 @@ const Health: React.FC<HealthProps> = ({
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="all" />
+                        <RadioGroupItem value="yes" />
                       </FormControl>
                       <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="mentions" />
+                        <RadioGroupItem value="no" />
                       </FormControl>
                       <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="none" />
+                        <RadioGroupItem value="prefer not to say" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Prefer not to answer
@@ -158,25 +176,6 @@ const Health: React.FC<HealthProps> = ({
                   </RadioGroup>
                 </FormControl>
                 <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="dob"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Please select one from the options</FormLabel>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
-                  </SelectContent>
-                </Select>
               </FormItem>
             )}
           />

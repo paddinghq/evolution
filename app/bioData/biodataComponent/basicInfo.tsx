@@ -28,12 +28,15 @@ import { useSelector } from 'react-redux'
 
 const formSchema = z.object({
   dob: z.date({ required_error: 'A date of birth is required.' }),
-  type: z.enum(['male', 'female', 'others', 'pns'], {
-    required_error: 'You need to select a notification type.',
+  gender: z.enum(['male', 'female', 'others', 'pns'], {
+    required_error: 'You need to select a gender.',
   }),
-  gender: z.string(),
-  maritalStatus: z.string(),
-  kids: z.string(),
+  maritalStatus: z.enum(['single', 'married',  'prefer not to say'], {
+    required_error: 'You need to select your marital status.',
+  }),
+  kids: z.enum(['yes', 'no', 'prefer not to say'], {
+    required_error: 'You need to select if you have kids.',
+  }),
 })
 
 interface BasicInfoProps {
@@ -43,16 +46,27 @@ interface BasicInfoProps {
 
 const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
   const bioData = useSelector((state: any) => state.bioData.bioData)
-  console.log(bioData)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      dob: bioData.dob,
-      gender: bioData.gender,
-      maritalStatus: bioData.maritalStatus,
-      kids: bioData.kids,
+      ...bioData
     },
   })
+
+  const handleSubmit =(values: z.infer<typeof formSchema>)=> {
+    const dob = values.dob.toLocaleString("en-gb",{
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }).split("/").reverse().join("-")
+  const payLoad = {
+    dob,
+    gender: values.gender,
+    maritalStatus: values.maritalStatus,
+    kid: values.kids
+  }
+    handleNextStep(payLoad)
+  }
 
   return (
     <div className="m-auto container p-20">
@@ -71,8 +85,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
 
       <FormProvider {...form}>
         <form
-          defaultValue={bioData}
-          onSubmit={(values) => handleNextStep(values)}
+          onSubmit={form.handleSubmit(handleSubmit)}
           className="max-w-md w-full flex flex-col gap-4"
         >
           <FormField
@@ -121,7 +134,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
           />
           <FormField
             control={form.control}
-            name="type"
+            name="gender"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>Please specify your gender</FormLabel>
@@ -165,7 +178,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
           />
           <FormField
             control={form.control}
-            name="type"
+            name="maritalStatus"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>Please specify your relationship status</FormLabel>
@@ -177,19 +190,19 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="all" />
+                        <RadioGroupItem value="single" />
                       </FormControl>
                       <FormLabel className="font-normal">Single</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="mentions" />
+                        <RadioGroupItem value="married" />
                       </FormControl>
                       <FormLabel className="font-normal">Married</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="none" />
+                        <RadioGroupItem value="prefer not to say" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Prefer not to answer
@@ -203,7 +216,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
           />
           <FormField
             control={form.control}
-            name="type"
+            name="kids"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>Do you have any kids?</FormLabel>
@@ -215,19 +228,19 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="all" />
+                        <RadioGroupItem value="yes" />
                       </FormControl>
                       <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="mentions" />
+                        <RadioGroupItem value="no" />
                       </FormControl>
                       <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="none" />
+                        <RadioGroupItem value="prefer not to say" />
                       </FormControl>
                       <FormLabel className="font-normal">
                         Prefer not to answer

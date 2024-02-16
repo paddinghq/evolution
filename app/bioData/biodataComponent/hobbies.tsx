@@ -125,7 +125,7 @@ const Hobbies: React.FC<HobbiesProps> = ({
   handleSubmit,
 }) => {
   const bioData = useSelector((state: any) => state.bioData.bioData)
-  console.log(bioData)
+  // console.log(bioData)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
