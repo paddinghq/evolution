@@ -78,7 +78,7 @@ const SignUp = () => {
         password: values.password,
       })
 
-      if (response.status === 201) {
+      if (response.data.success ==="true" ) {
         dispatch(setSubmitting(false))
         toast({
           description: response.data.message,
@@ -96,7 +96,7 @@ const SignUp = () => {
           description: response.data.message,
         })
         setTimeout(() => {
-          window.location.reload()
+          // window.location.reload()
         }, 2000)
         form.reset()
       }
@@ -105,7 +105,7 @@ const SignUp = () => {
         variant: 'destructive',
         description: 'Error occured try again',
       })
-      window.location.reload()
+      // window.location.reload()
       form.reset()
     }
   }
@@ -120,6 +120,25 @@ const SignUp = () => {
           onSubmit={form.handleSubmit(handleSubmit)}
           className="max-w-md w-full flex flex-col gap-4"
         >
+        <FormField
+            control={form.control}
+            name="emailAddress"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      placeholder="Email"
+                      type="email"
+                      {...field}
+                      className="focus-visible:ring-0 focus-visible:ring-offset-0 shadow-md rounded-2xl px-4 py-6 border-t-white"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
+          />
           <FormField
             control={form.control}
             name="name"
