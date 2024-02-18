@@ -17,7 +17,7 @@ const tabs = [
 
 const Event = () => {
   const [activeTab, setActiveTab] = useState(1)
-  
+
   const handleSelectedTab = (tab: React.SetStateAction<number>) => {
     setActiveTab(tab)
   }

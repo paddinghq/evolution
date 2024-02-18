@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Oval } from "react-loader-spinner";
+import { Oval } from 'react-loader-spinner'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -16,9 +16,9 @@ import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { OTPLogic } from './otpLogic'
 import { setLoading, setSubmitting } from '@/app/Redux/slice/signupSlice'
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/app/Redux/slice/interface';
-import Loader from '@/components/Loader';
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/app/Redux/slice/interface'
+import Loader from '@/components/Loader'
 
 const formSchema = z.object({
   otp1: z.string().max(1),
@@ -34,11 +34,9 @@ const OTP = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  const [userEmail, setUserEmail] = useState('')
+  const loading = useSelector((state: RootState) => state.auth.loading)
 
-  const [userEmail, setUserEmail] = useState('');
- const loading = useSelector((state: RootState) => state.auth.loading)
- 
- 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -63,16 +61,15 @@ const OTP = () => {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
-    dispatch(setLoading(true));
-    
+    dispatch(setLoading(true))
+
     const OtpDigit = `${values.otp1}${values.otp2}${values.otp3}${values.otp4}${values.otp5}${values.otp6}`
-    
 
     try {
-     const response = await OTPLogic({
+      const response = await OTPLogic({
         email: userEmail,
         otp: OtpDigit,
-     })
+      })
 
       if (response.status === 200) {
         localStorage.removeItem('userEmail')
@@ -81,7 +78,7 @@ const OTP = () => {
         })
         setTimeout(() => {
           router.push('/signin')
-        }, 3000);
+        }, 3000)
         form.reset()
       } else {
         toast({
@@ -109,7 +106,6 @@ const OTP = () => {
           Enter your verification code sent to your email
           <br />
           <span className="text-[#217873] text-sm">{userEmail}</span>
-          
         </h1>
       </div>
 
@@ -235,21 +231,18 @@ const OTP = () => {
           </div>
         </form>
         <div className="flex justify-center mt-5">
-        <div className="mt-5">
-              {!loading && (
-                <Button
+          <div className="mt-5">
+            {!loading && (
+              <Button
                 type="submit"
                 className="w-full buttoncolor hover:bg-[#217873]"
                 onClick={form.handleSubmit(handleSubmit)}
               >
-            
                 Verify Otp
               </Button>
-              )}
-              {loading && (
-                <Loader />
-              )}
-            </div>
+            )}
+            {loading && <Loader />}
+          </div>
         </div>
       </FormProvider>
     </div>

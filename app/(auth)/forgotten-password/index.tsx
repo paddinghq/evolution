@@ -40,23 +40,20 @@ const ForgottenPassword = () => {
     SetClicked(true);
     dispatch(setSubmitting(!submitting))
 
-    
     const postEmail = { email: values.email }
     try {
       const response = await resetpassword.sendEmail(postEmail)
-      
+
       if (response.status === 200) {
         dispatch(setSubmitting(submitting))
-        
-          toast({
-            description: response.data.message,
-          })
-        
-          
-          setTimeout(() => {
-            router.push('/new-password')
-          }, 2000)
-       
+
+        toast({
+          description: response.data.message,
+        })
+
+        setTimeout(() => {
+          router.push('/new-password')
+        }, 2000)
       } else {
         dispatch(setSubmitting(submitting))
 
@@ -64,7 +61,6 @@ const ForgottenPassword = () => {
           variant: 'destructive',
           description: response.data.message,
         })
-        
       }
     } catch (err) {
       toast({
@@ -72,7 +68,6 @@ const ForgottenPassword = () => {
         description: 'Error occured try again',
       })
       dispatch(setSubmitting(submitting))
-      
     }
   }
 

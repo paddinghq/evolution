@@ -2,8 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-
-export  interface User {
+export interface User {
   id: string
   name: string
   dateOfBirth: string
@@ -27,31 +26,28 @@ const initialState: UserState = {
   token: '',
   user: null,
   loading: false,
-  error: "",
+  error: '',
 }
 
 const userSlice = createSlice({
-    name: 'user',
-    initialState,
-    reducers: {
-        fetchUserStart(state) {
-            state.loading = true;
-            state.error = null;
-          },
-          fetchUserSuccess(state, action: PayloadAction<User>) {
-            state.loading = false;
-            state.user = action.payload;
-          },
-          fetchUserFailure(state, action: PayloadAction<string>) {
-            state.loading = false;
-            state.error = action.payload;
-          },
-        },
-    }
-)
+  name: 'user',
+  initialState,
+  reducers: {
+    fetchUserStart(state) {
+      state.loading = true
+      state.error = null
+    },
+    fetchUserSuccess(state, action: PayloadAction<User>) {
+      state.loading = false
+      state.user = action.payload
+    },
+    fetchUserFailure(state, action: PayloadAction<string>) {
+      state.loading = false
+      state.error = action.payload
+    },
+  },
+})
 
-
-
-
-export const { fetchUserStart, fetchUserSuccess, fetchUserFailure } = userSlice.actions
+export const { fetchUserStart, fetchUserSuccess, fetchUserFailure } =
+  userSlice.actions
 export default userSlice.reducer

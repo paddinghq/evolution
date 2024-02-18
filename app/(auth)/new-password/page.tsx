@@ -3,7 +3,9 @@ import NewPassword from '.'
 
 const page = () => {
   return (
-    <div className='w-2/3 p-4'><NewPassword/></div>
+    <div className="w-2/3 p-4">
+      <NewPassword />
+    </div>
   )
 }
 

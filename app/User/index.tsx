@@ -56,7 +56,6 @@ const UserProfile = () => {
   if (error) {
     return <div>Error: {error}</div>
   }
-  
 
   return (
     <div className="relative w-full container mx-auto">
