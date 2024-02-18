@@ -21,6 +21,7 @@ import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
 import { signUp } from './signUpLogic'
 import Loader from '@/components/Loader';
+import { useState } from 'react'
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -44,6 +45,7 @@ const formSchema = z.object({
 })
 
 const SignUp = () => {
+  const [clicked, SetClicked] = useState<boolean>(false);
   const dispatch = useDispatch()
   const { toast } = useToast()
 
@@ -65,6 +67,8 @@ const SignUp = () => {
   const router = useRouter()
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    SetClicked(true);
+    console.log(SetClicked);
     dispatch(setSubmitting(true))
     dispatch(setLoading(true));
     
@@ -215,6 +219,7 @@ const SignUp = () => {
                 <Button
                   type="submit"
                   className="w-full buttoncolor hover:bg-[#217873]"
+                  disabled={clicked}
                 >
                   SignUp
                 </Button>

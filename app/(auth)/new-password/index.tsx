@@ -51,7 +51,8 @@ const formSchema = z
   )
 
 const NewPassword = () => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [clicked, SetClicked] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
   const submitting = useSelector((state: RootState) => state.auth.submitting)
@@ -68,6 +69,7 @@ const NewPassword = () => {
   const router = useRouter()
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    SetClicked(true);
     dispatch(setSubmitting(!submitting))
     const postPassword = {
       email: values.email,
@@ -109,6 +111,7 @@ const NewPassword = () => {
       //form.reset()
     }
   }
+
   return (
     <div className="shadow-lg p-6 rounded-md  ">
       <div className="flex flex-col gap-8 mb-8">
@@ -224,6 +227,7 @@ const NewPassword = () => {
           <Button
             type="submit"
             className="w-full buttoncolor hover:bg-[#217873]"
+            disabled={clicked}
           >
             {submitting ? 'Updating Password...' : 'Update Password'}
           </Button>

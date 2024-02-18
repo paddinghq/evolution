@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormProvider, useForm } from 'react-hook-form'
@@ -22,6 +22,8 @@ const formSchema = z.object({
 })
 
 const SignIn = () => {
+  const [clicked, SetClicked] = useState<boolean>(false);
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,9 +31,11 @@ const SignIn = () => {
       password: '',
       remember: false,
     },
-  })
+  });
+  
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+    SetClicked(true);
+    console.log(values);
   }
 
   return (
@@ -115,6 +119,7 @@ const SignIn = () => {
           <Button
             type="submit"
             className="w-full buttoncolor hover:bg-[#217873]"
+            disabled={clicked}
           >
             Sign in
           </Button>

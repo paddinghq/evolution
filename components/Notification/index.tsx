@@ -74,14 +74,14 @@ const Notification = () => {
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className=" relative">
+          <div className=" relative cursor-pointer">
             <IoIosNotificationsOutline className="text-white text-4xl" />
             <p
               className={`text-white bg-orange-600 rounded-full w-5 text-center text-sm absolute bottom-[1.4rem] right-0 ${
                 notification ? '' : 'hidden'
               }`}
             >
-              3
+              24
             </p>
           </div>
         </DropdownMenuTrigger>
@@ -90,13 +90,13 @@ const Notification = () => {
             <div className="">
               <div className="">
                 <ul className="flex justify-between">
-                  <button className="text-[0.7rem] text-white bg-gray-400 p-2 cursor-pointer rounded-md hover:bg-gray-600 active:bg-gray-600 focus:bg-gray-600">
+                  <button className="text-[0.7rem] text-white bg-gray-500 p-2 cursor-pointer rounded-md hover:bg-gray-700 active:bg-gray-700 focus:bg-gray-700">
                     7 days ago
                   </button>
-                  <button className="text-[0.7rem] text-white bg-gray-400 p-2 cursor-pointer rounded-md hover:bg-gray-600 active:bg-gray-600 focus:bg-gray-600">
+                  <button className="text-[0.7rem] text-white bg-gray-500 p-2 cursor-pointer rounded-md hover:bg-gray-700 active:bg-gray-700 focus:bg-gray-700">
                     30 days ago
                   </button>
-                  <button className="text-[0.7rem] text-white bg-gray-400 p-2 cursor-pointer rounded-md hover:bg-gray-600 active:bg-gray-600 focus:bg-gray-600">
+                  <button className="text-[0.7rem] text-white bg-gray-500 p-2 cursor-pointer rounded-md hover:bg-gray-700 active:bg-gray-700 focus:bg-gray-700">
                     All Notifications
                   </button>
                 </ul>
