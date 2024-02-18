@@ -25,6 +25,7 @@ import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
 import { signUp } from './signUpLogic'
 import Loader from '@/components/Loader'
+import { useState } from 'react'
 
 const formSchema = z.object({
   name: z.string().min(3),
