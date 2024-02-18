@@ -40,7 +40,8 @@ const formSchema = z.object({
 })
 
 const SignIn = () => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [clicked, SetClicked] = useState<boolean>(false);
   const dispatch = useDispatch()
   const { toast } = useToast()
   const submitting = useSelector((state: RootState) => state.auth.submitting)
@@ -56,6 +57,7 @@ const SignIn = () => {
   const router = useRouter()
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    SetClicked(true);
     dispatch(setSubmitting(true))
 
     try {
@@ -192,6 +194,7 @@ const SignIn = () => {
           <Button
             type="submit"
             className="w-full buttoncolor hover:bg-[#217873]"
+            disabled={clicked}
           >
             Sign in
           </Button>

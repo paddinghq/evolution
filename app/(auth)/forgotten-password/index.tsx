@@ -24,6 +24,7 @@ const formSchema = z.object({
 })
 
 const ForgottenPassword = () => {
+  const [clicked, SetClicked] = useState<boolean>(false);
   const dispatch = useDispatch()
   const { toast } = useToast()
   const router = useRouter()
@@ -36,6 +37,7 @@ const ForgottenPassword = () => {
   })
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    SetClicked(true);
     dispatch(setSubmitting(!submitting))
 
     const postEmail = { email: values.email }
@@ -109,6 +111,7 @@ const ForgottenPassword = () => {
             type="submit"
             className="buttoncolor hover:bg-[#217873] w-1/2"
             onClick={form.handleSubmit(handleSubmit)}
+            disabled={clicked}
           >
             {submitting ? 'Sending OTP...' : 'Send OTP'}
           </Button>
