@@ -54,16 +54,17 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
   })
 
   const handleSubmit =(values: z.infer<typeof formSchema>)=> {
+    console.log(values)
     const dob = values.dob.toLocaleString("en-gb",{
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
     }).split("/").reverse().join("-")
   const payLoad = {
-    dob,
+    dob:dob,
     gender: values.gender,
     maritalStatus: values.maritalStatus,
-    kid: values.kids
+    kids: values.kids
   }
     handleNextStep(payLoad)
   }
@@ -125,9 +126,9 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
                     />
                   </PopoverContent>
                 </Popover>
-                <FormDescription>
+                {/* <FormDescription>
                   Your date of birth is used to calculate your age.
-                </FormDescription>
+                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}

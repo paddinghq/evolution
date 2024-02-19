@@ -77,6 +77,7 @@ const SignUp = () => {
         phone: values.phone,
         password: values.password,
       })
+      console.log(response)
 
       if (response.data.success ==="true" ) {
         dispatch(setSubmitting(false))

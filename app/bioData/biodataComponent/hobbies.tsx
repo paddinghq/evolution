@@ -19,7 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { BioSlice, setBioData } from '@/app/Redux/slice/bioDataSlice'
+import { BioData } from './../SubmitPostLogic';
 
 interface HobbiesProps {
   handleSubmit: (stepValues: any) => void
@@ -27,7 +29,8 @@ interface HobbiesProps {
 }
 
 const formSchema = z.object({
-  dob: z.date({ required_error: 'A date of birth is required.' }),
+  location: z.enum(["lagos", "togo", "ivorycoast"], 
+  { required_error: 'A location is required.' }),
   type: z.enum(['all', 'mentions', 'none'], {
     required_error: 'You need to select a notification type.',
   }),
@@ -35,88 +38,48 @@ const formSchema = z.object({
 
 const hobies = [
   {
-    name: 'label',
+    name: 'running',
+    value: 'running'
   },
   {
-    name: 'label',
+    name: 'dancing',
+    value: 'dancing',
   },
   {
-    name: 'label',
+    name: 'swimming',
+    value: 'swimming',
   },
   {
-    name: 'label',
+    name: 'drawing',
+    value: 'drawing',
   },
   {
-    name: 'label',
+    name: 'gaming',
+    value: 'gaming',
   },
   {
-    name: 'label',
+    name: 'painting',
+    value: 'painting',
   },
   {
-    name: 'label',
+    name: 'singing',
+    value: 'singing',
   },
   {
-    name: 'label',
+    name: 'cooking',
+    cooking: 'cooking',
   },
   {
-    name: 'label',
+    name: 'reading',
+    value: 'reading',
   },
   {
-    name: 'label',
+    name: 'jogging',
+    value: 'jogging',
   },
   {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
-  },
-  {
-    name: 'label',
+    name: 'others',
+    value: 'others',
   },
 ]
 
@@ -125,12 +88,32 @@ const Hobbies: React.FC<HobbiesProps> = ({
   handleSubmit,
 }) => {
   const bioData = useSelector((state: any) => state.bioData.bioData)
-  // console.log(bioData)
+  console.log(bioData)
+  const dispatch = useDispatch()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      ...bioData
+    },
   })
+  const handleSubmitData =(values: z.infer<typeof formSchema>)=> {
+    const payLoad = {
+      dob: bioData.dob,
+      gender: bioData.gender,
+      maritalStatus: bioData.maritalStatus,
+      kid: bioData.kids,
+      health: bioData.health,
+      disability: bioData.disabilty
+    }
+    handleSubmit(payLoad)
+  }
+
+  const handleeClick = (Value : string) => {
+    // dispatch(BioSlice.actions.setBioData(Value));
+    console.log(Value)
+  }
+
 
   return (
     <div className="container mt-10">
@@ -155,7 +138,7 @@ const Hobbies: React.FC<HobbiesProps> = ({
           >
             <FormField
               control={form.control}
-              name="dob"
+              name="location"
               render={({ field }) => (
                 <FormItem className="flex flex-col mt-6">
                   <FormLabel>Select your location</FormLabel>
@@ -164,9 +147,9 @@ const Hobbies: React.FC<HobbiesProps> = ({
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="light">Nigeria</SelectItem>
-                      <SelectItem value="dark">Togo</SelectItem>
-                      <SelectItem value="system">Ivory coast</SelectItem>
+                      <SelectItem value="nigeria">Nigeria</SelectItem>
+                      <SelectItem value="togo">Togo</SelectItem>
+                      <SelectItem value="ivorycoast">Ivory coast</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>
@@ -181,13 +164,14 @@ const Hobbies: React.FC<HobbiesProps> = ({
           </h6>
         </div>
 
-        <div className="grid grid-cols-7 gap-6 items-center mt-5 ">
+        <ul className="grid grid-cols-7 gap-6 items-center mt-5 ">
           {hobies.map((items) => (
-            <div className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white hover:bg-[#2A6562] hover:text-white">
+            //@ts-ignore
+            <li onClick={(e) => handleeClick(items.name)} className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white hover:bg-[#2A6562] hover:text-white">
               {items.name}
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
       <div className=" flex justify-end gap-3 mt-4">
         <Button
