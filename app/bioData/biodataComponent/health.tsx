@@ -23,9 +23,10 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useSelector } from 'react-redux'
+import { useEffect } from "react"
 
 const formSchema = z.object({
-  disabilty: z.enum(['yes', 'no',  'prefer not to say'], {
+  disability: z.enum(['yes', 'no',  'prefer not to say'], {
     required_error: 'You need to select a gender.',
   }),
   
@@ -51,17 +52,20 @@ const Health: React.FC<HealthProps> = ({
     },
   })
 
-  const handleSubmit =(values: z.infer<typeof formSchema>)=> {
+  const handleSubmitData =(values: z.infer<typeof formSchema>)=> {
+    // console.log({values})
     const payLoad = {
       dob: bioData.dob,
       gender: bioData.gender,
       maritalStatus: bioData.maritalStatus,
       kid: bioData.kids,
       health: values.health,
-      disability: values.disabilty
+      disability: values.disability
     }
     handleNextStep(payLoad)
-  }
+  };
+
+  useEffect(() => console.log(bioData), [bioData])
 
 
 
@@ -86,7 +90,7 @@ const Health: React.FC<HealthProps> = ({
 
       <FormProvider {...form}>
         <form
-          onSubmit={form.handleSubmit(handleSubmit)}
+          onSubmit={form.handleSubmit(handleSubmitData)}
           className="max-w-md w-full flex flex-col gap-4"
         >
           <FormField
@@ -143,7 +147,7 @@ const Health: React.FC<HealthProps> = ({
           />
           <FormField
             control={form.control}
-            name="disabilty"
+            name="disability"
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>Do you have disability?</FormLabel>

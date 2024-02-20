@@ -51,8 +51,8 @@ const SignUp = () => {
   const dispatch = useDispatch()
   const { toast } = useToast()
 
-  const loading = useSelector((state: RootState) => state.auth.loading)
-  const password = useSelector((state: RootState) => state.auth.showPassword)
+  const loading = useSelector((state: RootState) => state.AuthState.loading)
+  const password = useSelector((state: RootState) => state.AuthState.showPassword)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

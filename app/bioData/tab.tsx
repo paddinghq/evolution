@@ -51,41 +51,42 @@ const Tab = () => {
   }
 
   const handleSubmit = async (values: any) => {
-    console.log(values)
-    //    try {
-    //         const response =  await BioData({
-    //             values
-    //         })
+    // console.log(values)
+       try {
+            const response =  await BioData({
+                values
+            })
+            console.log(response.data)
 
-    //         if (response.status === 201){
-    //             dispatch(setSubmitting(false))
-    //             toast({
-    //                 description: response.data.message,
-    //             })
+            if (response.status === 201){
+                dispatch(setSubmitting(false))
+                toast({
+                    description: response.data.message,
+                })
 
-    //             setTimeout(() => {
-    //                 router.push("/HomePage")
-    //             }, 2000)
+                setTimeout(() => {
+                    router.push("/HomePage")
+                }, 2000)
 
-    //         } else {
-    //             dispatch(setSubmitting(false))
-    //             toast({
-    //                 variant: 'destructive',
-    //                 description: response.data.message,
-    //             })
-    //             setTimeout(() => {
-    //                 window.location.reload()
-    //             }, 2000);
-    //         }
-    //     } catch (err) {
-    //         toast({
-    //             variant: 'destructive',
-    //             description: 'Error occured try again',
-    //         })
-    //         setTimeout(() => {
-    //             window.location.reload()
-    //         }, 2000);
-    //     }
+            } else {
+                dispatch(setSubmitting(false))
+                toast({
+                    variant: 'destructive',
+                    description: response.data.message,
+                })
+                setTimeout(() => {
+                    // window.location.reload()
+                }, 2000);
+            }
+        } catch (err) {
+            toast({
+                variant: 'destructive',
+                description: 'Error occured try again',
+            })
+            setTimeout(() => {
+                // window.location.reload()
+            }, 2000);
+        }
   }
 
   let bioData

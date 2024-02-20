@@ -6,9 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormProvider, useForm } from 'react-hook-form'
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '@/components/ui/form'
 
 import { Button } from '@/components/ui/button'
@@ -22,19 +24,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { BioSlice, setBioData } from '@/app/Redux/slice/bioDataSlice'
 import { BioData } from './../SubmitPostLogic';
+import { Checkbox } from '@/components/ui/checkbox'
+import { useEffect } from "react"
 
 interface HobbiesProps {
   handleSubmit: (stepValues: any) => void
   handlePreviousStep: any
 }
-
-const formSchema = z.object({
-  location: z.enum(["lagos", "togo", "ivorycoast"], 
-  { required_error: 'A location is required.' }),
-  type: z.enum(['all', 'mentions', 'none'], {
-    required_error: 'You need to select a notification type.',
-  }),
-})
 
 const hobies = [
   {
@@ -83,36 +79,50 @@ const hobies = [
   },
 ]
 
+const formSchema = z.object({
+  location: z.enum(["nigeria", "togo", "ivorycoast"], 
+  { required_error: 'A location is required.' }),
+  hobies: z.array(z.string()).refine((value) => value.some((item) => item), {
+    message: "You have to select at least one item.",
+  }),
+})
+
+
+
 const Hobbies: React.FC<HobbiesProps> = ({
   handlePreviousStep,
   handleSubmit,
 }) => {
   const bioData = useSelector((state: any) => state.bioData.bioData)
-  console.log(bioData)
+  // console.log(bioData)
   const dispatch = useDispatch()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ...bioData
+      ...bioData,
+      hobies: []
     },
   })
   const handleSubmitData =(values: z.infer<typeof formSchema>)=> {
+   console.log(values)
     const payLoad = {
       dob: bioData.dob,
       gender: bioData.gender,
       maritalStatus: bioData.maritalStatus,
       kid: bioData.kids,
       health: bioData.health,
-      disability: bioData.disabilty
-    }
+      disability: bioData.disability,
+      location: values.location,
+      hobbies: values.hobies
+    };
+    console.log({payLoad})
     handleSubmit(payLoad)
-  }
 
-  const handleeClick = (Value : string) => {
-    // dispatch(BioSlice.actions.setBioData(Value));
-    console.log(Value)
-  }
+  };
+  useEffect(() => console.log(bioData), [bioData])
+  
+  
 
 
   return (
@@ -121,19 +131,25 @@ const Hobbies: React.FC<HobbiesProps> = ({
         <IoChevronBack size={24} />
       </div>
 
-      <div className="shadow-lg border-l-2 border-r-2 mt-10  ml-10 px-14 py-5">
-        <h5 className="text-2xl font-bold mb-1">
-          Good job! You’re just one step away
-        </h5>
-        <p>
-          We want to serve you based on where you are located and what you
-          like...
-        </p>
+      <div className="flex justify-between shadow-lg border-l-2 border-r-2 mt-10  ml-10 px-14 py-5">
+        <div>
+          <h5 className="text-2xl font-bold mb-1">
+              Good job! You’re just one step away
+            </h5>
+            <p className=" text-sm font-semibold">
+              We want to serve you based on where you are located and what you
+              like...
+            </p>
+        </div>
+
+       
 
         <FormProvider {...form}>
           <form
-            defaultValue={bioData}
-            onSubmit={(values) => handleSubmit(values)}
+            // defaultValue={bioData}
+            // onSubmit={(e:React.FormEvent) =>console.log((e.target as HTMLFormElement).value)}
+            // onSubmit={(e:React.FormEvent) =>console.log("hello world")}
+            onSubmit={form.handleSubmit(handleSubmitData)}
             className="max-w-md w-full flex flex-col gap-4"
           >
             <FormField
@@ -142,7 +158,10 @@ const Hobbies: React.FC<HobbiesProps> = ({
               render={({ field }) => (
                 <FormItem className="flex flex-col mt-6">
                   <FormLabel>Select your location</FormLabel>
-                  <Select>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger className="px-7 rounded-full">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -155,36 +174,83 @@ const Hobbies: React.FC<HobbiesProps> = ({
                 </FormItem>
               )}
             />
+
+            <FormField 
+              control = {form.control}
+              name= "hobies"
+              render = {({field}) => (
+                <FormItem>
+                <div className="mb-4">
+                  <FormLabel className="text-base">Hobbies</FormLabel>
+                  <FormDescription>
+                  Tell us about your hobbies
+                  </FormDescription>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                    {hobies.map((item) => (
+                      <FormField
+                        key={item.name}
+                        control={form.control}
+                        name="hobies"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.name}
+                              className="flex flex-row items-start space-x-3 space-y-0"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value?.includes(item.name)}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([...field.value, item.name])
+                                      : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== item.name
+                                          )
+                                        )
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="text-sm font-normal">
+                                {item.name}
+                              </FormLabel>
+                            </FormItem>
+                          )
+                        }}
+                      />
+                    ))}
+                </div>
+                
+                <FormMessage />
+              </FormItem>
+              )}
+            
+            
+            />
+
+            
+
+            <div className=" flex justify-end gap-3 mt-4">
+              <Button
+                type="submit"
+                onClick={handlePreviousStep}
+                className=" text-black hover:bg-[#217873] hover:text-white bg-white"
+              >
+                Skip
+              </Button>
+              <Button type="submit" className=" bg-[#2A6562] hover:bg-[#217873] px-8">
+                FinishUp
+              </Button>
+            </div>
           </form>
+
+          
         </FormProvider>
 
-        <div className="mt-5">
-          <h6 className="text-[#252C2B] font-base">
-            Tell us about your hobbies
-          </h6>
-        </div>
-
-        <ul className="grid grid-cols-7 gap-6 items-center mt-5 ">
-          {hobies.map((items) => (
-            //@ts-ignore
-            <li onClick={(e) => handleeClick(items.name)} className="border-2 rounded-full px-10 py-2 flex justify-center items-center cursor-pointer active:bg-[#B1761F] active:text-white hover:bg-[#2A6562] hover:text-white">
-              {items.name}
-            </li>
-          ))}
-        </ul>
+        
       </div>
-      <div className=" flex justify-end gap-3 mt-4">
-        <Button
-          type="submit"
-          onClick={handlePreviousStep}
-          className=" text-black hover:bg-[#217873] hover:text-white bg-white"
-        >
-          Skip
-        </Button>
-        <Button type="submit" className=" bg-[#2A6562] hover:bg-[#217873] px-8">
-          FinishUp
-        </Button>
-      </div>
+      
     </div>
   )
 }

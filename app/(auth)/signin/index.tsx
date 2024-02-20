@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form, FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
   FormControl,
   FormField,
@@ -17,9 +17,9 @@ import Link from 'next/link'
 import { useSelector, useDispatch } from 'react-redux'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { signIn } from './api'
-import { toast, useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
-import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { setSubmitting, setUserDetails } from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
 
 const formSchema = z.object({
@@ -43,7 +43,6 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
-  const submitting = useSelector((state: RootState) => state.auth.submitting)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,21 +63,22 @@ const SignIn = () => {
         password: values.password,
       })
 
-      console.log(response)
+      
 
       if (response.status === 200) {
         dispatch(setSubmitting(false))
         toast({
           description: response.data.message,
         })
+        dispatch(setUserDetails(response.data.user))
 
-        if (response.data.user.registerationCompleted === false) {
-          router.push('/CreateEvent')
+        if (response.data.user.registrationCompleted === false) {
+          router.replace('/bioData')
+          
         } else {
-          router.push('/HomePage')
+          router.replace('/HomePage')
         }
 
-        router.push('/HomePage')
         form.reset()
       } else {
         dispatch(setSubmitting(false))

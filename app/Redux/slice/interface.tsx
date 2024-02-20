@@ -1,10 +1,11 @@
 import { UserState } from './userSlice'
 
 export interface RootState {
-  auth: {
+  AuthState: {
     loading: boolean
     submitting: boolean
     showPassword: boolean
+    userDetails: string[]
   }
 
   bioData: {
