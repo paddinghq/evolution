@@ -79,7 +79,7 @@ const SignUp = () => {
       })
       console.log(response)
 
-      if (response.data.success ==="true" ) {
+      if (response.data.success === 'true') {
         dispatch(setSubmitting(false))
         toast({
           description: response.data.message,
@@ -121,7 +121,7 @@ const SignUp = () => {
           onSubmit={form.handleSubmit(handleSubmit)}
           className="max-w-md w-full flex flex-col gap-4"
         >
-        <FormField
+          <FormField
             control={form.control}
             name="emailAddress"
             render={({ field }) => {

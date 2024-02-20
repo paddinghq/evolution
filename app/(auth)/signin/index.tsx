@@ -63,8 +63,6 @@ const SignIn = () => {
         password: values.password,
       })
 
-      
-
       if (response.status === 200) {
         dispatch(setSubmitting(false))
         toast({
@@ -74,7 +72,6 @@ const SignIn = () => {
 
         if (response.data.user.registrationCompleted === false) {
           router.replace('/bioData')
-          
         } else {
           router.replace('/HomePage')
         }

@@ -7,8 +7,8 @@ export const BioData = async (userData: any) => {
   try {
     const response = await axios.post(`${API_BASE}`, userData, {
       headers: {
-        "Content-Type": "application/json"
-      }
+        'Content-Type': 'application/json',
+      },
     })
     return response
   } catch (error) {

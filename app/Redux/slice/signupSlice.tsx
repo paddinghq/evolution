@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface AuthState {
-  loading: boolean;
-  submitting: boolean;
-  showPassword: boolean;
-  userDetails: string[];
+  loading: boolean
+  submitting: boolean
+  showPassword: boolean
+  userDetails: string[]
 }
 
 const initialState: AuthState = {
@@ -12,28 +12,28 @@ const initialState: AuthState = {
   submitting: false,
   showPassword: false,
   userDetails: [],
-};
+}
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
+      state.loading = action.payload
     },
     setSubmitting: (state, action: PayloadAction<boolean>) => {
-      state.submitting = action.payload;
+      state.submitting = action.payload
     },
     setShowPassword: (state, action: PayloadAction<boolean>) => {
-      state.showPassword = action.payload;
+      state.showPassword = action.payload
     },
     setUserDetails: (state, action: PayloadAction<string[]>) => {
-      state.userDetails = action.payload;
+      state.userDetails = action.payload
     },
   },
-});
+})
 
 export const { setLoading, setSubmitting, setShowPassword, setUserDetails } =
-  authSlice.actions;
+  authSlice.actions
 
-export default authSlice.reducer;
+export default authSlice.reducer

@@ -23,14 +23,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useSelector } from 'react-redux'
-import { useEffect } from "react"
+import { useEffect } from 'react'
 
 const formSchema = z.object({
-  disability: z.enum(['yes', 'no',  'prefer not to say'], {
+  disability: z.enum(['yes', 'no', 'prefer not to say'], {
     required_error: 'You need to select a gender.',
   }),
-  
-  health: z.enum(['excellent', 'good', 'fair',  'poor', 'prefer not to say'], {
+
+  health: z.enum(['excellent', 'good', 'fair', 'poor', 'prefer not to say'], {
     required_error: 'You need to select a gender.',
   }),
 })
@@ -48,11 +48,11 @@ const Health: React.FC<HealthProps> = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ...bioData
+      ...bioData,
     },
   })
 
-  const handleSubmitData =(values: z.infer<typeof formSchema>)=> {
+  const handleSubmitData = (values: z.infer<typeof formSchema>) => {
     // console.log({values})
     const payLoad = {
       dob: bioData.dob,
@@ -60,16 +60,12 @@ const Health: React.FC<HealthProps> = ({
       maritalStatus: bioData.maritalStatus,
       kid: bioData.kids,
       health: values.health,
-      disability: values.disability
+      disability: values.disability,
     }
     handleNextStep(payLoad)
-  };
+  }
 
   useEffect(() => console.log(bioData), [bioData])
-
-
-
-  
 
   return (
     <div className="m-auto container p-20">

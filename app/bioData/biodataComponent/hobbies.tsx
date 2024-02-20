@@ -32,7 +32,7 @@ interface HobbiesProps {
 const hobies = [
   {
     name: 'running',
-    value: 'running'
+    value: 'running',
   },
   {
     name: 'dancing',
@@ -77,14 +77,13 @@ const hobies = [
 ]
 
 const formSchema = z.object({
-  location: z.enum(["nigeria", "togo", "ivorycoast"], 
-  { required_error: 'A location is required.' }),
+  location: z.enum(['nigeria', 'togo', 'ivorycoast'], {
+    required_error: 'A location is required.',
+  }),
   hobies: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: "You have to select at least one item.",
+    message: 'You have to select at least one item.',
   }),
 })
-
-
 
 const Hobbies: React.FC<HobbiesProps> = ({
   handlePreviousStep,
@@ -96,10 +95,10 @@ const Hobbies: React.FC<HobbiesProps> = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       ...bioData,
-      hobies: []
+      hobies: [],
     },
   })
-  const handleSubmitData =(values: z.infer<typeof formSchema>)=> {
+  const handleSubmitData = (values: z.infer<typeof formSchema>) => {
     const payLoad = {
       dob: bioData.dob,
       gender: bioData.gender,
@@ -108,14 +107,10 @@ const Hobbies: React.FC<HobbiesProps> = ({
       health: bioData.health,
       disability: bioData.disability,
       location: values.location,
-      hobbies: values.hobies
-    };
+      hobbies: values.hobies,
+    }
     handleSubmit(payLoad)
-
-  };
-  
-  
-
+  }
 
   return (
     <div className="container mt-10">
@@ -126,15 +121,13 @@ const Hobbies: React.FC<HobbiesProps> = ({
       <div className="flex justify-between shadow-lg border-l-2 border-r-2 mt-10  ml-10 px-14 py-5">
         <div>
           <h5 className="text-2xl font-bold mb-1">
-              Good job! You’re just one step away
-            </h5>
-            <p className=" text-sm font-semibold">
-              We want to serve you based on where you are located and what you
-              like...
-            </p>
+            Good job! You’re just one step away
+          </h5>
+          <p className=" text-sm font-semibold">
+            We want to serve you based on where you are located and what you
+            like...
+          </p>
         </div>
-
-       
 
         <FormProvider {...form}>
           <form
@@ -164,18 +157,18 @@ const Hobbies: React.FC<HobbiesProps> = ({
               )}
             />
 
-            <FormField 
-              control = {form.control}
-              name= "hobies"
-              render = {({field}) => (
+            <FormField
+              control={form.control}
+              name="hobies"
+              render={({ field }) => (
                 <FormItem>
-                <div className="mb-4">
-                  <FormLabel className="text-base">Hobbies</FormLabel>
-                  <FormDescription>
-                  Tell us about your hobbies
-                  </FormDescription>
-                </div>
-                <div className="grid grid-cols-4 gap-4">
+                  <div className="mb-4">
+                    <FormLabel className="text-base">Hobbies</FormLabel>
+                    <FormDescription>
+                      Tell us about your hobbies
+                    </FormDescription>
+                  </div>
+                  <div className="grid grid-cols-4 gap-4">
                     {hobies.map((item) => (
                       <FormField
                         key={item.name}
@@ -192,11 +185,14 @@ const Hobbies: React.FC<HobbiesProps> = ({
                                   checked={field.value?.includes(item.name)}
                                   onCheckedChange={(checked) => {
                                     return checked
-                                      ? field.onChange([...field.value, item.name])
+                                      ? field.onChange([
+                                          ...field.value,
+                                          item.name,
+                                        ])
                                       : field.onChange(
                                           field.value?.filter(
-                                            (value) => value !== item.name
-                                          )
+                                            (value) => value !== item.name,
+                                          ),
                                         )
                                   }}
                                 />
@@ -209,16 +205,12 @@ const Hobbies: React.FC<HobbiesProps> = ({
                         }}
                       />
                     ))}
-                </div>
-                
-                <FormMessage />
-              </FormItem>
-              )}
-            
-            
-            />
+                  </div>
 
-            
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <div className=" flex justify-end gap-3 mt-4">
               <Button
@@ -228,18 +220,16 @@ const Hobbies: React.FC<HobbiesProps> = ({
               >
                 Back
               </Button>
-              <Button type="submit" className=" bg-[#2A6562] hover:bg-[#217873] px-8">
+              <Button
+                type="submit"
+                className=" bg-[#2A6562] hover:bg-[#217873] px-8"
+              >
                 FinishUp
               </Button>
             </div>
           </form>
-
-          
         </FormProvider>
-
-        
       </div>
-      
     </div>
   )
 }

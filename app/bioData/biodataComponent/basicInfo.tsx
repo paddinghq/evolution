@@ -32,7 +32,7 @@ const formSchema = z.object({
   gender: z.enum(['male', 'female', 'others', 'prefer not to say'], {
     required_error: 'You need to select a gender.',
   }),
-  maritalStatus: z.enum(['single', 'married',  'prefer not to say'], {
+  maritalStatus: z.enum(['single', 'married', 'prefer not to say'], {
     required_error: 'You need to select your marital status.',
   }),
   kids: z.enum(['yes', 'no', 'prefer not to say'], {
@@ -50,30 +50,32 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ...bioData
+      ...bioData,
     },
   })
 
-  const handleSubmit =(values: z.infer<typeof formSchema>)=> {
+  const handleSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values)
-    const dob = values.dob.toLocaleString("en-gb",{
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    }).split("/").reverse().join("-")
-  const payLoad = {
-    dob:dob,
-    gender: values.gender,
-    maritalStatus: values.maritalStatus,
-    kids: values.kids
-  }
+    const dob = values.dob
+      .toLocaleString('en-gb', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      })
+      .split('/')
+      .reverse()
+      .join('-')
+    const payLoad = {
+      dob: dob,
+      gender: values.gender,
+      maritalStatus: values.maritalStatus,
+      kids: values.kids,
+    }
     handleNextStep(payLoad)
   }
 
   return (
     <div className=" container my-32 overflow-hidden">
-      
-      
       <div className="flex justify-around shadow-lg border-l-2 border-r-2 border-b-2 mt-10 mx-auto px-14 py-5">
         <div>
           <h1 className="text-2xl font-bold ">Let us get to know you better</h1>
@@ -81,9 +83,6 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
             We will use this information to personalize your experience
           </p>
         </div>
-        
-        
-      
 
         <FormProvider {...form}>
           <form
