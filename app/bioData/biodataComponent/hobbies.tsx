@@ -3,7 +3,7 @@ import { IoChevronBack } from 'react-icons/io5'
 import React from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form, FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
   FormControl,
   FormDescription,
@@ -21,11 +21,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useDispatch, useSelector } from 'react-redux'
-import { BioSlice, setBioData } from '@/app/Redux/slice/bioDataSlice'
-import { BioData } from './../SubmitPostLogic';
+import { useSelector } from 'react-redux'
 import { Checkbox } from '@/components/ui/checkbox'
-import { useEffect } from "react"
 
 interface HobbiesProps {
   handleSubmit: (stepValues: any) => void
@@ -94,8 +91,6 @@ const Hobbies: React.FC<HobbiesProps> = ({
   handleSubmit,
 }) => {
   const bioData = useSelector((state: any) => state.bioData.bioData)
-  // console.log(bioData)
-  const dispatch = useDispatch()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -105,7 +100,6 @@ const Hobbies: React.FC<HobbiesProps> = ({
     },
   })
   const handleSubmitData =(values: z.infer<typeof formSchema>)=> {
-   console.log(values)
     const payLoad = {
       dob: bioData.dob,
       gender: bioData.gender,
@@ -116,11 +110,9 @@ const Hobbies: React.FC<HobbiesProps> = ({
       location: values.location,
       hobbies: values.hobies
     };
-    console.log({payLoad})
     handleSubmit(payLoad)
 
   };
-  useEffect(() => console.log(bioData), [bioData])
   
   
 
@@ -146,9 +138,6 @@ const Hobbies: React.FC<HobbiesProps> = ({
 
         <FormProvider {...form}>
           <form
-            // defaultValue={bioData}
-            // onSubmit={(e:React.FormEvent) =>console.log((e.target as HTMLFormElement).value)}
-            // onSubmit={(e:React.FormEvent) =>console.log("hello world")}
             onSubmit={form.handleSubmit(handleSubmitData)}
             className="max-w-md w-full flex flex-col gap-4"
           >
@@ -237,7 +226,7 @@ const Hobbies: React.FC<HobbiesProps> = ({
                 onClick={handlePreviousStep}
                 className=" text-black hover:bg-[#217873] hover:text-white bg-white"
               >
-                Skip
+                Back
               </Button>
               <Button type="submit" className=" bg-[#2A6562] hover:bg-[#217873] px-8">
                 FinishUp

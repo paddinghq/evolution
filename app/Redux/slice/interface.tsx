@@ -1,6 +1,7 @@
 import { UserState } from './userSlice'
 
 export interface RootState {
+  auth: any
   AuthState: {
     loading: boolean
     submitting: boolean
