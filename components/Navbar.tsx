@@ -17,7 +17,7 @@ const priceOptions = [
 ]
 
 const links = [
-  { id: 1, name: 'Events', href: '/events' },
+  { id: 1, name: 'Events', href: '/Event' },
   { id: 2, name: 'Stories', href: '/stories' },
   { id: 3, name: 'Our mission', href: '/mission' },
   { id: 4, name: 'Contact Us', href: '/contactus' },

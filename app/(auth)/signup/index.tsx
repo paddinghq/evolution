@@ -50,6 +50,7 @@ const formSchema = z.object({
 const SignUp = () => {
   const dispatch = useDispatch()
   const { toast } = useToast()
+  const router = useRouter()
 
   const loading = useSelector((state: RootState) => state.auth.loading)
   const password = useSelector((state: RootState) => state.auth.showPassword)
@@ -64,8 +65,8 @@ const SignUp = () => {
       terms: false,
     },
   })
-  const router = useRouter()
-
+  
+  
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
     dispatch(setLoading(true))
@@ -77,7 +78,6 @@ const SignUp = () => {
         phone: values.phone,
         password: values.password,
       })
-      console.log(response)
 
       if (response.data.success === 'true') {
         dispatch(setSubmitting(false))

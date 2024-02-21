@@ -19,8 +19,9 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { signIn } from './api'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
-import { setSubmitting, setUserDetails } from '@/app/Redux/slice/signupSlice'
+import { setLoading, setSubmitting, setUserDetails } from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
+import Loader from '@/components/Loader'
 
 const formSchema = z.object({
   emailAddress: z.string().email(),
@@ -40,9 +41,14 @@ const formSchema = z.object({
 })
 
 const SignIn = () => {
-  const [showPassword, setShowPassword] = useState(false)
+
   const dispatch = useDispatch()
   const { toast } = useToast()
+  const router = useRouter()
+
+  const [showPassword, setShowPassword] = useState(false)
+  const loading = useSelector((state: RootState) => state.auth.loading)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,10 +58,11 @@ const SignIn = () => {
     },
   })
 
-  const router = useRouter()
-
+ 
+  
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
+    dispatch(setLoading(true))
 
     try {
       const response = await signIn({
@@ -179,19 +186,25 @@ const SignIn = () => {
               )}
             />
             <div>
-              <Link href="/">
+              <Link href="/forgotten-password">
                 <p className="text-sm font-medium text-[#217873]">
                   Forgotten password
                 </p>
               </Link>
             </div>
           </div>
-          <Button
-            type="submit"
-            className="w-full buttoncolor hover:bg-[#217873]"
-          >
-            Sign in
-          </Button>
+          
+          <div className="mt-5">
+            {!loading && (
+              <Button
+                type="submit"
+                className="w-full buttoncolor hover:bg-[#217873]"
+              >
+                SignIn
+              </Button>
+            )}
+            {loading && <Loader />}
+          </div>
         </form>
       </FormProvider>
       <div className="flex items-center mt-8">

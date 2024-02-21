@@ -13,11 +13,12 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { useToast } from '@/components/ui/use-toast'
-import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { setLoading, setSubmitting } from '@/app/Redux/slice/signupSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/app/Redux/slice/interface'
 import { useRouter } from 'next/navigation'
 import resetpassword from './userdata'
+import Loader from '@/components/Loader'
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -28,6 +29,7 @@ const ForgottenPassword = () => {
   const { toast } = useToast()
   const router = useRouter()
   const submitting = useSelector((state: RootState) => state.auth.submitting)
+  const loading = useSelector((state: RootState) => state.auth.loading)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,6 +39,7 @@ const ForgottenPassword = () => {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(!submitting))
+    dispatch(setLoading(true))
 
     const postEmail = { email: values.email }
     try {
@@ -104,15 +107,18 @@ const ForgottenPassword = () => {
             />
           </div>
         </form>
-        <div className="flex justify-center  mt-5">
-          <Button
-            type="submit"
-            className="buttoncolor hover:bg-[#217873] w-1/2"
-            onClick={form.handleSubmit(handleSubmit)}
-          >
-            {submitting ? 'Sending OTP...' : 'Send OTP'}
-          </Button>
-        </div>
+        <div className="">
+            {!loading && (
+              <Button
+              type="submit"
+              className="buttoncolor hover:bg-[#217873] w-1/2"
+              onClick={form.handleSubmit(handleSubmit)}
+              >
+                SignUp
+              </Button>
+            )}
+            {loading && <Loader />}
+          </div>
       </FormProvider>
     </div>
   )

@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/select'
 import { useSelector } from 'react-redux'
 import { Checkbox } from '@/components/ui/checkbox'
+import Loader from '@/components/Loader'
 
 interface HobbiesProps {
   handleSubmit: (stepValues: any) => void
@@ -90,7 +91,7 @@ const Hobbies: React.FC<HobbiesProps> = ({
   handleSubmit,
 }) => {
   const bioData = useSelector((state: any) => state.bioData.bioData)
-
+  const loading = useSelector((state: any) => state.auth.loading)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -113,12 +114,12 @@ const Hobbies: React.FC<HobbiesProps> = ({
   }
 
   return (
-    <div className="container mt-10">
+    <div className="container py-32">
       <div className="shadow-lg cursor-pointer w-fit p-2 rounded-full">
         <IoChevronBack size={24} />
       </div>
 
-      <div className="flex justify-between shadow-lg border-l-2 border-r-2 mt-10  ml-10 px-14 py-5">
+      <div className="flex justify-around shadow-lg border-l-2 border-r-2 mt-10  ml-10 px-14 py-5">
         <div>
           <h5 className="text-2xl font-bold mb-1">
             Good job! You’re just one step away
@@ -138,7 +139,7 @@ const Hobbies: React.FC<HobbiesProps> = ({
               control={form.control}
               name="location"
               render={({ field }) => (
-                <FormItem className="flex flex-col mt-6">
+                <FormItem className="flex flex-col">
                   <FormLabel>Select your location</FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -220,12 +221,17 @@ const Hobbies: React.FC<HobbiesProps> = ({
               >
                 Back
               </Button>
+              <div className="">
+            {!loading && (
               <Button
                 type="submit"
-                className=" bg-[#2A6562] hover:bg-[#217873] px-8"
+                className=" bg-[#217873] hover:bg-[#217873] px-8"
               >
-                FinishUp
+                Submit
               </Button>
+            )}
+            {loading && <Loader />}
+          </div>
             </div>
           </form>
         </FormProvider>

@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
-import { OTPLogic } from './otpLogic'
+import { OTPGet, OTPLogic } from './otpLogic'
 import { setLoading, setSubmitting } from '@/app/Redux/slice/signupSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app/Redux/slice/interface'
@@ -59,6 +59,8 @@ const OTP = () => {
     }
   }, [])
 
+  dispatch(setLoading(false))
+
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
     dispatch(setLoading(true))
@@ -97,6 +99,32 @@ const OTP = () => {
       form.reset()
     }
   }
+
+  const requestOtp = async (e: { preventDefault: () => void }) => {
+		e.preventDefault();
+		
+		try {
+      const response = await OTPGet({
+        email: userEmail,
+      })
+
+      if (response.status === 200) {
+        toast({
+          description: response.data.message,
+        })
+      } else {
+        toast({
+          variant: 'destructive',
+          description: response.data.message,
+        })
+      }
+    } catch (err) {
+      toast({
+        variant: 'destructive',
+        description: 'Error occured try again',
+      })
+    }
+	};
 
   return (
     <div className="shadow-lg p-6 rounded-md ">
@@ -230,8 +258,14 @@ const OTP = () => {
             />
           </div>
         </form>
+        <p className='text-center mt-5'>
+          If you didn't receive code!{" "}
+          <span className="text-primary cursor-pointer font-semibold" onClick={requestOtp}>
+            Resend
+          </span>
+				</p>
         <div className="flex justify-center mt-5">
-          <div className="mt-5">
+          
             {!loading && (
               <Button
                 type="submit"
@@ -242,7 +276,7 @@ const OTP = () => {
               </Button>
             )}
             {loading && <Loader />}
-          </div>
+          
         </div>
       </FormProvider>
     </div>

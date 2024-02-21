@@ -75,7 +75,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
   }
 
   return (
-    <div className=" container my-32 overflow-hidden">
+    <div className=" container py-32">
       <div className="flex justify-around shadow-lg border-l-2 border-r-2 border-b-2 mt-10 mx-auto px-14 py-5">
         <div>
           <h1 className="text-2xl font-bold ">Let us get to know you better</h1>

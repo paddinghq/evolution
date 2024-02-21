@@ -9,17 +9,12 @@ import {
   setSteps,
 } from '@/app/Redux/slice/bioDataSlice'
 import { BioData } from './SubmitPostLogic'
-import { setSubmitting } from '../Redux/slice/signupSlice'
+import { setLoading, setSubmitting } from '../Redux/slice/signupSlice'
 import { toast } from '@/components/ui/use-toast'
 import BasicInfo from './biodataComponent/basicInfo'
 import Health from './biodataComponent/health'
 import Hobbies from './biodataComponent/hobbies'
 
-const tabs = [
-  { id: 1, title: 'basic' },
-  { id: 2, title: 'health' },
-  { id: 3, title: 'hobbies' },
-]
 
 BasicInfo.propTypes = {
   handleNextStep: PropTypes.func.isRequired,
@@ -50,15 +45,15 @@ const Tab = () => {
     dispatch(decrementSteps())
   }
 
+  
   const handleSubmit = async (values: any) => {
-    // console.log(values)
+    dispatch(setLoading(true))
     try {
       const response = await BioData({
         values,
       })
-      console.log(response.data)
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         dispatch(setSubmitting(false))
         toast({
           description: response.data.message,

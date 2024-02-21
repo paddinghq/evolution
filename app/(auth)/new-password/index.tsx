@@ -18,12 +18,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { setSubmitting } from '@/app/Redux/slice/signupSlice'
+import { setLoading, setSubmitting } from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
 import { useToast } from '@/components/ui/use-toast'
 import resetpassword from '../forgotten-password/userdata'
-const formSchema = z
-  .object({
+import Loader from '@/components/Loader'
+const formSchema = z.object({
     email: z.string().email(),
     otp: z.string().length(6),
     password: z
@@ -54,6 +54,8 @@ const NewPassword = () => {
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const { toast } = useToast()
+
+  const loading = useSelector((state: RootState) => state.auth.loading)
   const submitting = useSelector((state: RootState) => state.auth.submitting)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -67,8 +69,10 @@ const NewPassword = () => {
   })
   const router = useRouter()
 
+  
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(!submitting))
+    dispatch(setLoading(true))
     const postPassword = {
       email: values.email,
       otp: values.otp,
@@ -221,12 +225,17 @@ const NewPassword = () => {
               )
             }}
           />
-          <Button
-            type="submit"
-            className="w-full buttoncolor hover:bg-[#217873]"
-          >
-            {submitting ? 'Updating Password...' : 'Update Password'}
-          </Button>
+          <div className="mt-5">
+            {!loading && (
+              <Button
+                type="submit"
+                className="w-full buttoncolor hover:bg-[#217873]"
+              >
+                SignUp
+              </Button>
+            )}
+            {loading && <Loader />}
+          </div>
         </form>
       </FormProvider>
     </div>

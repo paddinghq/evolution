@@ -8,10 +8,10 @@ const EventList = (props: any) => {
   return (
     <>
       <div className="p-10 ">
-        <h2 className="text-[#B1761F] text-2xl font-semibold">{title}</h2>
+        <h2 className="text-[#B1761F] text-2xl font-semibold">hello</h2>
         <hr className="w-[70px] border-4 border-[#B1761F] rounded-xl" />
         <div className="my-10 grid grid-cols-4 gap-7">
-          {events.map((event: any) => {
+          {/* {events.map((event: any) => {
             return (
               <Card
                 key={event.title}
@@ -27,7 +27,7 @@ const EventList = (props: any) => {
                 details={event.details}
               />
             )
-          })}
+          })} */}
         </div>
       </div>
     </>
