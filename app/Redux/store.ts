@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import AuthSlice from './slice/signupSlice'
-import updateProfileReducer from './slice/updateProfileSlice'
+import EditBioSlice from './slice/updateProfileSlice'
 
 const store = configureStore({
   reducer: {
     auth: AuthSlice,
-    updateProfile: updateProfileReducer,
+    updateProfile: EditBioSlice,
   },
 })
 
