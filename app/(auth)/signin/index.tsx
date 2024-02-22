@@ -71,11 +71,12 @@ const SignIn = () => {
       })
 
       if (response.status === 200) {
-        dispatch(setSubmitting(false))
+        dispatch(setLoading(false))
         toast({
           description: response.data.message,
         })
         dispatch(setUserDetails(response.data.user))
+        
 
         if (response.data.user.registrationCompleted === false) {
           router.replace('/bioData')
@@ -85,7 +86,7 @@ const SignIn = () => {
 
         form.reset()
       } else {
-        dispatch(setSubmitting(false))
+        dispatch(setLoading(false))
         toast({
           variant: 'destructive',
           description: response.data.message,
@@ -94,6 +95,7 @@ const SignIn = () => {
         form.reset()
       }
     } catch (err) {
+      dispatch(setLoading(false))
       toast({
         variant: 'destructive',
         description: 'Error occured try again',

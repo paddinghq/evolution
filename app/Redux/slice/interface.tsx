@@ -1,4 +1,3 @@
-import { UserState } from './userSlice'
 
 export interface RootState {
   auth: any
@@ -10,15 +9,15 @@ export interface RootState {
   }
 
   bioData: {
-    dob: string
+    dateOfBirth: string
     gender: string
     maritalStatus: string
     kids: string
     health: string
     disability: string
+    disabilityStatus: string
     locate: string
     hobbies: string[]
     loading: boolean
   }
-  user: UserState
 }

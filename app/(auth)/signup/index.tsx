@@ -81,6 +81,7 @@ const SignUp = () => {
 
       if (response.data.success === 'true') {
         dispatch(setSubmitting(false))
+        dispatch(setLoading(false))
         toast({
           description: response.data.message,
         })
@@ -92,6 +93,7 @@ const SignUp = () => {
         form.reset()
       } else {
         dispatch(setSubmitting(false))
+        dispatch(setLoading(false))
         toast({
           variant: 'destructive',
           description: response.data.message,
@@ -102,6 +104,7 @@ const SignUp = () => {
         form.reset()
       }
     } catch (err) {
+      dispatch(setLoading(false))
       toast({
         variant: 'destructive',
         description: 'Error occured try again',

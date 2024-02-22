@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import PropTypes from 'prop-types'
-
+import React, { useEffect, useState } from 'react'
 import {
   decrementSteps,
   setBioData,
@@ -32,10 +32,13 @@ const Tab = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const step = useSelector((state: any) => state.bioData.steps)
+  const userEmail = useSelector((state: any) => state.auth.userDetails)
   // const token =  localStorage.getItem("token")
 
+  
+
   const handleNextStep = (stepValues: any) => {
-    console.log({ stepValues })
+    // console.log({ stepValues })
 
     dispatch(setBioData(stepValues))
     dispatch(setSteps())
@@ -46,15 +49,29 @@ const Tab = () => {
   }
 
   
+  
   const handleSubmit = async (values: any) => {
+  
     dispatch(setLoading(true))
     try {
       const response = await BioData({
-        values,
+        
+          email: userEmail.email,
+          dateOfBirth: values.dateOfBirth,
+          gender: values.gender,
+          relationshipStatus: values.maritalStatus          ,
+          kids: values.kid,
+          healthStatus: values.health          ,
+          disabilityStatus: values.disabilityStatus,
+          disability: values.disability,
+          location: values.location,
+          hobbies: values.hobbies
+      
       })
 
       if (response.status === 200) {
         dispatch(setSubmitting(false))
+        dispatch(setLoading(false))
         toast({
           description: response.data.message,
         })
@@ -64,6 +81,7 @@ const Tab = () => {
         }, 2000)
       } else {
         dispatch(setSubmitting(false))
+        dispatch(setLoading(false))
         toast({
           variant: 'destructive',
           description: response.data.message,
@@ -73,6 +91,7 @@ const Tab = () => {
         }, 2000)
       }
     } catch (err) {
+      dispatch(setLoading(false))
       toast({
         variant: 'destructive',
         description: 'Error occured try again',

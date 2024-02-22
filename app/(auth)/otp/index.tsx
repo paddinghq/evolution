@@ -75,6 +75,7 @@ const OTP = () => {
 
       if (response.status === 200) {
         localStorage.removeItem('userEmail')
+        dispatch(setLoading(false))
         toast({
           description: response.data.message,
         })
@@ -83,6 +84,7 @@ const OTP = () => {
         }, 3000)
         form.reset()
       } else {
+        dispatch(setLoading(false))
         toast({
           variant: 'destructive',
           description: response.data.message,
@@ -91,6 +93,7 @@ const OTP = () => {
         form.reset()
       }
     } catch (err) {
+      dispatch(setLoading(false))
       toast({
         variant: 'destructive',
         description: 'Error occured try again',

@@ -91,6 +91,7 @@ const Hobbies: React.FC<HobbiesProps> = ({
   handleSubmit,
 }) => {
   const bioData = useSelector((state: any) => state.bioData.bioData)
+  // console.log(bioData)
   const loading = useSelector((state: any) => state.auth.loading)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -101,12 +102,13 @@ const Hobbies: React.FC<HobbiesProps> = ({
   })
   const handleSubmitData = (values: z.infer<typeof formSchema>) => {
     const payLoad = {
-      dob: bioData.dob,
+      dateOfBirth: bioData.dateOfBirth,
       gender: bioData.gender,
       maritalStatus: bioData.maritalStatus,
       kid: bioData.kids,
       health: bioData.health,
       disability: bioData.disability,
+      disabilityStatus: bioData.disabilityStatus,
       location: values.location,
       hobbies: values.hobies,
     }

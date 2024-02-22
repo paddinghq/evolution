@@ -27,12 +27,15 @@ import { useEffect } from 'react'
 import { IoChevronBack } from 'react-icons/io5'
 
 const formSchema = z.object({
-  disability: z.enum(['yes', 'no', 'prefer not to say'], {
-    required_error: 'You need to select a gender.',
+  disabilityStatus: z.enum(['yes', 'no', 'prefer not to say'], {
+    required_error: 'You need to select a disability status.',
+  }),
+  disability: z.enum(['blind', 'deaf', 'dumb', 'none', 'prefer not to say'], {
+    required_error: 'You need to select a disability.',
   }),
 
   health: z.enum(['excellent', 'good', 'fair', 'poor', 'prefer not to say'], {
-    required_error: 'You need to select a gender.',
+    required_error: 'You need to select a health status.',
   }),
 })
 
@@ -56,12 +59,13 @@ const Health: React.FC<HealthProps> = ({
   const handleSubmitData = (values: z.infer<typeof formSchema>) => {
     // console.log({values})
     const payLoad = {
-      dob: bioData.dob,
+      dateOfBirth: bioData.dateOfBirth,
       gender: bioData.gender,
       maritalStatus: bioData.maritalStatus,
       kid: bioData.kids,
       health: values.health,
       disability: values.disability,
+      disabilityStatus: values.disabilityStatus
     }
     handleNextStep(payLoad)
   }
@@ -143,7 +147,7 @@ const Health: React.FC<HealthProps> = ({
             />
             <FormField
               control={form.control}
-              name="disability"
+              name="disabilityStatus"
               render={({ field }) => (
                 <FormItem className="space-y-3">
                   <FormLabel>Do you have disability?</FormLabel>
@@ -164,6 +168,56 @@ const Health: React.FC<HealthProps> = ({
                           <RadioGroupItem value="no" />
                         </FormControl>
                         <FormLabel className="font-normal">No</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="prefer not to say" />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          Prefer not to answer
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="disability"
+              render={({ field }) => (
+                <FormItem className="space-y-3">
+                  <FormLabel>Which disability do you have?</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex space-y-1"
+                    >
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="blind" />
+                        </FormControl>
+                        <FormLabel className="font-normal">blind</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="deaf" />
+                        </FormControl>
+                        <FormLabel className="font-normal">deaf</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="dumb" />
+                        </FormControl>
+                        <FormLabel className="font-normal">dumb</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="none" />
+                        </FormControl>
+                        <FormLabel className="font-normal">none</FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>

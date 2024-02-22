@@ -28,7 +28,7 @@ import { IoIosArrowBack } from 'react-icons/io'
 import { useSelector } from 'react-redux'
 
 const formSchema = z.object({
-  dob: z.date({ required_error: 'A date of birth is required.' }),
+  dateOfBirth: z.date({ required_error: 'A date of birth is required.' }),
   gender: z.enum(['male', 'female', 'others', 'prefer not to say'], {
     required_error: 'You need to select a gender.',
   }),
@@ -56,7 +56,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values)
-    const dob = values.dob
+    const dob = values.dateOfBirth
       .toLocaleString('en-gb', {
         day: '2-digit',
         month: '2-digit',
@@ -66,7 +66,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
       .reverse()
       .join('-')
     const payLoad = {
-      dob: dob,
+      dateOfBirth: dob,
       gender: values.gender,
       maritalStatus: values.maritalStatus,
       kids: values.kids,
@@ -91,7 +91,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleNextStep }) => {
           >
             <FormField
               control={form.control}
-              name="dob"
+              name="dateOfBirth"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>What is your date of birth?</FormLabel>

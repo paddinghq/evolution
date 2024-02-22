@@ -2,12 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   bioData: {
-    dob: '',
+    dateOfBirth: '',
     gender: '',
     maritalStatus: '',
     kids: '',
     health: '',
     disability: '',
+    disabilityStatus: '',
     location: '',
     hobbies: [],
   },
