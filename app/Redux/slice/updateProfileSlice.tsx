@@ -1,32 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-  user: null,
+  editbioData: {
+    dob: '',
+    gender: '',
+    maritalStatus: '',
+    kids: '',
+    health: '',
+    disability: '',
+    location: '',
+    hobbies: [],
+  },
+  steps: 1,
   loading: false,
-  error: null,
 }
-const updateProfileSlice = createSlice({
-  name: 'profifle',
+
+export const EditBioSlice = createSlice({
+  name: 'editbioData',
   initialState,
   reducers: {
-    updateProfileRequest: (state) => {
-      state.loading = true
-      state.error = null
+    setBioData: (state, action) => {
+      state.editbioData = { ...state.editbioData, ...action.payload }
     },
-    updateProfileSuccess: (state) => {
-      state.loading = false
-      state.user = action.payload
+    setSteps: (state) => {
+      state.steps = state.steps + 1
     },
-    updateProfileFailure: (state) => {
-      state.loading = false
-      state.error = action.payload
+    decrementSteps: (state) => {
+      if (state.steps > 0) {
+        state.steps = state.steps - 1
+      }
     },
   },
 })
 
-export const {
-  updateProfileRequest,
-  updateProfileSuccess,
-  updateProfileFailure,
-} = updateProfileSlice.actions
-export default updateProfileSlice.reducer
+export const { setBioData, setSteps, decrementSteps } = EditBioSlice.actions
+
+export default EditBioSlice.reducer
