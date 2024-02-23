@@ -51,8 +51,7 @@ const trends = [
     rate: 93,
   },
 ]
-const loading = useSelector((state: RootState) => state.auth.userDetails)
-console.log(loading)
+
 const Trend = () => {
   return (
     <div className="py-5 px-36 mb-10 ">

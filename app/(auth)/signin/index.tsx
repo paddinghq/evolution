@@ -77,7 +77,7 @@ const SignIn = () => {
           description: response.data.message,
         })
         dispatch(setUserDetails(response.data.user))
-        console.log(response.data.user)
+        localStorage.setItem('token', response.data.token)
 
         if (response.data.user.registrationCompleted === false) {
           router.replace('/bioData')

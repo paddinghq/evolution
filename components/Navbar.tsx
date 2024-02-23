@@ -1,3 +1,5 @@
+"use client"
+
 import Logo from '@/public/Images/Evolution_logo.png'
 import { Input } from "@/components/ui/input"
 import Link from 'next/link'
@@ -9,6 +11,7 @@ import {
 } from 'react-icons/io5'
 import SignIn from '../app/(auth)/signin/index'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 const priceOptions = [
   { value: 'nigeria', label: 'Nigeria' },
@@ -23,10 +26,21 @@ const links = [
   { id: 4, name: 'Contact Us', href: '/contactus' },
 ]
 
-const token =
-  typeof window !== 'undefined' ? localStorage.getItem('token') : null
+
 
 const Navbar = () => {
+  const [token, setToken] = useState('')
+
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const storedEmail = localStorage.getItem('token')
+  
+      if (storedEmail) {
+        setToken(storedEmail)
+      }
+    }
+  }, [])
   return (
     <div className="bg-black flex justify-between py-3 px-5 sticky top-0 z-10">
       <div className="flex justify-between items-center gap-4">
@@ -70,18 +84,13 @@ const Navbar = () => {
             {link.name}
           </Link>
         ))}
+
         {token ? (
           <>
-              {links.map((link) => (
-              <Link
-                key={link.id}
-                href={link.href}
-                className="text-white hover:text-[#B1761F] active:bg-[#B1761F] "
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Link href="/profile">Profile</Link>
+            <Link href="/profile" 
+              className="text-white hover:text-[#B1761F] active:bg-[#B1761F] ">
+              Profile
+            </Link>
             <div className="flex">
               <Link
                 href="/createevent"
@@ -91,8 +100,17 @@ const Navbar = () => {
                 Create an event
               </Link>
             </div>
+            <div className="flex">
+              <Link
+                href="/createevent"
+                className="bg-[#B1761f] text-white py-3 px-8 rounded-lg"
+              >
+                <IoTicketOutline />
+                SignOut
+              </Link>
+            </div>
           </>
-        ) : (
+        ): (
           <div className="flex">
             <Link
               href="/signin"
@@ -103,9 +121,44 @@ const Navbar = () => {
             </Link>
           </div>
         )}
+        
       </div>
     </div>
   )
 }
 
 export default Navbar
+
+// {token ? (
+//   <>
+//       {links.map((link) => (
+//       <Link
+//         key={link.id}
+//         href={link.href}
+//         className="text-white hover:text-[#B1761F] active:bg-[#B1761F] "
+//       >
+//         {link.name}
+//       </Link>
+//     ))}
+//     <Link href="/profile">Profile</Link>
+//     <div className="flex">
+//       <Link
+//         href="/createevent"
+//         className="bg-[#B1761f] text-white py-3 px-8 rounded-lg"
+//       >
+//         <IoTicketOutline />
+//         Create an event
+//       </Link>
+//     </div>
+//   </>
+// ) : (
+//   <div className="flex">
+//     <Link
+//       href="/signin"
+//       className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3 hover:bg-[#2A6562]"
+//     >
+//       <IoTicketOutline />
+//       SignIn
+//     </Link>
+//   </div>
+// )}
