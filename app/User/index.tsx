@@ -19,7 +19,7 @@ import { AppDispatch } from '../Redux/store'
 const UserProfile = () => {
   const dispatch: AppDispatch = useDispatch()
   const router = useRouter()
-  const { user, loading, error } = useSelector((state: RootState) => state.user)
+  // const { user, loading, error } = useSelector((state: RootState) => state.user)
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -47,15 +47,15 @@ const UserProfile = () => {
     fetchUserProfile()
   }, [dispatch])
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
-  if (!user) {
-    return <div>User profile not available</div>
-  }
-  if (error) {
-    return <div>Error: {error}</div>
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>
+  // }
+  // if (!user) {
+  //   return <div>User profile not available</div>
+  // }
+  // if (error) {
+  //   return <div>Error: {error}</div>
+  // }
 
   return (
     <div className="relative w-full container mx-auto">
@@ -67,34 +67,27 @@ const UserProfile = () => {
 
         <div className="flex flex-col gap-3 rounded-3xl w-full p-5 bg-[#a4ddda] bg-opacity-50">
           <div className="flex justify-between">
-            <h2 className="text-2xl font-semibold mb-2 not-italic text-orange-400">
+            {/* <h2 className="text-2xl font-semibold mb-2 not-italic text-orange-400">
               {user?.name}
-            </h2>
+            </h2> */}
             <div className="bg-white rounded-full p-3">
               <LuPencil />
             </div>
           </div>
-          <p>Date of Birth: {user?.dateOfBirth}</p>
+          {/* <p>Date of Birth: {user?.dateOfBirth}</p>
           <p>Gender: {user?.gender}</p>
           <p>Marital Status: {user?.maritalStatus}</p>
           <p>Email: {user?.email}</p>
-          <p>Mobile: {user?.mobile}</p>
-          <div className="flex gap-3 items-center">
+          <p>Mobile: {user?.mobile}</p> */}
+          {/* <div className="flex gap-3 items-center">
             Hobbies:{' '}
             {user?.hobbies.map((items) => (
               <p className="text-white bg-[#217873] px-4 py-2 rounded-lg">
                 {items}
               </p>
             ))}
-          </div>
-          <div className="flex gap-3 items-center">
-            Medical Condition:{' '}
-            {user?.medicalCondition.map((items) => (
-              <p className="text-white bg-[#F5A42C] px-4 py-2 rounded-lg">
-                {items}
-              </p>
-            ))}
-          </div>
+          </div> */}
+          /
         </div>
       </div>
     </div>

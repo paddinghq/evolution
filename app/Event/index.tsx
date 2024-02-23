@@ -1,10 +1,22 @@
 'use client'
 
 import Card from '@/components/Event-card/Card'
+import axios from 'axios'
 import React from 'react'
 
-const EventList = (props: any) => {
-  const { events, title } = props
+const EventList = () => {
+  const getEvent = async () => {
+    try{
+      const response = await axios.get("https://evolution-stagin.onrender.com/api/v1/events", {
+        headers: {
+          "Content-type": "application/json",
+          // Authorization: `Bearer ${token}`,
+        },
+      })
+    }catch (err) {
+
+    }
+  }
   return (
     <>
       <div className="p-10 ">
