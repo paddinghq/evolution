@@ -82,7 +82,7 @@ const SignIn = () => {
         if (response.data.user.registrationCompleted === false) {
           router.replace('/bioData')
         } else {
-          router.replace('/User')
+          router.replace('/Homepage')
         }
 
         form.reset()
