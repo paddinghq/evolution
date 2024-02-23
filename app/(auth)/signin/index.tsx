@@ -19,7 +19,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { signIn } from './api'
 import { useToast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
-import { setLoading, setSubmitting, setUserDetails } from '@/app/Redux/slice/signupSlice'
+import {
+  setLoading,
+  setSubmitting,
+  setUserDetails,
+} from '@/app/Redux/slice/signupSlice'
 import { RootState } from '@/app/Redux/slice/interface'
 import Loader from '@/components/Loader'
 
@@ -41,7 +45,6 @@ const formSchema = z.object({
 })
 
 const SignIn = () => {
-
   const dispatch = useDispatch()
   const { toast } = useToast()
   const router = useRouter()
@@ -58,8 +61,6 @@ const SignIn = () => {
     },
   })
 
- 
-  
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     dispatch(setSubmitting(true))
     dispatch(setLoading(true))
@@ -76,12 +77,12 @@ const SignIn = () => {
           description: response.data.message,
         })
         dispatch(setUserDetails(response.data.user))
-        
+        console.log(response.data.user)
 
         if (response.data.user.registrationCompleted === false) {
           router.replace('/bioData')
         } else {
-          router.replace('/HomePage')
+          router.replace('/User')
         }
 
         form.reset()
@@ -195,7 +196,7 @@ const SignIn = () => {
               </Link>
             </div>
           </div>
-          
+
           <div className="mt-5">
             {!loading && (
               <Button
