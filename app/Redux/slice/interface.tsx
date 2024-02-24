@@ -6,6 +6,8 @@ export interface RootState {
     submitting: boolean
     showPassword: boolean
     userDetails: string[]
+    event: string[]
+    token: string
   }
 
   bioData: {
@@ -19,5 +21,8 @@ export interface RootState {
     locate: string
     hobbies: string[]
     loading: boolean
+  },
+  event: {
+    eventDetails: string[]
   }
 }

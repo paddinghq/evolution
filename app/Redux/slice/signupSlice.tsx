@@ -5,6 +5,8 @@ interface AuthState {
   submitting: boolean
   showPassword: boolean
   userDetails: string[]
+  event: string[]
+  token: string
 }
 
 const initialState: AuthState = {
@@ -12,6 +14,9 @@ const initialState: AuthState = {
   submitting: false,
   showPassword: false,
   userDetails: [],
+  event: [],
+
+  token: ""
 }
 
 const authSlice = createSlice({
@@ -30,10 +35,16 @@ const authSlice = createSlice({
     setUserDetails: (state, action: PayloadAction<string[]>) => {
       state.userDetails = action.payload
     },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload
+    },
+    setEvent: (state, action: PayloadAction<string[]>) => {
+      state.event = action.payload
+    },
   },
 })
 
-export const { setLoading, setSubmitting, setShowPassword, setUserDetails } =
+export const { setLoading, setSubmitting, setShowPassword, setUserDetails, setToken,setEvent } =
   authSlice.actions
 
 export default authSlice.reducer

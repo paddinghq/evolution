@@ -6,12 +6,14 @@ import Link from 'next/link'
 import {
   IoLocationOutline,
   IoOptions,
-  IoSearchSharp,
-  IoTicketOutline,
+  IoSearchSharp
 } from 'react-icons/io5'
-import SignIn from '../app/(auth)/signin/index'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { GoSignIn, GoSignOut } from 'react-icons/go'
+import { useDispatch, useSelector } from 'react-redux'
+import { setToken } from '@/app/Redux/slice/signupSlice'
 
 const priceOptions = [
   { value: 'nigeria', label: 'Nigeria' },
@@ -20,7 +22,6 @@ const priceOptions = [
 ]
 
 const links = [
-  { id: 1, name: 'Events', href: '/Event' },
   { id: 2, name: 'Stories', href: '/stories' },
   { id: 3, name: 'Our mission', href: '/mission' },
   { id: 4, name: 'Contact Us', href: '/contactus' },
@@ -29,7 +30,9 @@ const links = [
 
 
 const Navbar = () => {
-  const [token, setToken] = useState('')
+  const token = useSelector((state: any) => state.auth.token)
+  const router = useRouter()
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
@@ -37,10 +40,16 @@ const Navbar = () => {
       const storedEmail = localStorage.getItem('token')
   
       if (storedEmail) {
-        setToken(storedEmail)
+        dispatch(setToken(storedEmail))
       }
     }
   }, [])
+
+  const logOut=() => {
+    localStorage.removeItem("token")
+
+    router.push('/')
+  }
   return (
     <div className="bg-black flex justify-between py-3 px-5 sticky top-0 z-10">
       <div className="flex justify-between items-center gap-4">
@@ -87,39 +96,30 @@ const Navbar = () => {
 
         {token ? (
           <>
+            <Link href="/Event" 
+              className="text-white hover:text-[#B1761F] active:bg-[#B1761F] ">
+              Event
+            </Link>
             <Link href="/profile" 
               className="text-white hover:text-[#B1761F] active:bg-[#B1761F] ">
               Profile
             </Link>
-            <div className="flex">
-              <Link
-                href="/createevent"
-                className="bg-[#B1761f] text-white py-3 px-8 rounded-lg"
-              >
-                <IoTicketOutline />
-                Create an event
-              </Link>
-            </div>
-            <div className="flex">
-              <Link
-                href="/createevent"
-                className="bg-[#B1761f] text-white py-3 px-8 rounded-lg"
-              >
-                <IoTicketOutline />
-                SignOut
-              </Link>
+            <div 
+              onClick={logOut}
+              className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3 hover:bg-[#2A6562]">
+              <GoSignOut />
+              SignOut
             </div>
           </>
         ): (
-          <div className="flex">
-            <Link
-              href="/signin"
-              className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3 hover:bg-[#2A6562]"
-            >
-              <IoTicketOutline />
-              SignIn
-            </Link>
-          </div>
+          
+          <Link
+            href="/signin"
+            className="bg-[#B1761f] text-white py-2 px-8 rounded-lg flex justify-center items-center gap-3 hover:bg-[#2A6562]"
+          >
+            <GoSignIn />
+            SignIn
+          </Link>
         )}
         
       </div>
