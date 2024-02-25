@@ -96,7 +96,7 @@ const Navbar = () => {
 
         {token ? (
           <>
-            <Link href="/Event" 
+            <Link href="/EventDemo" 
               className="text-white hover:text-[#B1761F] active:bg-[#B1761F] ">
               Event
             </Link>
