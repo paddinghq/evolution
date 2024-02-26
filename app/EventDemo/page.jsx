@@ -7,7 +7,7 @@ import Navbar from '@/components/Navbar'
 
 async function fetchEvents(token) {
   const res = await fetch(
-    'https://evolution-stagin.onrender.com/api/v1/events?select=eventName,eventPrice',
+    'https://evolution-stagin.onrender.com/api/v1/events',
     {
       headers: {
         'Content-type': 'application/json',

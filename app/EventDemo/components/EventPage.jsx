@@ -14,6 +14,7 @@ export default function EventPage({
   startTime,
   endTime,
   eventDescription,
+  noButton = false,
 }) {
   return (
     <div className="border-2 flex flex-col rounded-lg">
@@ -57,10 +58,10 @@ export default function EventPage({
         </div>
 
         <p className="text-[#252C2B] text-sm">
-          {eventDescription.slice(0, 115)}...
+          {eventDescription?.slice(0, 115)}...
         </p>
 
-        <EventBtn id={_id} />
+        {!noButton && <EventBtn id={_id} />}
       </div>
     </div>
   )
